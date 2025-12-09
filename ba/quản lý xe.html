@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý Xe - Nhà Xe Thăng Long</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --sidebar-bg: #0f0f1a;
+      --sidebar-hover: #1e1e2e;
+      --text-light: #cbd5e1;
+      --border-radius: 20px;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #f8fafc; color: #333; display: flex; min-height: 100vh; }
+
+    /* ==================== SIDEBAR ĐẸP NHƯ ẢNH GỐC ==================== */
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      color: white;
+      padding: 30px 20px;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      box-shadow: 8px 0 30px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #2d2d44;
+      margin-bottom: 30px;
+    }
+    .user-info img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #374151;
+    }
+    .user-info .info h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .user-info .info p {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .menu-title {
+      text-transform: uppercase;
+      font-size: 11px;
+      color: #64748b;
+      letter-spacing: 1.5px;
+      margin: 20px 0 12px;
+      font-weight: 600;
+    }
+    .menu {
+      list-style: none;
+    }
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      color: #94a3b8;
+      text-decoration: none;
+      border-radius: 14px;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .menu a i {
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+    .menu a:hover {
+      background: var(--sidebar-hover);
+      color: white;
+    }
+    .menu a.active {
+      background: white !important;
+      color: var(--primary) !important;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.25);
+    }
+    .menu a.active i {
+      color: var(--primary) !important;
+    }
+
+    /* ==================== MAIN CONTENT ==================== */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 30px;
+      background: #f1f5f9;
+      min-height: 100vh;
+    }
+    .top-bar {
+      background: white;
+      padding: 20px 30px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .greeting {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .greeting span { color: #94a3b8; font-size: 16px; }
+    .notification {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .notification .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==================== NỘI DUNG QUẢN LÝ XE ==================== */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .btn-add {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+    .btn-add:hover { background: #3651d4; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .stat-card h3 {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+    .stat-card .number {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .stat-card.ready .number { color: var(--green); }
+    .stat-card.running .number { color: var(--blue); }
+    .stat-card.maintenance .number { color: var(--yellow); }
+    .stat-card.broken .number { color: var(--red); }
+
+    .filter-bar {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .filter-select {
+      padding: 10px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: white;
+      font-size: 14px;
+      min-width: 200px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    thead { background: #f8fafc; }
+    th, td { padding: 16px; text-align: left; font-size: 14.5px; }
+    th { color: #475569; font-weight: 600; }
+    tbody tr:hover { background: #f8fafc; }
+    .status {
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status.ready { background: #dcfce7; color: #166534; }
+    .status.running { background: #dbeafe; color: #1e40af; }
+    .status.maintenance { background: #fef9c3; color: #92400e; }
+    .actions a {
+      margin-right: 12px;
+      color: #64748b;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .actions a:hover { color: var(--primary); }
+    .actions a.edit:hover { color: #f59e0b; }
+    .actions a.delete:hover { color: #ef4444; }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 992px) {
+      .sidebar { width: 80px; padding: 20px 10px; }
+      .sidebar .user-info .info,
+      .sidebar .menu-title,
+      .sidebar .menu a span { display: none; }
+      .sidebar a { justify-content: center; }
+      .main-content { margin-left: 80px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 576px) {
+      .main-content { margin-left: 0; padding: 15px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="user-info">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
+      <div class="info">
+        <h3>Samantha</h3>
+        <p>+098 (99) 439-49-16</p>
+      </div>
+    </div>
+
+    <p class="menu-title">MAIN MENU</p>
+    <ul class="menu">
+      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+      <li><a href="#"><i class="fas fa-car"></i> <span>Rides</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Clients</span></a></li>
+      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Drivers</span></a></li>
+      <li><a href="#"><i class="fas fa-clock"></i> <span>Shift</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Live map</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-car-side"></i> <span>Car classes</span></a></li>
+      <li><a href="#"><i class="fas fa-code-branch"></i> <span>Branches</span></a></li>
+      <li><a href="#"><i class="fas fa-user-shield"></i> <span>Moderators</span></a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="greeting">
+        Good morning, Samantha <span>you have 1 new message</span>
+      </div>
+      <div class="notification">
+        <i class="fas fa-bell" style="font-size:18px; color:#64748b;"></i>
+        <div class="badge">1</div>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <h1>Quản lý Thông tin Xe</h1>
+      <button class="btn-add">
+        <i class="fas fa-plus"></i> Thêm xe mới
+      </button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><h3>Tổng số xe</h3><div class="number">3</div></div>
+      <div class="stat-card ready"><h3>Sẵn sàng</h3><div class="number">1</div></div>
+      <div class="stat-card running"><h3>Đang chạy</h3><div class="number">1</div></div>
+      <div class="stat-card maintenance"><h3>Bảo dưỡng</h3><div class="number">1</div></div>
+      <div class="stat-card broken"><h3>Hỏng</h3><div class="number">0</div></div>
+    </div>
+
+    <div class="filter-bar">
+      <i class="fas fa-filter" style="color:#64748b;"></i>
+      <select class="filter-select">
+        <option>Tất cả trạng thái</option>
+        <option>Sẵn sàng</option>
+        <option>Đang chạy</option>
+        <option>Bảo dưỡng</option>
+        <option>Hỏng</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Biển số</th>
+          <th>Loại xe</th>
+          <th>Số ghế</th>
+          <th>Hãng xe</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>29A-12345</strong></td>
+          <td>Xe khách 45 chỗ</td>
+          <td>45 chỗ</td>
+          <td>Hyundai Universe</td>
+          <td><span class="status ready">Sẵn sàng</span></td>
+          <td class="actions">
+            <a href="chi tiết xe.html" title="Xem"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit" title="Sửa"><i class="fas fa-edit"></i></a>
+            <a href="#" title="Lịch sử"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>30B-67890</strong></td>
+          <td>Xe khách 29 chỗ</td>
+          <td>29 chỗ</td>
+          <td>Thaco TB85S</td>
+          <td><span class="status running">Đang chạy</span></td>
+          <td class="actions">
+            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+            <a href="#"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>29C-11111</strong></td>
+          <td>Xe khách 16 chỗ</td>
+          <td>16 chỗ</td>
+          <td>Ford Transit</td>
+          <td><span class="status maintenance">Bảo dưỡng</span></td>
+          <td class="actions">
+            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+            <a href="#"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
