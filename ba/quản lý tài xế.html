@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý Tài xế - Nhà Xe Thăng Long</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --sidebar-bg: #0f0f1a;
+      --sidebar-hover: #1e1e2e;
+      --text-light: #cbd5e1;
+      --border-radius: 20px;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --orange: #fb923c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #f8fafc; color: #333; display: flex; min-height: 100vh; }
+
+    /* SIDEBAR - GIỐNG HỆT PHẦN QUẢN LÝ XE */
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      color: white;
+      padding: 30px 20px;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      box-shadow: 8px 0 30px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #2d2d44;
+      margin-bottom: 30px;
+    }
+    .user-info img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #374151;
+    }
+    .user-info .info h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+    .user-info .info p { font-size: 13px; color: #94a3b8; }
+    .menu-title { text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 1.5px; margin: 20px 0 12px; font-weight: 600; }
+    .menu { list-style: none; }
+    .menu a {
+      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+      color: #94a3b8; text-decoration: none; border-radius: 14px;
+      transition: all 0.3s ease; font-size: 15px; font-weight: 500;
+    }
+    .menu a i { font-size: 18px; width: 24px; text-align: center; }
+    .menu a:hover { background: var(--sidebar-hover); color: white; }
+    .menu a.active {
+      background: white !important; color: var(--primary) !important;
+      font-weight: 600; box-shadow: 0 6px 20px rgba(67, 97, 238, 0.25);
+    }
+    .menu a.active i { color: var(--primary) !important; }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex: 1; margin-left: 280px; padding: 30px;
+      background: #f1f5f9; min-height: 100vh;
+    }
+    .top-bar {
+      background: white; padding: 20px 30px; border-radius: var(--border-radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;
+      justify-content: space-between; align-items: center; margin-bottom: 30px;
+    }
+    .greeting { font-size: 18px; font-weight: 500; }
+    .greeting span { color: #94a3b8; font-size: 16px; }
+    .notification {
+      position: relative; width: 40px; height: 40px; background: #f1f5f9;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .notification .badge {
+      position: absolute; top: -4px; right: -4px; background: #ef4444;
+      color: white; font-size: 10px; width: 18px; height: 18px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 24px;
+    }
+    .page-header h1 { font-size: 26px; font-weight: 600; color: #1e293b; }
+    .btn-add {
+      background: var(--primary); color: white; border: none;
+      padding: 10px 20px; border-radius: 12px; font-size: 15px;
+      cursor: pointer; font-weight: 500; display: flex;
+      align-items: center; gap: 8px; transition: 0.3s;
+    }
+    .btn-add:hover { background: #3651d4; }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: 16px; margin-bottom: 30px;
+    }
+    .stat-card {
+      background: white; padding: 20px; border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;
+    }
+    .stat-card h3 { font-size: 14px; color: #64748b; margin-bottom: 8px; }
+    .stat-card .number { font-size: 28px; font-weight: 700; }
+    .stat-card.ready .number { color: var(--green); }
+    .stat-card.running .number { color: var(--blue); }
+    .stat-card.leave .number { color: var(--orange); }
+    .stat-card.suspended .number { color: var(--red); }
+    .stat-card.expired .number { color: var(--yellow); }
+
+    /* FILTER & TABLE */
+    .filter-bar {
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .filter-select, .search-input {
+      padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 12px;
+      background: white; font-size: 14px;
+    }
+    .search-input { min-width: 280px; }
+
+    table {
+      width: 100%; border-collapse: collapse; background: white;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    thead { background: #f8fafc; }
+    th, td { padding: 16px; text-align: left; font-size: 14.5px; }
+    th { color: #475569; font-weight: 600; }
+    tbody tr:hover { background: #f8fafc; }
+    .status {
+      padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: 500;
+    }
+    .status.ready { background: #dcfce7; color: #166534; }
+    .status.running { background: #dbeafe; color: #1e40af; }
+    .status.leave { background: #fed7aa; color: #9c4221; }
+    .status.suspended { background: #fee2e2; color: #991b1b; }
+    .status.warning { background: #fef9c3; color: #92400e; }
+    .license-warning {
+      color: var(--red); font-size: 12px; font-weight: 500;
+    }
+    .actions a {
+      margin-right: 12px; color: #64748b; font-size: 18px;
+      cursor: pointer; transition: 0.3s;
+    }
+    .actions a:hover { color: var(--primary); }
+    .actions a.edit:hover { color: #f59e0b; }
+    .actions a.delete:hover { color: #ef4444; }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .sidebar { width: 80px; padding: 20px 10px; }
+      .sidebar .user-info .info, .sidebar .menu-title, .sidebar .menu a span { display: none; }
+      .sidebar a { justify-content: center; }
+      .main-content { margin-left: 80px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 576px) {
+      .main-content { margin-left: 0; padding: 15px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .filter-bar { flex-direction: column; align-items: stretch; }
+      .search-input { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="user-info">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
+      <div class="info">
+        <h3>Samantha</h3>
+        <p>+098 (99) 439-49-16</p>
+      </div>
+    </div>
+
+    <p class="menu-title">MAIN MENU</p>
+    <ul class="menu">
+      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
+      <li><a href="quản lý xe.html"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="greeting">
+        Chào buổi sáng, Samantha <span>bạn có 3 cảnh báo GPLX sắp hết hạn</span>
+      </div>
+      <div class="notification">
+        <i class="fas fa-bell" style="font-size:18px; color:#64748b;"></i>
+        <div class="badge">5</div>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <h1>Quản lý Tài xế</h1>
+      <button class="btn-add" onclick="alert('Mở form thêm tài xế mới')">
+        <i class="fas fa-plus"></i> Thêm tài xế mới
+      </button>
+    </div>
+
+    <!-- Thống kê trạng thái tài xế -->
+    <div class="stats-grid">
+      <div class="stat-card"><h3>Tổng tài xế</h3><div class="number">28</div></div>
+      <div class="stat-card ready"><h3>Sẵn sàng</h3><div class="number">19</div></div>
+      <div class="stat-card running"><h3>Đang chạy</h3><div class="number">6</div></div>
+      <div class="stat-card leave"><h3>Nghỉ phép</h3><div class="number">2</div></div>
+      <div class="stat-card suspended"><h3>Tạm ngưng</h3><div class="number">1</div></div>
+      <div class="stat-card expired"><h3>GPLX sắp hết hạn</h3><div class="number">3</div></div>
+    </div>
+
+    <!-- Bộ lọc -->
+    <div class="filter-bar">
+      <i class="fas fa-filter" style="color:#64748b;"></i>
+      <input type="text" class="search-input" placeholder="Tìm kiếm theo tên, GPLX, SĐT...">
+      <select class="filter-select">
+        <option>Tất cả trạng thái</option>
+        <option>Sẵn sàng</option>
+        <option>Đang chạy</option>
+        <option>Nghỉ phép</option>
+        <option>Tạm ngưng</option>
+      </select>
+      <select class="filter-select">
+        <option>GPLX còn hạn</option>
+        <option>Sắp hết hạn (&lt;30 ngày)</option>
+        <option>Đã hết hạn</option>
+      </select>
+    </div>
+
+    <!-- Bảng danh sách tài xế -->
+    <table>
+      <thead>
+        <tr>
+          <th>Họ tên</th>
+          <th>Số GPLX</th>
+          <th>Hạn GPLX</th>
+          <th>Số điện thoại</th>
+          <th>Kinh nghiệm</th>
+          <th>Trạng thái</th>
+          <th>GPLX</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nguyễn Văn An</strong></td>
+          <td>123456789012</td>
+          <td>15/06/2027</td>
+          <td>0905 123 456</td>
+          <td>8 năm</td>
+          <td><span class="status ready">Sẵn sàng</span></td>
+          <td></td>
+          <td class="actions">
+            <a href="chi tiết tài xế.html" title="Xem chi tiết"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit" title="Sửa"><i class="fas fa-edit"></i></a>
+            <a href="#" title="Lịch sử ca"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Trần Thị Bình</strong></td>
+          <td>987654321098</td>
+          <td>10/01/2026</td>
+          <td>0918 555 888</td>
+          <td>5 năm</td>
+          <td><span class="status running">Đang chạy</span></td>
+          <td></td>
+          <td class="actions">
+            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+            <a href="#"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Lê Văn Cường</strong></td>
+          <td>456789123456</td>
+          <td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td>
+          <td>0932 777 999</td>
+          <td>12 năm</td>
+          <td><span class="status warning">Sắp hết hạn GPLX</span></td>
+          <td><span class="license-warning">Cảnh báo</span></td>
+          <td class="actions">
+            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+            <a href="#"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Phạm Thị Dung</strong></td>
+          <td>789123456789</td>
+          <td>20/03/2026</td>
+          <td>0987 654 321</td>
+          <td>3 năm</td>
+          <td><span class="status leave">Nghỉ phép</span></td>
+          <td></td>
+          <td class="actions">
+            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+            <a href="#"><i class="fas fa-history"></i></a>
+            <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

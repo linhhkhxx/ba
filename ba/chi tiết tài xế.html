@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chi tiết tài xế Nguyễn Văn A - Nhà Xe Thăng Long</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --sidebar-bg: #0f0f1a;
+      --sidebar-hover: #1e1e2e;
+      --text-light: #cbd5e1;
+      --border-radius: 20px;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --light-green: #ecfdf5;
+      --light-purple: #f3e8ff;
+      --orange: #fb923c;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:#f8fafc; color:#333; display:flex; min-height:100vh; }
+
+    /* SIDEBAR – ĐỒNG NHẤT VỚI TRANG CHỦ & CHI TIẾT XE */
+    .sidebar {
+      width:280px; background:var(--sidebar-bg); color:white; padding:30px 20px;
+      position:fixed; height:100vh; overflow-y:auto;
+      border-radius:0 var(--border-radius) var(--border-radius) 0;
+      box-shadow:8px 0 30px rgba(0,0,0,0.4); z-index:1000;
+    }
+    .user-info { display:flex; align-items:center; gap:14px; padding-bottom:24px;
+      border-bottom:1px solid #2d2d44; margin-bottom:30px; }
+    .user-info img { width:52px; height:52px; border-radius:50%; object-fit:cover; border:3px solid #374151; }
+    .user-info .info h3 { font-size:17px; font-weight:600; margin-bottom:4px; }
+    .user-info .info p { font-size:13px; color:#94a3b8; }
+    .menu-title { text-transform:uppercase; font-size:11px; color:#64748b; letter-spacing:1.5px;
+      margin:20px 0 12px; font-weight:600; }
+    .menu { list-style:none; }
+    .menu a {
+      display:flex; align-items:center; gap:14px; padding:14px 18px; color:#94a3b8;
+      text-decoration:none; border-radius:14px; transition:all .3s; font-size:15px; font-weight:500;
+    }
+    .menu a i { font-size:18px; width:24px; text-align:center; }
+    .menu a:hover { background:var(--sidebar-hover); color:white; }
+    .menu a.active { background:white !important; color:var(--primary) !important;
+      font-weight:600; box-shadow:0 6px 20px rgba(67,97,238,.25); }
+    .menu a.active i { color:var(--primary) !important; }
+
+    /* MAIN CONTENT */
+    .main-content { flex:1; margin-left:280px; padding:30px; background:#f1f5f9; min-height:100vh; }
+    .top-bar {
+      background:white; padding:20px 30px; border-radius:var(--border-radius);
+      box-shadow:0 4px 20px rgba(0,0,0,.06); display:flex; justify-content:space-between;
+      align-items:center; margin-bottom:30px;
+    }
+    .greeting { font-size:18px; font-weight:500; }
+    .greeting span { color:#94a3b8; font-size:16px; }
+    .notification { position:relative; width:40px; height:40px; background:#f1f5f9;
+      border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+    .notification .badge { position:absolute; top:-4px; right:-4px; background:#ef4444;
+      color:white; font-size:10px; width:18px; height:18px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; }
+
+    .back-btn { display:flex; align-items:center; gap:8px; color:#64748b;
+      font-size:16px; margin-bottom:20px; cursor:pointer; }
+    .page-title { font-size:24px; font-weight:600; color:#1e293b; margin-bottom:24px; }
+
+    .action-buttons { display:flex; gap:12px; margin-bottom:30px; justify-content:flex-end; }
+    .btn { padding:10px 20px; border-radius:12px; font-size:14px; font-weight:500;
+      cursor:pointer; display:flex; align-items:center; gap:8px; transition:.3s; }
+    .btn:hover { opacity:0.9; }
+    .btn-refresh { background:#e0e7ff; color:var(--primary); border:1px solid #c7d2fe; }
+    .btn-edit { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+    .btn-delete { background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; }
+
+    /* CẢNH BÁO */
+    .alert-box {
+      background:#fef3c7; border-left:4px solid #f59e0b; padding:16px; border-radius:8px;
+      margin-bottom:20px; display:flex; align-items:center; gap:12px; color:#92400e; font-weight:500;
+    }
+    .alert-danger {
+      background:#fee2e2; border-left:4px solid var(--red); color:#991b1b;
+    }
+
+    /* GRID THÔNG TIN */
+    .info-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:30px; background:white;
+      padding:24px; border-radius:16px; box-shadow:0 4px 15px rgba(0,0,0,.05); margin-bottom:30px;
+    }
+    .info-item { display:flex; justify-content:space-between; padding:12px 0;
+      border-bottom:1px solid #f1f5f9; }
+    .info-item:last-child { border-bottom:none; }
+    .info-item strong { color:#475569; }
+    .status-badge { padding:6px 14px; border-radius:30px; font-size:13px; font-weight:500; }
+
+    /* THỐNG KÊ NHỎ */
+    .stats-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:30px; }
+    .stat-box { background:white; padding:20px; border-radius:16px; text-align:center;
+      box-shadow:0 4px 15px rgba(0,0,0,.05); }
+    .stat-box h3 { font-size:26px; font-weight:700; margin-bottom:8px; }
+    .stat-box.ready h3 { color:var(--green); }
+    .stat-box.warning h3 { color:var(--yellow); }
+    .stat-box.over h3 { color:var(--red); }
+    .stat-box.total h3 { color:var(--primary); }
+
+    /* TAB */
+    .tab-buttons { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+    .tab-btn {
+      padding:10px 20px; background:#e2e8f0; border-radius:12px; font-weight:500;
+      cursor:pointer; transition:all .3s;
+    }
+    .tab-btn.active { background:var(--primary); color:white; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* BẢNG */
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td { padding:12px 16px; text-align:left; border-bottom:1px solid #f1f5f9; }
+    th { background:#f8fafc; color:#475569; font-weight:600; }
+    .btn-small { padding:4px 10px; font-size:12px; border-radius:8px; }
+
+    /* MODAL */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      align-items:center; justify-content:center; z-index:9999; }
+    .modal.active { display:flex; }
+    .modal-content { background:white; width:90%; max-width:520px; border-radius:16px;
+      overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,0.3); animation:zoom .3s; }
+    @keyframes zoom { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+    .modal-header { padding:20px; background:var(--primary); color:white; font-size:18px;
+      font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+    .modal-header.danger { background:var(--red); }
+    .modal-body { padding:24px; }
+    .modal-footer { padding:16px 24px; background:#f8fafc; display:flex; gap:12px;
+      justify-content:flex-end; }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; margin-bottom:6px; font-weight:500; }
+    .form-group input, .form-group select, .form-group textarea {
+      width:100%; padding:10px 14px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px;
+    }
+    .btn-modal { padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-weight:500; }
+    .btn-modal-primary { background:var(--primary); color:white; }
+    .btn-modal-danger { background:var(--red); color:white; }
+    .btn-modal-secondary { background:#e2e8f0; color:#475569; }
+
+    @media (max-width:992px) {
+      .sidebar { width:80px; padding:20px 10px; }
+      .sidebar .user-info .info, .sidebar .menu-title, .sidebar .menu a span { display:none; }
+      .sidebar a { justify-content:center; }
+      .main-content { margin-left:80px; }
+      .info-grid, .stats-summary { grid-template-columns:1fr; }
+    }
+    @media (max-width:576px) {
+      .main-content { margin-left:0; padding:15px; }
+      .action-buttons { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR (giữ nguyên) -->
+  <aside class="sidebar">
+    <div class="user-info">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
+      <div class="info">
+        <h3>Samantha</h3>
+        <p>+098 (99) 439-49-16</p>
+      </div>
+    </div>
+    <p class="menu-title">MAIN MENU</p>
+    <ul class="menu">
+      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fas fa-car"></i> <span>Quản lý xe</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Tuyến & Giá vé</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="greeting">Chào buổi sáng, Samantha <span>bạn có 2 thông báo mới</span></div>
+      <div class="notification">
+        <i class="fas fa-bell" style="font-size:18px;color:#64748b;"></i>
+        <div class="badge">2</div>
+      </div>
+    </div>
+
+    <div class="back-btn" onclick="history.back()">
+      <i class="fas fa-arrow-left"></i> Quay lại danh sách tài xế
+    </div>
+
+    <div class="page-title">Chi tiết tài xế • Nguyễn Văn A</div>
+
+    <!-- NÚT HÀNH ĐỘNG -->
+    <div class="action-buttons">
+      <button class="btn btn-refresh" onclick="openModal('statusModal')">
+        <i class="fas fa-sync-alt"></i> Cập nhật trạng thái
+      </button>
+      <button class="btn btn-edit" onclick="openModal('editModal')">
+        <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+      </button>
+      <button class="btn btn-delete" onclick="openModal('deleteModal')">
+        <i class="fas fa-trash-alt"></i> Xóa tài xế
+      </button>
+    </div>
+
+    <!-- CẢNH BÁO GPLX -->
+    <div class="alert-box">
+      <i class="fas fa-exclamation-triangle" style="font-size:20px;"></i>
+      <div>
+        <strong>Cảnh báo:</strong> Giấy phép lái xe (GPLX) của tài xế sẽ hết hạn vào ngày <strong>15/01/2026</strong> (còn 36 ngày).
+      </div>
+    </div>
+
+    <!-- CẢNH BÁO QUÁ GIỜ LÀM VIỆC -->
+    <div class="alert-box alert-danger">
+      <i class="fas fa-exclamation-circle" style="font-size:20px;"></i>
+      <div>
+        <strong>Cảnh báo an toàn lao động:</strong> Hôm nay tài xế đã lái <strong>9.5 giờ</strong> (vượt 1.5 giờ so với quy định 8 giờ/ngày).<br>
+        Tuần này đã lái <strong>58 giờ</strong> (vượt 2 giờ so với quy định tối đa 56 giờ/tuần).
+      </div>
+    </div>
+
+    <!-- THÔNG TIN CƠ BẢN -->
+    <div class="info-grid">
+      <div>
+        <h3 style="margin-bottom:20px;color:#1e293b;font-size:18px;">Thông tin cá nhân</h3>
+        <div class="info-item"><span>Họ và tên</span> <strong>Nguyễn Văn A</strong></div>
+        <div class="info-item"><span>Số điện thoại</span> <strong>0905 123 456</strong></div>
+        <div class="info-item"><span>Địa chỉ</span> <strong>123 Đường Láng, Đống Đa, Hà Nội</strong></div>
+        <div class="info-item"><span>Kinh nghiệm</span> <strong>8 năm</strong></div>
+      </div>
+      <div>
+        <div style="height:32px;"></div>
+        <div class="info-item"><span>Số GPLX</span> <strong>012345678901</strong></div>
+        <div class="info-item"><span>Hạng GPLX</span> <strong>E</strong></div>
+        <div class="info-item"><span>Ngày cấp GPLX</span> <strong>15/01/2021</strong></div>
+        <div class="info-item"><span>Hết hạn GPLX</span> <strong style="color:#dc2626;">15/01/2026</strong></div>
+        <div class="info-item"><span>Trạng thái</span> 
+          <span class="status-badge" style="background:#dcfce7;color:#166534;">Sẵn sàng</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- THỐNG KÊ NHANH -->
+    <div class="stats-summary">
+      <div class="stat-box ready"><h3>48</h3><p>Tổng chuyến đã chạy</p></div>
+      <div class="stat-box total"><h3>168 giờ</h3><p>Tổng giờ lái (tháng này)</p></div>
+      <div class="stat-box warning"><h3>9.5 giờ</h3><p>Ca làm hôm nay</p></div>
+      <div class="stat-box over"><h3 style="color:var(--red);">+2 giờ</h3><p>Vượt giờ tuần</p></div>
+    </div>
+
+    <!-- TAB NỘI DUNG (giữ nguyên như cũ) -->
+    <div class="tab-buttons">
+      <div class="tab-btn active" data-tab="tab-profile">Hồ sơ & Tài liệu</div>
+      <div class="tab-btn" data-tab="tab-schedule">Lịch làm việc</div>
+      <div class="tab-btn" data-tab="tab-history">Lịch sử trạng thái</div>
+    </div>
+
+    <!-- Các tab giữ nguyên nội dung của bạn -->
+    <div id="tab-profile" class="tab-content active">
+      <div class="history-section" style="background:white;padding:24px;border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,.05);">
+        <h3 class="section-title"><i class="fas fa-folder-open"></i> Tài liệu hồ sơ</h3>
+        <table>
+          <thead><tr><th>Tên tài liệu</th><th>Ngày tải lên</th><th>Hết hạn</th><th>Hành động</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><i class="fas fa-file-pdf" style="color:#dc2626;"></i> GPLX (mặt trước + sau)</td>
+              <td>10/01/2021</td>
+              <td>15/01/2026</td>
+              <td>
+                <button class="btn-small" style="background:#e0e7ff;color:var(--primary);">Xem</button>
+                <button class="btn-small" style="background:#fef3c7;color:#92400e;">Thay</button>
+              </td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-file-alt"></i> Giấy khám sức khỏe</td>
+              <td>05/06/2025</td>
+              <td>05/06/2026</td>
+              <td><button class="btn-small" style="background:#e0e7ff;color:var(--primary);">Xem</button></td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-file-contract"></i> Hợp đồng lao động</td>
+              <td>01/01/2023</td>
+              <td>—</td>
+              <td><button class="btn-small" style="background:#e0e7ff;color:var(--primary);">Xem</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-schedule" class="tab-content">
+      <div class="history-section" style="background:white;padding:24px;border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,.05);">
+        <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Ca làm việc gần đây</h3>
+        <div class="history-item" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;padding:16px 0;border-bottom:1px solid #f1f5f9;">
+          <div><strong>Hà Nội → Hải Phòng</strong><br>10/12/2025</div>
+          <div>Khởi hành: 06:00 - Kết thúc: 08:30</div>
+          <div>Xe: 29A-12345</div>
+          <div style="color:var(--green);">2.5 giờ</div>
+        </div>
+        <div class="history-item" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;padding:16px 0;border-bottom:1px solid #f1f5f9;">
+          <div><strong>Hải Phòng → Hà Nội</strong><br>10/12/2025</div>
+          <div>Khởi hành: 14:00 - Kết thúc: 16:30</div>
+          <div>Xe: 29A-12345</div>
+          <div style="color:var(--green);">2.5 giờ</div>
+        </div>
+        <div class="history-item" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;padding:16px 0;">
+          <div><strong>Hà Nội → Vinh</strong><br>09/12/2025</div>
+          <div>Khởi hành: 07:00 - Kết thúc: 12:00</div>
+          <div>Xe: 29B-56789</div>
+          <div style="color:var(--green);">5 giờ</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-history" class="tab-content">
+      <div class="history-section" style="background:white;padding:24px;border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,.05);">
+        <h3 class="section-title"><i class="fas fa-history"></i> Lịch sử thay đổi trạng thái</h3>
+        <table>
+          <thead><tr><th>Thời gian</th><th>Trạng thái mới</th><th>Lý do</th><th>Người thực hiện</th></tr></thead>
+          <tbody>
+            <tr><td>10/12/2025 05:30</td><td>Sẵn sàng</td><td>Hoàn thành ca nghỉ phép</td><td>Samantha</td></tr>
+            <tr><td>01/12/2025 00:00</td><td>Nghỉ phép</td><td>Nghỉ phép năm (7 ngày)</td><td>Samantha</td></tr>
+            <tr><td>15/11/2025 08:00</td><td>Sẵn sàng</td><td>—</td><td>Hệ thống</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== MODAL CẬP NHẬT TRẠNG THÁI ==================== -->
+  <div id="statusModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span><i class="fas fa-sync-alt"></i> Cập nhật trạng thái tài xế</span>
+        <i class="fas fa-times" onclick="closeModal('statusModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Trạng thái mới</label>
+          <select id="statusSelect">
+            <option value="ready">Sẵn sàng</option>
+            <option value="driving">Đang chạy xe</option>
+            <option value="rest">Nghỉ phép</option>
+            <option value="suspended">Tạm ngưng</option>
+          </select>
+        </div>
+        <div class="form-group" id="reasonGroup" style="display:none;">
+          <label>Lý do tạm ngưng <span style="color:red;">*</span></label>
+          <textarea rows="3" placeholder="Nhập lý do bắt buộc khi tạm ngưng"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('statusModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="alert('Cập nhật trạng thái thành công!'); closeModal('statusModal')">
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL CHỈNH SỬA THÔNG TIN ==================== -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span><i class="fas fa-edit"></i> Chỉnh sửa thông tin tài xế</span>
+        <i class="fas fa-times" onclick="closeModal('editModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label>Họ và tên</label><input type="text" value="Nguyễn Văn A"></div>
+        <div class="form-group"><label>Số điện thoại</label><input type="text" value="0905123456"></div>
+        <div class="form-group"><label>Địa chỉ</label><input type="text" value="123 Đường Láng, Đống Đa, Hà Nội"></div>
+        <div class="form-group"><label>Kinh nghiệm (năm)</label><input type="number" value="8"></div>
+        <small style="color:#64748b;">Số GPLX chỉ được thay đổi khi có giấy tờ xác thực.</small>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('editModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="alert('Cập nhật thông tin thành công!'); closeModal('editModal')">
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL XÓA TÀI XẾ ==================== -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header danger">
+        <span><i class="fas fa-trash-alt"></i> Xóa tài xế</span>
+        <i class="fas fa-times" onclick="closeModal('deleteModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn <strong>xóa tài xế Nguyễn Văn A</strong>?</p>
+        <p style="color:#dc2626;margin:12px 0;">Hành động này không thể hoàn tác!</p>
+        <div class="form-group">
+          <label>Lý do xóa <span style="color:red;">*</span></label>
+          <textarea rows="3" placeholder="Nhập lý do bắt buộc" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('deleteModal')">Hủy</button>
+        <button class="btn-modal btn-modal-danger" onclick="if(document.querySelector('#deleteModal textarea').value.trim()===''){alert('Vui lòng nhập lý do xóa!');}else{alert('Xóa tài xế thành công!');closeModal('deleteModal');}">
+          Xóa tài xế
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Modal
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Hiển thị ô lý do khi chọn Tạm ngưng
+    document.getElementById('statusSelect')?.addEventListener('change', function() {
+      document.getElementById('reasonGroup').style.display = this.value === 'suspended' ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
