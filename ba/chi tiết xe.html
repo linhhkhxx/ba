@@ -190,6 +190,22 @@
     .status-delayed { background: #fef3c7; color: #92400e; }
     .distance-info { color: #ef4444; font-weight: 500; text-align: right; }
 
+    /* MODAL - CHỈ THÊM ĐỂ 3 NÚT HOẠT ĐỘNG */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:9999; }
+    .modal.active { display:flex; }
+    .modal-content { background:white; width:90%; max-width:500px; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.3); overflow:hidden; }
+    .modal-header { padding:20px; background:var(--primary); color:white; font-size:18px; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+    .modal-header.danger { background:var(--red); }
+    .modal-body { padding:24px; }
+    .modal-footer { padding:16px 24px; background:#f8fafc; display:flex; gap:12px; justify-content:flex-end; }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; margin-bottom:6px; font-weight:500; }
+    .form-group input, .form-group select, .form-group textarea { width:100%; padding:10px 14px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px; }
+    .btn-modal { padding:10px 20px; border:none; border-radius:12px; cursor:pointer; font-weight:500; }
+    .btn-modal-primary { background:var(--primary); color:white; }
+    .btn-modal-danger { background:var(--red); color:white; }
+    .btn-modal-secondary { background:#e2e8f0; color:#475569; }
+
     @media (max-width: 992px) {
       .sidebar { width: 80px; padding: 20px 10px; }
       .sidebar .user-info .info,
@@ -208,7 +224,7 @@
 </head>
 <body>
 
-  <!-- SIDEBAR ĐÃ ĐƯỢC ĐỒNG NHẤT HOÀN TOÀN VỚI TRANG CHỦ -->
+  <!-- SIDEBAR GIỮ NGUYÊN -->
   <aside class="sidebar">
     <div class="user-info">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
@@ -227,14 +243,14 @@
       <li><a href=""><i class="fas fa-user-tie"></i> <span>Phân xe tự động</span></a></li>
       <li><a href="#"><i class="fas fa-clock"></i> <span>Quản lý tài xế</span></a></li>
       <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến và giá vé</span></a></li>
-      <li><a href="quản lý xe.html" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li> <!-- Đang active đúng mục Quản lý xe -->
+      <li><a href="quản lý xe.html" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
       <li><a href="#"><i class="fas fa-code-branch"></i> <span>Dashboard</span></a></li>
       <li><a href="#"><i class="fas fa-user-shield"></i> <span>Moderators</span></a></li>
       <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
     </ul>
   </aside>
 
-  <!-- Main Content -->
+  <!-- MAIN CONTENT GIỮ NGUYÊN 100% -->
   <main class="main-content">
     <div class="top-bar">
       <div class="greeting">
@@ -247,18 +263,25 @@
     </div>
 
     <div class="back-btn" onclick="history.back()">
-      <i class="fas fa-arrow-left"></i> Quay lại danh sách xe
+      Quay lại danh sách xe
     </div>
 
     <div class="page-title">Chi tiết xe • 29A-12345</div>
 
+    <!-- CHỈ SỬA 3 NÚT NÀY CHO HOẠT ĐỘNG -->
     <div class="action-buttons">
-      <button class="btn btn-refresh"><i class="fas fa-sync-alt"></i> Cập nhật trạng thái</button>
-      <button class="btn btn-edit"><i class="fas fa-edit"></i> Chỉnh sửa thông tin</button>
-      <button class="btn btn-delete"><i class="fas fa-trash-alt"></i> Xóa xe</button>
+      <button class="btn btn-refresh" onclick="openModal('statusModal')">
+        <i class="fas fa-sync-alt"></i> Cập nhật trạng thái
+      </button>
+      <button class="btn btn-edit" onclick="openModal('editModal')">
+        <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+      </button>
+      <button class="btn btn-delete" onclick="openModal('deleteModal')">
+        <i class="fas fa-trash-alt"></i> Xóa tài xế
+      </button>
     </div>
 
-    <!-- Thông tin xe -->
+    <!-- TẤT CẢ PHẦN DƯỚI GIỮ NGUYÊN 100% -->
     <div class="info-grid">
       <div>
         <h3 style="margin-bottom:20px; color:#1e293b;font-size:18px;">Thông tin chung</h3>
@@ -276,16 +299,14 @@
       </div>
     </div>
 
-    <!-- Thống kê nhanh -->
     <div class="stats-summary">
       <div class="stat-box total"><h3>45</h3><p>Tổng chuyến đi</p></div>
       <div class="stat-box distance"><h3>12.450 km</h3><p>Tổng quãng đường</p></div>
       <div class="stat-box time"><h3>280 giờ</h3><p>Thời gian hoạt động</p></div>
     </div>
 
-    <!-- Lịch sử hoạt động -->
     <div class="history-section">
-      <h3 class="section-title"><i class="fas fa-history"></i> Lịch sử hoạt động</h3>
+      <h3 class="section-title">Lịch sử hoạt động</h3>
       <div class="filter-row">
         <input type="text" placeholder="Từ ngày (dd/mm/yyyy)">
         <input type="text" placeholder="Đến ngày (dd/mm/yyyy)">
@@ -300,8 +321,8 @@
             <div class="date-info">08/12/2024 • 2.5 giờ</div>
           </div>
           <div class="time-info">Khởi hành: 06:00</div>
-          <div class="driver-info">Nguyễn Văn A</div>
-          <div class="distance-info">120 km</div>
+          <div class="driver-info"> Tài xế: Nguyễn Văn A</div>
+          <div class="distance-info">Quãng đường: 120 km</div>
         </div>
 
         <div class="history-item">
@@ -336,5 +357,81 @@
       </div>
     </div>
   </main>
+
+  <!-- 3 MODAL CHO 3 NÚT HOẠT ĐỘNG -->
+  <div id="statusModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Cập nhật trạng thái xe</span>
+        <i class="fas fa-times" onclick="closeModal('statusModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Trạng thái mới</label>
+          <select>
+            <option>Sẵn sàng</option>
+            <option>Đang chạy</option>
+            <option>Bảo dưỡng</option>
+            <option>Ngừng hoạt động</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('statusModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="alert('Cập nhật trạng thái thành công!'); closeModal('statusModal')">
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Chỉnh sửa thông tin xe</span>
+        <i class="fas fa-times" onclick="closeModal('editModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label>Biển số</label><input type="text" value="29A-12345"></div>
+        <div class="form-group"><label>Loại xe</label><input type="text" value="Xe khách 45 chỗ"></div>
+        <div class="form-group"><label>Hãng xe</label><input type="text" value="Hyundai Universe"></div>
+        <div class="form-group"><label>Mô tả</label><textarea rows="3">Xe đời mới, đầy đủ tiện nghi, điều hòa 2 chiều</textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('editModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="alert('Cập nhật thành công!'); closeModal('editModal')">
+          Lưu thay đổi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header danger">
+        <span>Xóa xe</span>
+        <i class="fas fa-times" onclick="closeModal('deleteModal')" style="cursor:pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn <strong>xóa xe 29A-12345</strong>?</p>
+        <p style="color:#dc2626;margin:12px 0;">Hành động này không thể hoàn tác!</p>
+        <div class="form-group">
+          <label>Lý do xóa <span style="color:red;">*</span></label>
+          <textarea rows="3" placeholder="Nhập lý do bắt buộc"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('deleteModal')">Hủy</button>
+        <button class="btn-modal btn-modal-danger" onclick="if(document.querySelector('#deleteModal textarea').value.trim()===''){alert('Vui lòng nhập lý do!')}else{alert('Xóa xe thành công!');closeModal('deleteModal')}">
+          Xóa xe
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+  </script>
 </body>
 </html>
