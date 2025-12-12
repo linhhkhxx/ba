@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý tuyến & giá vé - Nhà Xe Thăng Long</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{
+      --primary:#4361ee;
+      --sidebar-bg:#0f0f1a;
+      --sidebar-hover:#1e1e2e;
+      --border-radius:20px;
+      --green:#10b981;
+      --blue:#3b82f6;
+      --yellow:#f59e0b;
+      --red:#ef4444;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+    body{background:#f8fafc;color:#333;display:flex;min-height:100vh;}
+
+    .sidebar{
+      width:280px;background:var(--sidebar-bg);color:white;padding:30px 20px;position:fixed;height:100vh;overflow-y:auto;
+      border-radius:0 var(--border-radius) var(--border-radius) 0;box-shadow:8px 0 30px rgba(0,0,0,0.4);z-index:1000;
+    }
+    .user-info{display:flex;align-items:center;gap:14px;padding-bottom:24px;border-bottom:1px solid #2d2d44;margin-bottom:30px;}
+    .user-info img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid #374151;}
+    .user-info .info h3{font-size:17px;font-weight:600;margin-bottom:4px;}
+    .user-info .info p{font-size:13px;color:#94a3b8;}
+    .menu-title{text-transform:uppercase;font-size:11px;color:#64748b;letter-spacing:1.5px;margin:20px 0 12px;font-weight:600;}
+    .menu{list-style:none;}
+    .menu a{display:flex;align-items:center;gap:14px;padding:14px 18px;color:#94a3b8;text-decoration:none;border-radius:14px;transition:all .3s;font-size:15px;font-weight:500;}
+    .menu a i{font-size:18px;width:24px;text-align:center;}
+    .menu a:hover{background:var(--sidebar-hover);color:white;}
+    .menu a.active{background:white !important;color:var(--primary) !important;font-weight:600;box-shadow:0 6px 20px rgba(67,97,238,.25);}
+    .menu a.active i{color:var(--primary) !important;}
+
+    .main-content{flex:1;margin-left:280px;padding:30px;background:#f1f5f9;min-height:100vh;}
+    .top-bar{background:white;padding:20px 30px;border-radius:var(--border-radius);box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:30px;}
+    .greeting{font-size:18px;font-weight:500;color:#1e293b;}
+
+    .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:12px;flex-wrap:wrap;}
+    .page-header h1{font-size:26px;font-weight:600;color:#1e293b;}
+    .btn-add{background:var(--primary);color:white;border:none;padding:12px 24px;border-radius:12px;font-size:15px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:8px;transition:.3s;}
+    .btn-add:hover{background:#3651d4;}
+    .btn-secondary{background:#e0e7ff;color:var(--primary);border:1px solid #c7d2fe;padding:12px 18px;border-radius:12px;font-size:14px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:8px;transition:.3s;}
+    .btn-secondary:hover{opacity:.9;}
+
+    .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:20px;}
+    .stat-card{background:white;padding:18px;border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,.05);text-align:center;}
+    .stat-card h3{font-size:13px;color:#64748b;margin-bottom:8px;}
+    .stat-card .number{font-size:26px;font-weight:800;}
+    .stat-card.routes .number{color:var(--primary);}
+    .stat-card.bus .number{color:var(--green);}
+    .stat-card.limo .number{color:var(--blue);}
+    .stat-card.min .number{color:var(--yellow);}
+    .stat-card.max .number{color:var(--red);}
+
+    .filter-bar{margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .search-input{padding:10px 16px;border:1px solid #e2e8f0;border-radius:12px;background:white;font-size:14px;min-width:260px;}
+    .filter-select{padding:10px 16px;border:1px solid #e2e8f0;border-radius:12px;background:white;font-size:14px;}
+    .hint{color:#64748b;font-size:13px;margin:6px 0 14px;}
+
+    table{width:100%;border-collapse:collapse;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.05);}
+    thead{background:#f8fafc;}
+    th,td{padding:16px;text-align:left;font-size:14.5px;vertical-align:top;}
+    th{color:#475569;font-weight:700;}
+    tbody tr:hover{background:#f8fafc;}
+
+    .badge{padding:6px 14px;border-radius:30px;font-size:13px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;}
+    .badge.bus{background:#dcfce7;color:#166534;}
+    .badge.limo{background:#dbeafe;color:#1e40af;}
+    .badge.price{background:#f1f5f9;color:#334155;}
+
+    .actions a{margin-right:12px;color:#64748b;font-size:18px;cursor:pointer;transition:.3s;}
+    .actions a:hover{color:var(--primary);}
+
+    /* MODAL */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:9999;}
+    .modal.active{display:flex;}
+    .modal-content{background:white;width:90%;max-width:900px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.3);overflow:hidden;animation:zoom .3s;}
+    @keyframes zoom{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+    .modal-header{padding:20px;background:var(--primary);color:white;font-size:18px;font-weight:800;display:flex;justify-content:space-between;align-items:center;}
+    .modal-header.danger{background:var(--red);}
+    .modal-body{padding:24px;max-height:75vh;overflow-y:auto;}
+    .modal-footer{padding:16px 24px;background:#f8fafc;display:flex;gap:12px;justify-content:flex-end;}
+    .form-group{margin-bottom:16px;}
+    .form-group label{display:block;margin-bottom:8px;font-weight:700;color:#374151;}
+    .form-group label span.required{color:var(--red);}
+    .form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .btn-modal{padding:10px 24px;border:none;border-radius:12px;cursor:pointer;font-weight:800;}
+    .btn-modal-primary{background:var(--primary);color:white;}
+    .btn-modal-secondary{background:#e2e8f0;color:#475569;}
+    .btn-modal-danger{background:var(--red);color:white;}
+
+    .section-title{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font-weight:900;color:#0f172a;}
+    .split-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;}
+    .muted{color:#64748b;font-size:13px;margin-top:6px;line-height:1.4;}
+    .mini-help{color:#64748b;font-size:12.5px;margin-top:6px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-weight:800;font-size:13px;background:#f1f5f9;color:#334155;}
+
+    @media (max-width:992px){
+      .sidebar{width:80px;padding:20px 10px;}
+      .sidebar .user-info .info,.sidebar .menu-title,.sidebar .menu a span{display:none;}
+      .sidebar a{justify-content:center;}
+      .main-content{margin-left:80px;}
+      .stats-grid{grid-template-columns:repeat(3,1fr);}
+      .form-row{grid-template-columns:1fr;}
+      .search-input{min-width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="user-info">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+      <div class="info">
+        <h3>Samantha</h3>
+        <p>+098 (99) 439-49-16</p>
+      </div>
+    </div>
+
+    <p class="menu-title">MAIN MENU</p>
+    <ul class="menu">
+      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+      <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
+      <li><a href="#"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
+      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-map-marked"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="greeting">Chào buổi sáng, Samantha</div>
+    </div>
+
+    <div class="page-header">
+      <h1>Quản lý Tuyến, Giá vé & Điểm đón/trả</h1>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-secondary" onclick="resetDemo()"><i class="fas fa-rotate-left"></i> Reset dữ liệu mẫu</button>
+        <button class="btn-add" onclick="openAddModal()"><i class="fas fa-plus"></i> Thêm tuyến mới</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card routes"><h3>Tổng tuyến</h3><div class="number" id="st_routes">—</div></div>
+      <div class="stat-card bus"><h3>Giá xe khách thấp nhất</h3><div class="number" id="st_busMin">—</div></div>
+      <div class="stat-card limo"><h3>Giá limousine thấp nhất</h3><div class="number" id="st_limoMin">—</div></div>
+      <div class="stat-card min"><h3>Giá thấp nhất (tất cả)</h3><div class="number" id="st_allMin">—</div></div>
+      <div class="stat-card max"><h3>Giá cao nhất (tất cả)</h3><div class="number" id="st_allMax">—</div></div>
+    </div>
+
+    <div class="filter-bar">
+      <i class="fas fa-filter" style="color:#64748b;"></i>
+      <input id="q" type="text" class="search-input" placeholder="Tìm tuyến: Hà Nội, Hải Phòng... (Enter để lọc)">
+      <select id="vehicleFilter" class="filter-select">
+        <option value="all" selected>Tất cả loại xe</option>
+        <option value="bus">Chỉ xe khách</option>
+        <option value="limo">Chỉ limousine</option>
+      </select>
+      <select id="priceFilter" class="filter-select">
+        <option value="all" selected>Tất cả mức giá</option>
+        <option value="<=200">≤ 200k</option>
+        <option value="201-300">201k – 300k</option>
+        <option value=">300">> 300k</option>
+      </select>
+      <button class="btn-secondary" onclick="applyFilters()"><i class="fas fa-magnifying-glass"></i> Lọc</button>
+    </div>
+
+    <div class="hint">
+      <span class="pill"><i class="fas fa-bus"></i> Xe khách: đón/trả tại bến</span>
+      <span class="pill" style="margin-left:8px;"><i class="fas fa-van-shuttle"></i> Limousine: đón/trả tận nơi</span>
+      <div style="margin-top:8px;">Cột điểm đón/trả đã được ẩn. Bấm <b>Xem</b> để xem chi tiết.</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tuyến</th>
+          <th>Xe khách</th>
+          <th>Limousine</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </main>
+
+  <!-- MODAL: ADD/EDIT ROUTE -->
+  <div id="routeModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modalTitle">Thêm tuyến mới</span>
+        <i class="fas fa-times" onclick="closeModal('routeModal')" style="cursor:pointer;font-size:22px;"></i>
+      </div>
+
+      <div class="modal-body">
+        <div class="section-title"><i class="fas fa-route"></i> Thông tin cơ bản</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Điểm đi <span class="required">*</span></label>
+            <input id="m_from" type="text" placeholder="Ví dụ: Hà Nội">
+          </div>
+          <div class="form-group">
+            <label>Điểm đến <span class="required">*</span></label>
+            <input id="m_to" type="text" placeholder="Ví dụ: Hải Phòng">
+          </div>
+        </div>
+
+        <div class="section-title"><i class="fas fa-tags"></i> Giá vé</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Giá xe khách (đ) <span class="required">*</span></label>
+            <input id="m_busPrice" type="number" min="0" placeholder="130000">
+          </div>
+          <div class="form-group">
+            <label>Giá limousine (đ) <span class="required">*</span></label>
+            <input id="m_limoPrice" type="number" min="0" placeholder="250000">
+          </div>
+        </div>
+
+        <div class="section-title"><i class="fas fa-location-dot"></i> Quản lý điểm đón/trả</div>
+        <div class="form-row">
+          <div class="split-card">
+            <div style="display:flex;align-items:center;gap:10px;font-weight:900;color:#166534;">
+              <span class="badge bus"><i class="fas fa-bus"></i> Xe khách</span>
+              <span style="color:#334155;font-weight:800;">Đón/Trả tại bến</span>
+            </div>
+            <div class="muted">Nhập mỗi điểm trên 1 dòng (ví dụ: Bến xe ..., Điểm trung chuyển ...).</div>
+
+            <div class="form-group" style="margin-top:12px;">
+              <label>Điểm đón (xe khách)</label>
+              <textarea id="m_busPickup" rows="4" placeholder="Ví dụ:
+Bến xe (Điểm đi)
+Điểm trung chuyển A"></textarea>
+              <div class="mini-help">Nếu bỏ trống: hệ thống tự tạo “Bến xe (Điểm đi)”.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Điểm trả (xe khách)</label>
+              <textarea id="m_busDropoff" rows="4" placeholder="Ví dụ:
+Bến xe (Điểm đến)
+Điểm trung chuyển B"></textarea>
+              <div class="mini-help">Nếu bỏ trống: hệ thống tự tạo “Bến xe (Điểm đến)”.</div>
+            </div>
+          </div>
+
+          <div class="split-card">
+            <div style="display:flex;align-items:center;gap:10px;font-weight:900;color:#1e40af;">
+              <span class="badge limo"><i class="fas fa-van-shuttle"></i> Limousine</span>
+              <span style="color:#334155;font-weight:800;">Đón/Trả tận nơi</span>
+            </div>
+            <div class="muted">Mặc định: <b>đón/trả tận nơi</b>. Có thể nhập thêm khu vực/điểm hẹn nếu muốn.</div>
+
+            <div class="form-group" style="margin-top:12px;">
+              <label>Điểm đón (limousine)</label>
+              <textarea id="m_limoPickup" rows="4" placeholder="Ví dụ:
+Đón tận nơi (theo địa chỉ khách cung cấp)
+Điểm hẹn: ..."></textarea>
+              <div class="mini-help">Nếu bỏ trống: tự đặt “Đón tận nơi…”.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Điểm trả (limousine)</label>
+              <textarea id="m_limoDropoff" rows="4" placeholder="Ví dụ:
+Trả tận nơi (theo địa chỉ khách cung cấp)
+Điểm hẹn: ..."></textarea>
+              <div class="mini-help">Nếu bỏ trống: tự đặt “Trả tận nơi…”.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:16px;">
+          <label>Ghi chú</label>
+          <textarea id="m_note" rows="3" placeholder="Ví dụ: áp dụng lễ/Tết, phụ thu đón tận nơi..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('routeModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="submitRoute()">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DELETE -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header danger">
+        <span><i class="fas fa-trash-alt"></i> Xóa tuyến</span>
+        <i class="fas fa-times" onclick="closeModal('deleteModal')" style="cursor:pointer;font-size:22px;"></i>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn <b>xóa tuyến</b> <span id="delName"></span>?</p>
+        <p style="color:#dc2626;margin-top:10px;">Hành động này không thể hoàn tác.</p>
+        <div class="form-group" style="margin-top:14px;">
+          <label>Lý do xóa <span class="required">*</span></label>
+          <textarea id="delReason" rows="3" placeholder="Nhập lý do bắt buộc..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('deleteModal')">Hủy</button>
+        <button class="btn-modal btn-modal-danger" onclick="confirmDelete()">Xóa</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const KEY = "TL_ROUTES_PRICES_V4_STOPS_NOCOL";
+    let routes = [];
+    let editingId = null;
+    let deletingId = null;
+
+    function openModal(id){ document.getElementById(id).classList.add("active"); }
+    function closeModal(id){ document.getElementById(id).classList.remove("active"); }
+
+    function fmtK(v){
+      const n = Number(v);
+      if (!n && n !== 0) return "—";
+      return (n/1000).toLocaleString("vi-VN") + "k";
+    }
+    function fmtVND(v){
+      const n = Number(v);
+      if (!n && n !== 0) return "—";
+      return n.toLocaleString("vi-VN") + " đ";
+    }
+    function routeLabel(r){ return `${r.from} - ${r.to}`; }
+
+    function linesToArray(text){
+      return (text || "")
+        .split("\n")
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+    function arrayToLines(arr){
+      return (arr || []).join("\n");
+    }
+
+    function defaultBusStops(from, to){
+      return { pickup:[`Bến xe (${from})`], dropoff:[`Bến xe (${to})`] };
+    }
+    function defaultLimoStops(){
+      return {
+        pickup:["Đón tận nơi (theo địa chỉ khách cung cấp)"],
+        dropoff:["Trả tận nơi (theo địa chỉ khách cung cấp)"]
+      };
+    }
+
+    function seed(){
+      routes = [
+        { id:1, from:"Hà Nội", to:"Hải Phòng", busPrice:130000, limoPrice:250000, note:"",
+          stops:{ bus: defaultBusStops("Hà Nội","Hải Phòng"), limo: defaultLimoStops() } },
+        { id:2, from:"Hà Nội", to:"Thái Bình", busPrice:130000, limoPrice:250000, note:"",
+          stops:{ bus: defaultBusStops("Hà Nội","Thái Bình"), limo: defaultLimoStops() } },
+        { id:3, from:"Hà Nội", to:"Thanh Hóa", busPrice:200000, limoPrice:280000, note:"",
+          stops:{ bus: defaultBusStops("Hà Nội","Thanh Hóa"), limo: defaultLimoStops() } },
+        { id:4, from:"Hà Nội", to:"Nghệ An", busPrice:260000, limoPrice:320000, note:"",
+          stops:{ bus: defaultBusStops("Hà Nội","Nghệ An"), limo: defaultLimoStops() } },
+        { id:5, from:"Hà Nội", to:"Hà Tĩnh", busPrice:300000, limoPrice:380000, note:"",
+          stops:{ bus: defaultBusStops("Hà Nội","Hà Tĩnh"), limo: defaultLimoStops() } },
+      ];
+      save();
+    }
+
+    function save(){ localStorage.setItem(KEY, JSON.stringify(routes)); }
+
+    function load(){
+      const raw = localStorage.getItem(KEY);
+      routes = raw ? JSON.parse(raw) : [];
+      if (!routes || routes.length === 0) seed();
+
+      // tương thích dữ liệu cũ thiếu stops
+      routes = routes.map(r => {
+        if (!r.stops) r.stops = { bus: defaultBusStops(r.from, r.to), limo: defaultLimoStops() };
+        if (!r.stops.bus) r.stops.bus = defaultBusStops(r.from, r.to);
+        if (!r.stops.limo) r.stops.limo = defaultLimoStops();
+        if (!Array.isArray(r.stops.bus.pickup)) r.stops.bus.pickup = [];
+        if (!Array.isArray(r.stops.bus.dropoff)) r.stops.bus.dropoff = [];
+        if (!Array.isArray(r.stops.limo.pickup)) r.stops.limo.pickup = [];
+        if (!Array.isArray(r.stops.limo.dropoff)) r.stops.limo.dropoff = [];
+        return r;
+      });
+      save();
+    }
+
+    function renderStats(){
+      document.getElementById("st_routes").innerText = routes.length;
+
+      const busPrices = routes.map(r=>r.busPrice).filter(n=>typeof n==="number");
+      const limoPrices = routes.map(r=>r.limoPrice).filter(n=>typeof n==="number");
+      const all = [...busPrices, ...limoPrices];
+
+      const busMin = busPrices.length ? Math.min(...busPrices) : null;
+      const limoMin = limoPrices.length ? Math.min(...limoPrices) : null;
+      const allMin = all.length ? Math.min(...all) : null;
+      const allMax = all.length ? Math.max(...all) : null;
+
+      document.getElementById("st_busMin").innerText  = busMin == null ? "—" : fmtK(busMin);
+      document.getElementById("st_limoMin").innerText = limoMin == null ? "—" : fmtK(limoMin);
+      document.getElementById("st_allMin").innerText  = allMin == null ? "—" : fmtK(allMin);
+      document.getElementById("st_allMax").innerText  = allMax == null ? "—" : fmtK(allMax);
+    }
+
+    function getFilters(){
+      const q = (document.getElementById("q").value || "").toLowerCase().trim();
+      const vehicle = document.getElementById("vehicleFilter").value;
+      const price = document.getElementById("priceFilter").value;
+      return { q, vehicle, price };
+    }
+    function matchPriceRange(value, key){
+      if (key === "all") return true;
+      const v = Number(value);
+      if (key === "<=200") return v <= 200000;
+      if (key === "201-300") return v >= 201000 && v <= 300000;
+      if (key === ">300") return v > 300000;
+      return true;
+    }
+    function applyFilters(){ renderTable(); }
+
+    function renderTable(){
+      const { q, vehicle, price } = getFilters();
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+
+      let list = routes.slice();
+      if (q) list = list.filter(r => routeLabel(r).toLowerCase().includes(q));
+
+      if (vehicle === "bus") list = list.filter(r => matchPriceRange(r.busPrice, price));
+      else if (vehicle === "limo") list = list.filter(r => matchPriceRange(r.limoPrice, price));
+      else list = list.filter(r => matchPriceRange(r.busPrice, price) || matchPriceRange(r.limoPrice, price));
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="color:#64748b;padding:18px;">Không có tuyến phù hợp bộ lọc.</td></tr>`;
+        renderStats();
+        return;
+      }
+
+      list.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>
+            <div style="font-weight:900;color:#1e293b;">${routeLabel(r)}</div>
+            <div style="margin-top:8px;color:#64748b;font-size:13px;">
+              <span class="badge price"><i class="fas fa-tag"></i> Xe khách: ${fmtVND(r.busPrice)}</span>
+              <span style="margin-left:8px" class="badge price"><i class="fas fa-tag"></i> Limo: ${fmtVND(r.limoPrice)}</span>
+            </div>
+            ${r.note ? `<div style="margin-top:8px;color:#64748b;font-size:13px;"><i class="fas fa-circle-info"></i> ${r.note}</div>` : ``}
+          </td>
+
+          <td><div class="badge bus"><i class="fas fa-bus"></i> ${fmtK(r.busPrice)}</div></td>
+          <td><div class="badge limo"><i class="fas fa-van-shuttle"></i> ${fmtK(r.limoPrice)}</div></td>
+
+          <td class="actions">
+            <a title="Xem chi tiết (gồm điểm đón/trả)" onclick="viewRoute(${r.id})"><i class="fas fa-eye"></i></a>
+            <a title="Sửa" onclick="openEditModal(${r.id})"><i class="fas fa-edit"></i></a>
+            <a title="Xóa" onclick="openDeleteModal(${r.id})"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderStats();
+    }
+
+    function openAddModal(){
+      editingId = null;
+      document.getElementById("modalTitle").innerText = "Thêm tuyến mới";
+      fillModal({
+        from:"",to:"",busPrice:"",limoPrice:"",
+        stops:{ bus:{pickup:[],dropoff:[]}, limo: defaultLimoStops() },
+        note:""
+      });
+      openModal("routeModal");
+    }
+
+    function openEditModal(id){
+      const r = routes.find(x=>x.id===id);
+      if(!r) return;
+      editingId = id;
+      document.getElementById("modalTitle").innerText = "Cập nhật tuyến, giá vé & điểm đón/trả";
+      fillModal(r);
+      openModal("routeModal");
+    }
+
+    function fillModal(r){
+      document.getElementById("m_from").value = r.from ?? "";
+      document.getElementById("m_to").value = r.to ?? "";
+      document.getElementById("m_busPrice").value = r.busPrice ?? "";
+      document.getElementById("m_limoPrice").value = r.limoPrice ?? "";
+
+      const busPickup = r.stops?.bus?.pickup ?? [];
+      const busDropoff = r.stops?.bus?.dropoff ?? [];
+      const limoPickup = r.stops?.limo?.pickup ?? [];
+      const limoDropoff = r.stops?.limo?.dropoff ?? [];
+
+      document.getElementById("m_busPickup").value = arrayToLines(busPickup);
+      document.getElementById("m_busDropoff").value = arrayToLines(busDropoff);
+      document.getElementById("m_limoPickup").value = arrayToLines(limoPickup.length ? limoPickup : defaultLimoStops().pickup);
+      document.getElementById("m_limoDropoff").value = arrayToLines(limoDropoff.length ? limoDropoff : defaultLimoStops().dropoff);
+
+      document.getElementById("m_note").value = r.note ?? "";
+    }
+
+    function submitRoute(){
+      const from = document.getElementById("m_from").value.trim();
+      const to = document.getElementById("m_to").value.trim();
+      const busPrice = Number(document.getElementById("m_busPrice").value);
+      const limoPrice = Number(document.getElementById("m_limoPrice").value);
+      const note = document.getElementById("m_note").value.trim();
+
+      if(!from || !to || !busPrice || !limoPrice){
+        alert("Vui lòng nhập đầy đủ: điểm đi, điểm đến, giá xe khách, giá limousine.");
+        return;
+      }
+
+      const exists = routes.some(r =>
+        r.from.toLowerCase() === from.toLowerCase() &&
+        r.to.toLowerCase() === to.toLowerCase() &&
+        r.id !== editingId
+      );
+      if(exists){
+        alert("Tuyến này đã tồn tại. Vui lòng sửa tuyến hiện có.");
+        return;
+      }
+
+      const busPickup = linesToArray(document.getElementById("m_busPickup").value);
+      const busDropoff = linesToArray(document.getElementById("m_busDropoff").value);
+      const limoPickup = linesToArray(document.getElementById("m_limoPickup").value);
+      const limoDropoff = linesToArray(document.getElementById("m_limoDropoff").value);
+
+      const fixedBus = {
+        pickup: busPickup.length ? busPickup : defaultBusStops(from, to).pickup,
+        dropoff: busDropoff.length ? busDropoff : defaultBusStops(from, to).dropoff
+      };
+      const fixedLimo = {
+        pickup: limoPickup.length ? limoPickup : defaultLimoStops().pickup,
+        dropoff: limoDropoff.length ? limoDropoff : defaultLimoStops().dropoff
+      };
+      const stops = { bus: fixedBus, limo: fixedLimo };
+
+      if(editingId){
+        routes = routes.map(r => r.id === editingId ? ({...r, from, to, busPrice, limoPrice, note, stops}) : r);
+        alert("Cập nhật tuyến thành công!");
+      } else {
+        const newId = routes.length ? Math.max(...routes.map(r=>r.id)) + 1 : 1;
+        routes.push({ id:newId, from, to, busPrice, limoPrice, note, stops });
+        alert("Thêm tuyến thành công!");
+      }
+
+      save();
+      closeModal("routeModal");
+      renderTable();
+    }
+
+    function viewRoute(id){
+      const r = routes.find(x=>x.id===id);
+      if(!r) return;
+
+      const busP = (r.stops?.bus?.pickup || []).join("\n- ");
+      const busD = (r.stops?.bus?.dropoff || []).join("\n- ");
+      const limoP = (r.stops?.limo?.pickup || []).join("\n- ");
+      const limoD = (r.stops?.limo?.dropoff || []).join("\n- ");
+
+      alert(
+        `Tuyến: ${routeLabel(r)}\n\n` +
+        `Giá xe khách: ${fmtVND(r.busPrice)}\n` +
+        `Điểm đón (xe khách - tại bến):\n- ${busP || "(chưa có)"}\n` +
+        `Điểm trả (xe khách - tại bến):\n- ${busD || "(chưa có)"}\n\n` +
+        `Giá limousine: ${fmtVND(r.limoPrice)}\n` +
+        `Điểm đón (limousine - tận nơi):\n- ${limoP || "(chưa có)"}\n` +
+        `Điểm trả (limousine - tận nơi):\n- ${limoD || "(chưa có)"}\n` +
+        (r.note ? `\nGhi chú: ${r.note}` : "")
+      );
+    }
+
+    function openDeleteModal(id){
+      const r = routes.find(x=>x.id===id);
+      if(!r) return;
+      deletingId = id;
+      document.getElementById("delName").innerText = `"${routeLabel(r)}"`;
+      document.getElementById("delReason").value = "";
+      openModal("deleteModal");
+    }
+    function confirmDelete(){
+      const reason = document.getElementById("delReason").value.trim();
+      if(!reason){ alert("Vui lòng nhập lý do xóa."); return; }
+      routes = routes.filter(r => r.id !== deletingId);
+      deletingId = null;
+      save();
+      closeModal("deleteModal");
+      renderTable();
+      alert("Đã xóa tuyến.");
+    }
+
+    function resetDemo(){
+      if(!confirm("Reset sẽ xóa dữ liệu đang lưu và quay về dữ liệu mẫu. Tiếp tục?")) return;
+      localStorage.removeItem(KEY);
+      load();
+      renderTable();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      load();
+      renderTable();
+
+      document.getElementById("q").addEventListener("keydown", (e)=>{
+        if(e.key === "Enter") applyFilters();
+      });
+      document.getElementById("vehicleFilter").addEventListener("change", applyFilters);
+      document.getElementById("priceFilter").addEventListener("change", applyFilters);
+    });
+  </script>
+</body>
+</html>
