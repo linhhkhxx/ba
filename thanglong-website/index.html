@@ -1,0 +1,4566 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhà Xe Thăng Long - Dịch Vụ Xe Khách Uy Tín</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #2563eb;
+        --primary-dark: #1e40af;
+        --primary-light: #3b82f6;
+        --danger-color: #ef4444;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.6;
+        color: var(--gray-900);
+        background: #ffffff;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .top-bar {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 8px 0;
+        font-size: 13px;
+      }
+
+      .top-bar .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .contact-info {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .contact-info span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        opacity: 0.95;
+      }
+
+      .user-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .user-actions a {
+        color: white;
+        text-decoration: none;
+        padding: 6px 16px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .user-actions a:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .main-nav {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 800;
+        color: white;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .logo-text h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--gray-900);
+        letter-spacing: -0.5px;
+      }
+
+      .logo-text p {
+        font-size: 12px;
+        color: var(--gray-600);
+        font-weight: 500;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 8px;
+      }
+
+      nav a {
+        color: var(--gray-700);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 10px 18px;
+        border-radius: 8px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      nav a:hover {
+        background: var(--gray-50);
+        color: var(--primary-color);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--gray-700);
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 120px 24px 180px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .hero-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h2 {
+        font-size: 56px;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 24px;
+        line-height: 1.1;
+        letter-spacing: -1px;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .hero p {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 48px;
+        font-weight: 400;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+
+      .hero-badges {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin-top: 40px;
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+      }
+
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 16px 28px;
+        border-radius: 12px;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Booking Section */
+      .booking-section {
+        max-width: 1100px;
+        margin: -100px auto 0;
+        padding: 0 24px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .booking-card {
+        background: white;
+        padding: 48px;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(0, 0, 0, 0.05);
+      }
+
+      .booking-form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--gray-900);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .form-group label .required {
+        color: var(--danger-color);
+      }
+
+      .form-group input,
+      .form-group select {
+        padding: 14px 16px;
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.3s;
+        background: white;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      }
+
+      .search-btn {
+        grid-column: 1 / -1;
+        padding: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 12px;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Results Section */
+      .results-section {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        display: none;
+      }
+
+      .results-section.show {
+        display: block;
+      }
+
+      .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .results-info h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 4px;
+      }
+
+      .results-count {
+        font-size: 14px;
+        color: var(--gray-600);
+      }
+
+      .results-filters {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 8px 16px;
+        background: white;
+        border: 2px solid var(--gray-200);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--gray-700);
+      }
+
+      .filter-btn:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      .filter-btn.active {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+      }
+
+      .sort-select {
+        padding: 8px 16px;
+        border: 2px solid var(--gray-200);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .sort-select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      /* Trip Cards */
+      .trips-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .trip-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+
+      .trip-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border-color: var(--primary-light);
+        transform: translateY(-2px);
+      }
+
+      .trip-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        gap: 16px;
+      }
+
+      .trip-type {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .trip-type.bus {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        color: #1e40af;
+      }
+
+      .trip-type.limousine {
+        background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+        color: #9f1239;
+      }
+
+      .trip-price {
+        text-align: right;
+      }
+
+      .price-amount {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary-color);
+        line-height: 1;
+      }
+
+      .price-label {
+        font-size: 12px;
+        color: var(--gray-600);
+        margin-top: 4px;
+      }
+
+      .trip-route {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .route-location {
+        flex: 1;
+      }
+
+      .location-label {
+        font-size: 12px;
+        color: var(--gray-600);
+        margin-bottom: 4px;
+      }
+
+      .location-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--gray-900);
+      }
+
+      .route-arrow {
+        font-size: 24px;
+        color: var(--gray-400);
+        flex-shrink: 0;
+      }
+
+      .trip-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+        padding-top: 20px;
+        border-top: 1px solid var(--gray-200);
+      }
+
+      .trip-detail {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .detail-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gray-100);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .detail-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .detail-label {
+        font-size: 12px;
+        color: var(--gray-600);
+      }
+
+      .detail-value {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--gray-900);
+      }
+
+      .trip-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .btn-book {
+        flex: 1;
+        padding: 14px 24px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-book:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Loading State */
+      .loading-state {
+        text-align: center;
+        padding: 60px 24px;
+        display: none;
+      }
+
+      .loading-state.show {
+        display: block;
+      }
+
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid var(--gray-200);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 16px;
+        color: var(--gray-600);
+        font-weight: 500;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 80px 24px;
+        display: none;
+      }
+
+      .empty-state.show {
+        display: block;
+      }
+
+      .empty-icon {
+        width: 120px;
+        height: 120px;
+        background: var(--gray-100);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        margin: 0 auto 24px;
+      }
+
+      .empty-state h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 12px;
+      }
+
+      .empty-state p {
+        font-size: 16px;
+        color: var(--gray-600);
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      /* Badge */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .badge-success {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .badge-warning {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(8px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .modal-content {
+        background: white;
+        padding: 40px;
+        border-radius: 24px;
+        max-width: 480px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        position: relative;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .modal-icon {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 32px;
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+      }
+
+      .modal-header h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 8px;
+      }
+
+      .modal-header p {
+        color: var(--gray-600);
+        font-size: 14px;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: var(--gray-100);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--gray-600);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .close-modal:hover {
+        background: var(--gray-200);
+        color: var(--gray-900);
+      }
+
+      .auth-form .form-group {
+        margin-bottom: 20px;
+      }
+
+      .auth-form input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.3s;
+      }
+
+      .auth-form input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      }
+
+      .auth-form input.error {
+        border-color: var(--danger-color);
+      }
+
+      .password-toggle-group {
+        position: relative;
+      }
+
+      .password-toggle-btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 8px;
+        color: var(--gray-500);
+        transition: color 0.3s;
+      }
+
+      .password-toggle-btn:hover {
+        color: var(--gray-700);
+      }
+
+      .password-strength {
+        height: 4px;
+        background: var(--gray-200);
+        border-radius: 2px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+
+      .password-strength-bar {
+        height: 100%;
+        width: 0;
+        transition: all 0.3s;
+        border-radius: 2px;
+      }
+
+      .password-strength-bar.weak {
+        width: 33%;
+        background: var(--danger-color);
+      }
+
+      .password-strength-bar.medium {
+        width: 66%;
+        background: var(--warning-color);
+      }
+
+      .password-strength-bar.strong {
+        width: 100%;
+        background: var(--success-color);
+      }
+
+      .password-strength-text {
+        font-size: 12px;
+        margin-top: 4px;
+        color: var(--gray-600);
+      }
+
+      .error-message {
+        color: var(--danger-color);
+        font-size: 13px;
+        margin-top: 6px;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      .checkbox-group label {
+        margin: 0;
+        font-weight: normal;
+        font-size: 14px;
+        cursor: pointer;
+        line-height: 1.5;
+        color: var(--gray-700);
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 8px;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .submit-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 24px 0;
+        color: var(--gray-500);
+        font-size: 14px;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .divider span {
+        padding: 0 16px;
+      }
+
+      .switch-auth {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 14px;
+        color: var(--gray-600);
+      }
+
+      .switch-auth a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .switch-auth a:hover {
+        text-decoration: underline;
+      }
+
+      .forgot-password {
+        text-align: right;
+        margin-top: 8px;
+      }
+
+      .forgot-password a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .forgot-password a:hover {
+        text-decoration: underline;
+      }
+
+      .alert {
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        display: none;
+        align-items: center;
+        gap: 10px;
+        animation: slideDown 0.3s ease-out;
+      }
+
+      .alert.show {
+        display: flex;
+      }
+
+      .alert-error {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+      }
+
+      .alert-success {
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: white;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .user-name {
+        font-weight: 600;
+      }
+
+      .logout-btn {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .text-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .text-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Booking Modal Styles */
+      .booking-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(17, 24, 39, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 1001;
+        overflow-y: auto;
+        padding: 24px;
+      }
+
+      .booking-modal.show {
+        display: block;
+      }
+
+      .booking-modal-content {
+        background: white;
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .booking-modal-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 24px 32px;
+        position: relative;
+      }
+
+      .booking-modal-header h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .booking-modal-header p {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      .close-booking-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .close-booking-modal:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .booking-modal-body {
+        padding: 24px;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+      }
+
+      .trip-summary {
+        background: var(--gray-50);
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+      }
+
+      .trip-summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .trip-summary-row:last-child {
+        margin-bottom: 0;
+        padding-top: 8px;
+        border-top: 2px dashed var(--gray-300);
+        margin-top: 4px;
+      }
+
+      .trip-summary-label {
+        font-size: 13px;
+        color: var(--gray-600);
+      }
+
+      .trip-summary-value {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--gray-900);
+      }
+
+      .trip-summary-total {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      /* Seat Selection */
+      .seat-selection-container {
+        margin-bottom: 24px;
+      }
+
+      .seat-selection-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .seat-selection-header h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--gray-900);
+      }
+
+      .seats-selected {
+        font-size: 13px;
+        color: var(--gray-600);
+      }
+
+      .seats-selected strong {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      .seat-legend {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--gray-700);
+      }
+
+      .legend-box {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .legend-box.available {
+        background: white;
+        border: 2px solid var(--gray-300);
+        color: var(--gray-700);
+      }
+
+      .legend-box.selected {
+        background: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        color: white;
+      }
+
+      .legend-box.occupied {
+        background: var(--gray-300);
+        border: 2px solid var(--gray-300);
+        color: var(--gray-600);
+        cursor: not-allowed;
+      }
+
+      .bus-layout {
+        background: var(--gray-100);
+        padding: 16px;
+        border-radius: 12px;
+        border: 2px solid var(--gray-200);
+      }
+
+      .driver-section {
+        text-align: right;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 2px dashed var(--gray-300);
+      }
+
+      .driver-icon {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--gray-700);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .seats-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        max-width: 350px;
+        margin: 0 auto;
+      }
+
+      .seat {
+        aspect-ratio: 1;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+      }
+
+      .seat.available {
+        background: white;
+        border-color: var(--gray-300);
+        color: var(--gray-700);
+      }
+
+      .seat.available:hover {
+        border-color: var(--primary-color);
+        transform: scale(1.05);
+      }
+
+      .seat.selected {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        transform: scale(1.05);
+      }
+
+      .seat.occupied {
+        background: var(--gray-300);
+        border-color: var(--gray-300);
+        color: var(--gray-600);
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      .seat.aisle {
+        background: transparent;
+        border: none;
+        cursor: default;
+      }
+
+      /* Passenger Info Form */
+      .passenger-info-container {
+        margin-bottom: 24px;
+      }
+
+      .passenger-info-container h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+      }
+
+      .passenger-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .passenger-form .form-group {
+        margin-bottom: 0;
+      }
+
+      .passenger-form .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .passenger-form .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .passenger-form .form-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+
+      /* Payment Method */
+      .payment-method-container {
+        margin-bottom: 24px;
+      }
+
+      .payment-method-container h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+      }
+
+      .payment-methods {
+        display: grid;
+        gap: 12px;
+      }
+
+      .payment-method {
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+      }
+
+      .payment-method:hover {
+        border-color: var(--primary-color);
+        background: var(--gray-50);
+      }
+
+      .payment-method.selected {
+        border-color: var(--primary-color);
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.05),
+          rgba(59, 130, 246, 0.05)
+        );
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .payment-radio {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--gray-300);
+        border-radius: 50%;
+        flex-shrink: 0;
+        position: relative;
+        transition: all 0.3s;
+      }
+
+      .payment-method.selected .payment-radio {
+        border-color: var(--primary-color);
+      }
+
+      .payment-method.selected .payment-radio::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        background: var(--primary-color);
+        border-radius: 50%;
+      }
+
+      .payment-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gray-100);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+
+      .payment-method.selected .payment-icon {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .payment-info {
+        flex: 1;
+      }
+
+      .payment-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--gray-900);
+        margin-bottom: 2px;
+      }
+
+      .payment-desc {
+        font-size: 12px;
+        color: var(--gray-600);
+      }
+
+      .payment-badge {
+        background: var(--success-color);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .payment-note {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 12px;
+        display: none;
+      }
+
+      .payment-note.show {
+        display: block;
+      }
+
+      .payment-note p {
+        font-size: 13px;
+        color: var(--gray-700);
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .payment-note strong {
+        color: var(--gray-900);
+      }
+
+      .confirm-booking-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, var(--success-color), #059669);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        margin-top: 8px;
+      }
+
+      .confirm-booking-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      .confirm-booking-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* Login Required Modal */
+      .login-required-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(17, 24, 39, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 1002;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+      }
+
+      .login-required-modal.show {
+        display: flex;
+      }
+
+      .login-required-content {
+        background: white;
+        max-width: 440px;
+        width: 100%;
+        border-radius: 24px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .login-required-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        margin: 0 auto 24px;
+      }
+
+      .login-required-content h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 12px;
+      }
+
+      .login-required-content p {
+        font-size: 15px;
+        color: var(--gray-600);
+        line-height: 1.6;
+        margin-bottom: 32px;
+      }
+
+      .login-required-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .btn-login-now {
+        flex: 1;
+        padding: 14px 24px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .btn-login-now:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      .btn-cancel {
+        flex: 1;
+        padding: 14px 24px;
+        background: white;
+        color: var(--gray-700);
+        border: 2px solid var(--gray-300);
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-cancel:hover {
+        background: var(--gray-50);
+        border-color: var(--gray-400);
+      }
+
+      /* Features Section */
+      .section {
+        padding: 100px 24px;
+      }
+
+      .section-alt {
+        background: var(--gray-50);
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .section-label {
+        display: inline-block;
+        padding: 8px 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.1),
+          rgba(59, 130, 246, 0.1)
+        );
+        color: var(--primary-color);
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .section-header h2 {
+        font-size: 42px;
+        font-weight: 800;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+        letter-spacing: -1px;
+      }
+
+      .section-header p {
+        font-size: 18px;
+        color: var(--gray-600);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 40px 32px;
+        border-radius: 20px;
+        border: 1px solid var(--gray-200);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        border-color: var(--primary-color);
+      }
+
+      .feature-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.1),
+          rgba(59, 130, 246, 0.1)
+        );
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        font-size: 28px;
+      }
+
+      .feature-card h3 {
+        color: var(--gray-900);
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .feature-card p {
+        color: var(--gray-600);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--gray-900);
+        color: white;
+        padding: 80px 24px 32px;
+      }
+
+      .footer-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 64px;
+        margin-bottom: 48px;
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .footer-section p {
+        color: var(--gray-400);
+        line-height: 1.7;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        padding: 8px 0;
+      }
+
+      .footer-section a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: color 0.3s;
+        font-size: 14px;
+      }
+
+      .footer-section a:hover {
+        color: white;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 32px;
+        border-top: 1px solid var(--gray-800);
+        color: var(--gray-400);
+        font-size: 14px;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero h2 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 16px;
+        }
+
+        .hero-badges {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .booking-card {
+          padding: 32px 24px;
+        }
+
+        .section-header h2 {
+          font-size: 32px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .results-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .results-filters {
+          width: 100%;
+        }
+
+        .filter-btn,
+        .sort-select {
+          flex: 1;
+        }
+
+        .trip-header {
+          flex-direction: column;
+        }
+
+        .trip-price {
+          text-align: left;
+          align-self: flex-start;
+        }
+
+        .trip-route {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .route-arrow {
+          transform: rotate(90deg);
+        }
+
+        .trip-details {
+          grid-template-columns: 1fr;
+        }
+
+        .trip-actions {
+          flex-direction: column;
+        }
+
+        nav {
+          display: none;
+        }
+
+        nav.show {
+          display: block;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          padding: 16px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .top-bar .container {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+
+        .contact-info {
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="top-bar">
+        <div class="container">
+          <div class="contact-info">
+            <span>📞 Hotline: 1900-6789</span>
+            <span>✉️ support@thanglong.vn</span>
+          </div>
+          <div class="user-actions" id="userActions">
+            <a onclick="showLoginModal()">Đăng nhập</a>
+            <a onclick="showRegisterModal()">Đăng ký</a>
+          </div>
+        </div>
+      </div>
+      <div class="main-nav">
+        <div class="logo" onclick="window.location.reload()">
+          <div class="logo-icon">TL</div>
+          <div class="logo-text">
+            <h1>Thăng Long Express</h1>
+            <p>Nhanh chóng • An toàn • Tiện lợi</p>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <nav id="mainNav">
+          <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li><a href="#booking">Đặt vé</a></li>
+            <li><a href="#my-tickets">Vé của tôi</a></li>
+            <li><a href="#contact">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h2>Đặt Vé Xe Khách Online<br />Nhanh Chóng & Tiện Lợi</h2>
+        <p>
+          Trải nghiệm dịch vụ vận chuyển hành khách hàng đầu Việt Nam với công
+          nghệ hiện đại
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">🚌 Hơn 500 chuyến/ngày</div>
+          <div class="hero-badge">⭐ 4.9/5 đánh giá</div>
+          <div class="hero-badge">👥 2M+ khách hàng</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section" id="booking">
+      <div class="booking-card">
+        <form class="booking-form" onsubmit="handleBookingSearch(event)">
+          <div class="form-group">
+            <label>📍 Điểm đi <span class="required">*</span></label>
+            <select id="from" required>
+              <option value="">Chọn điểm đi</option>
+              <option value="hanoi">Hà Nội</option>
+              <option value="haiphong">Hải Phòng</option>
+              <option value="thaibinh">Thái Bình</option>
+              <option value="thanhhoa">Thanh Hóa</option>
+              <option value="nghean">Nghệ An</option>
+              <option value="hatinh">Hà Tĩnh</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📍 Điểm đến <span class="required">*</span></label>
+            <select id="to" required>
+              <option value="">Chọn điểm đến</option>
+              <option value="hanoi">Hà Nội</option>
+              <option value="haiphong">Hải Phòng</option>
+              <option value="thaibinh">Thái Bình</option>
+              <option value="thanhhoa">Thanh Hóa</option>
+              <option value="nghean">Nghệ An</option>
+              <option value="hatinh">Hà Tĩnh</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📅 Ngày đi <span class="required">*</span></label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label>👥 Số hành khách</label>
+            <input
+              type="number"
+              id="passengers"
+              min="1"
+              max="50"
+              value="1"
+              required
+            />
+          </div>
+          <button type="submit" class="search-btn">🔍 Tìm chuyến xe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection">
+      <!-- Results Header -->
+      <div class="results-header" id="resultsHeader">
+        <div class="results-info">
+          <h3 id="routeTitle">Hà Nội → Hải Phòng</h3>
+          <p class="results-count">
+            Tìm thấy <strong id="tripCount">0</strong> chuyến xe •
+            <span id="selectedDate">13/12/2024</span>
+          </p>
+        </div>
+        <div class="results-filters">
+          <button
+            class="filter-btn active"
+            data-filter="all"
+            onclick="filterTrips('all')"
+          >
+            🎫 Tất cả
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="bus"
+            onclick="filterTrips('bus')"
+          >
+            🚌 Xe khách
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="limousine"
+            onclick="filterTrips('limousine')"
+          >
+            ✨ Limousine
+          </button>
+          <select class="sort-select" id="sortSelect" onchange="sortTrips()">
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+            <option value="time-asc">Giờ đi sớm nhất</option>
+            <option value="time-desc">Giờ đi muộn nhất</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p class="loading-text">Đang tìm kiếm chuyến xe phù hợp...</p>
+      </div>
+
+      <!-- No Results State -->
+      <div class="empty-state" id="noResultsState">
+        <div class="empty-icon">😔</div>
+        <h3>Không tìm thấy chuyến xe phù hợp</h3>
+        <p>
+          Xin lỗi, chúng tôi không tìm thấy chuyến xe nào cho tuyến đường này.
+          Vui lòng thử tìm kiếm tuyến khác.
+        </p>
+      </div>
+
+      <!-- Trips Grid -->
+      <div class="trips-grid" id="tripsGrid"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section section-alt" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Ưu điểm</span>
+          <h2>Tại Sao Chọn Thăng Long?</h2>
+          <p>
+            Chúng tôi cam kết mang đến trải nghiệm di chuyển tuyệt vời nhất cho
+            bạn
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎫</div>
+            <h3>Đăng ký & Đặt vé Online</h3>
+            <p>
+              Tạo tài khoản dễ dàng, đăng nhập an toàn. Đặt vé nhanh chóng chỉ
+              trong 30 giây với thanh toán đa dạng.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🚌</div>
+            <h3>Tìm Kiếm Thông Minh</h3>
+            <p>
+              Tìm chuyến xe phù hợp với bộ lọc thông minh, so sánh giá, xem số
+              ghế trống real-time.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Quản Lý Vé</h3>
+            <p>
+              Xem lịch sử đặt vé, theo dõi trạng thái, hủy vé linh hoạt. Tất cả
+              trong một giao diện duy nhất.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Giá Tốt Nhất</h3>
+            <p>
+              Giá vé minh bạch, không phí ẩn. Nhiều chương trình ưu đãi và tích
+              điểm đổi quà hấp dẫn.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Theo Dõi Realtime</h3>
+            <p>
+              Theo dõi vị trí xe trực tuyến với độ chính xác cao. Nhận thông báo
+              tự động về trạng thái chuyến đi.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>An Toàn 5 Sao</h3>
+            <p>
+              Tài xế chuyên nghiệp 10+ năm kinh nghiệm. Bảo hiểm hành khách 200
+              triệu/người.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Thăng Long Express</h3>
+          <p>
+            Với hơn 15 năm kinh nghiệm, chúng tôi tự hào là đơn vị vận tải hành
+            khách hàng đầu Việt Nam, luôn đặt sự hài lòng của khách hàng lên
+            hàng đầu.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Dịch vụ</h3>
+          <ul>
+            <li><a href="#booking">Đặt vé online</a></li>
+            <li><a href="#">Quản lý vé</a></li>
+            <li><a href="#">Theo dõi xe</a></li>
+            <li><a href="#">Thuê xe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>📍 123 Đường ABC, Hà Nội</li>
+            <li>📞 Hotline: 1900-6789</li>
+            <li>✉️ support@thanglong.vn</li>
+            <li>🕐 Hỗ trợ 24/7</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Thăng Long Express. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('loginModal')">
+          ×
+        </button>
+        <div class="modal-header">
+          <div class="modal-icon">👋</div>
+          <h2>Chào mừng trở lại!</h2>
+          <p>Đăng nhập để tiếp tục đặt vé</p>
+        </div>
+
+        <div id="loginAlert" class="alert alert-error">
+          <span>⚠️</span>
+          <span id="loginAlertMessage"></span>
+        </div>
+
+        <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label
+              >Email hoặc số điện thoại <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="loginIdentifier"
+              placeholder="VD: user@example.com hoặc 0912345678"
+              required
+            />
+            <div class="error-message" id="loginIdentifierError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Mật khẩu <span class="required">*</span></label>
+            <div class="password-toggle-group">
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Nhập mật khẩu"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle-btn"
+                onclick="togglePassword('loginPassword')"
+              >
+                👁️
+              </button>
+            </div>
+            <div class="error-message" id="loginPasswordError"></div>
+          </div>
+
+          <div class="forgot-password">
+            <a onclick="showForgotPasswordModal()">Quên mật khẩu?</a>
+          </div>
+
+          <button type="submit" class="submit-btn">Đăng nhập</button>
+        </form>
+
+        <div class="divider">
+          <span>hoặc</span>
+        </div>
+
+        <div class="switch-auth">
+          Chưa có tài khoản? <a onclick="switchToRegister()">Đăng ký ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('registerModal')">
+          ×
+        </button>
+        <div class="modal-header">
+          <div class="modal-icon">🚀</div>
+          <h2>Tạo tài khoản mới</h2>
+          <p>Đăng ký để bắt đầu đặt vé</p>
+        </div>
+
+        <div id="registerAlert" class="alert alert-error">
+          <span>⚠️</span>
+          <span id="registerAlertMessage"></span>
+        </div>
+
+        <form
+          class="auth-form"
+          id="registerForm"
+          onsubmit="handleRegister(event)"
+        >
+          <div class="form-group">
+            <label>Họ và tên <span class="required">*</span></label>
+            <input
+              type="text"
+              id="registerFullName"
+              placeholder="VD: Nguyễn Văn A"
+              required
+            />
+            <div class="error-message" id="registerFullNameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Email <span class="required">*</span></label>
+            <input
+              type="email"
+              id="registerEmail"
+              placeholder="VD: user@example.com"
+              required
+            />
+            <div class="error-message" id="registerEmailError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Số điện thoại <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="registerPhone"
+              placeholder="VD: 0912345678"
+              required
+            />
+            <div class="error-message" id="registerPhoneError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Mật khẩu <span class="required">*</span></label>
+            <div class="password-toggle-group">
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Tối thiểu 8 ký tự"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle-btn"
+                onclick="togglePassword('registerPassword')"
+              >
+                👁️
+              </button>
+            </div>
+            <div class="password-strength">
+              <div class="password-strength-bar" id="passwordStrengthBar"></div>
+            </div>
+            <div class="password-strength-text" id="passwordStrengthText"></div>
+            <div class="error-message" id="registerPasswordError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Xác nhận mật khẩu <span class="required">*</span></label>
+            <div class="password-toggle-group">
+              <input
+                type="password"
+                id="registerConfirmPassword"
+                placeholder="Nhập lại mật khẩu"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle-btn"
+                onclick="togglePassword('registerConfirmPassword')"
+              >
+                👁️
+              </button>
+            </div>
+            <div class="error-message" id="registerConfirmPasswordError"></div>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="agreeTerms" required />
+            <label for="agreeTerms">
+              Tôi đồng ý với
+              <a href="#" class="text-link">Điều khoản dịch vụ</a> và
+              <a href="#" class="text-link">Chính sách bảo mật</a>
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">Đăng ký</button>
+        </form>
+
+        <div class="divider">
+          <span>hoặc</span>
+        </div>
+
+        <div class="switch-auth">
+          Đã có tài khoản? <a onclick="switchToLogin()">Đăng nhập</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('forgotPasswordModal')">
+          ×
+        </button>
+        <div class="modal-header">
+          <div class="modal-icon">🔑</div>
+          <h2>Quên mật khẩu?</h2>
+          <p>Nhập email để nhận mã xác nhận</p>
+        </div>
+
+        <div id="forgotPasswordAlert" class="alert alert-error">
+          <span>⚠️</span>
+          <span id="forgotPasswordAlertMessage"></span>
+        </div>
+
+        <!-- Step 1: Enter Email -->
+        <form
+          class="auth-form"
+          id="forgotPasswordForm"
+          onsubmit="handleForgotPassword(event)"
+          style="display: block"
+        >
+          <div class="form-group">
+            <label>Email đã đăng ký <span class="required">*</span></label>
+            <input
+              type="email"
+              id="forgotEmail"
+              placeholder="VD: user@example.com"
+              required
+            />
+            <div class="error-message" id="forgotEmailError"></div>
+          </div>
+
+          <button type="submit" class="submit-btn">Gửi mã xác nhận</button>
+        </form>
+
+        <!-- Step 2: Enter OTP -->
+        <form
+          class="auth-form"
+          id="verifyOtpForm"
+          onsubmit="handleVerifyOtp(event)"
+          style="display: none"
+        >
+          <div class="form-group">
+            <label>Mã xác nhận (OTP) <span class="required">*</span></label>
+            <input
+              type="text"
+              id="otpCode"
+              placeholder="Nhập mã 6 số"
+              maxlength="6"
+              required
+            />
+            <div class="error-message" id="otpCodeError"></div>
+            <p style="font-size: 13px; color: var(--gray-600); margin-top: 8px">
+              Mã xác nhận đã được gửi đến email của bạn
+            </p>
+          </div>
+
+          <button type="submit" class="submit-btn">Xác nhận</button>
+          <button
+            type="button"
+            class="submit-btn"
+            onclick="resendOtp()"
+            style="background: var(--gray-600); margin-top: 12px"
+          >
+            Gửi lại mã
+          </button>
+        </form>
+
+        <!-- Step 3: Reset Password -->
+        <form
+          class="auth-form"
+          id="resetPasswordForm"
+          onsubmit="handleResetPassword(event)"
+          style="display: none"
+        >
+          <div class="form-group">
+            <label>Mật khẩu mới <span class="required">*</span></label>
+            <div class="password-toggle-group">
+              <input
+                type="password"
+                id="newPassword"
+                placeholder="Tối thiểu 8 ký tự"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle-btn"
+                onclick="togglePassword('newPassword')"
+              >
+                👁️
+              </button>
+            </div>
+            <div class="password-strength">
+              <div
+                class="password-strength-bar"
+                id="newPasswordStrengthBar"
+              ></div>
+            </div>
+            <div
+              class="password-strength-text"
+              id="newPasswordStrengthText"
+            ></div>
+            <div class="error-message" id="newPasswordError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Xác nhận mật khẩu mới <span class="required">*</span></label>
+            <div class="password-toggle-group">
+              <input
+                type="password"
+                id="confirmNewPassword"
+                placeholder="Nhập lại mật khẩu mới"
+                required
+              />
+              <button
+                type="button"
+                class="password-toggle-btn"
+                onclick="togglePassword('confirmNewPassword')"
+              >
+                👁️
+              </button>
+            </div>
+            <div class="error-message" id="confirmNewPasswordError"></div>
+          </div>
+
+          <button type="submit" class="submit-btn">Đặt lại mật khẩu</button>
+        </form>
+
+        <div class="divider">
+          <span>hoặc</span>
+        </div>
+
+        <div class="switch-auth">
+          Nhớ mật khẩu? <a onclick="switchToLogin()">Đăng nhập</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content" style="max-width: 400px; text-align: center">
+        <button class="close-modal" onclick="closeModal('successModal')">
+          ×
+        </button>
+
+        <div
+          style="
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+          "
+        >
+          ✓
+        </div>
+
+        <h2
+          style="
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+          "
+        >
+          Đăng nhập thành công!
+        </h2>
+
+        <p style="color: var(--gray-600); font-size: 15px; margin-bottom: 24px">
+          Chào mừng bạn đến với Thăng Long Express
+        </p>
+
+        <div
+          style="
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 12px;
+            "
+          >
+            <span style="font-size: 24px">👤</span>
+            <div style="text-align: left; flex: 1">
+              <div style="font-size: 12px; color: var(--gray-600)">
+                Họ và tên
+              </div>
+              <div
+                style="
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: var(--gray-900);
+                "
+                id="successUserName"
+              ></div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span style="font-size: 24px">📧</span>
+            <div style="text-align: left; flex: 1">
+              <div style="font-size: 12px; color: var(--gray-600)">Email</div>
+              <div
+                style="
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: var(--gray-900);
+                "
+                id="successUserEmail"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="closeSuccessModal()" class="submit-btn">
+          Bắt đầu đặt vé
+        </button>
+      </div>
+    </div>
+
+    <!-- Login Required Modal -->
+    <div id="loginRequiredModal" class="login-required-modal">
+      <div class="login-required-content">
+        <div class="login-required-icon">🔐</div>
+        <h2>Vui lòng đăng nhập</h2>
+        <p>
+          Bạn cần đăng nhập để có thể đặt vé. <br />
+          Đăng nhập ngay để tiếp tục đặt vé cho chuyến đi của bạn!
+        </p>
+        <div class="login-required-actions">
+          <button class="btn-login-now" onclick="proceedToLogin()">
+            🔑 Đăng nhập ngay
+          </button>
+          <button class="btn-cancel" onclick="closeLoginRequired()">
+            Để sau
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="booking-modal">
+      <div class="booking-modal-content">
+        <div class="booking-modal-header">
+          <button class="close-booking-modal" onclick="closeBookingModal()">
+            ×
+          </button>
+          <h2 id="bookingModalTitle">Đặt vé xe khách</h2>
+          <p id="bookingModalSubtitle">Chọn ghế và điền thông tin hành khách</p>
+        </div>
+
+        <div class="booking-modal-body">
+          <!-- Trip Summary -->
+          <div class="trip-summary">
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Tuyến đường:</span>
+              <span class="trip-summary-value" id="summaryRoute"
+                >Hà Nội → Hải Phòng</span
+              >
+            </div>
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Ngày khởi hành:</span>
+              <span class="trip-summary-value" id="summaryDate"
+                >13/12/2024</span
+              >
+            </div>
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Giờ khởi hành:</span>
+              <span class="trip-summary-value" id="summaryTime">08:00</span>
+            </div>
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Loại xe:</span>
+              <span class="trip-summary-value" id="summaryType">Xe khách</span>
+            </div>
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Giá vé (1 người):</span>
+              <span class="trip-summary-value" id="summaryPrice"
+                >130,000 VNĐ</span
+              >
+            </div>
+            <div class="trip-summary-row">
+              <span class="trip-summary-label">Tổng tiền:</span>
+              <span class="trip-summary-total" id="summaryTotal"
+                >130,000 VNĐ</span
+              >
+            </div>
+          </div>
+
+          <!-- Seat Selection (for Bus only) -->
+          <div
+            class="seat-selection-container"
+            id="seatSelectionContainer"
+            style="display: none"
+          >
+            <div class="seat-selection-header">
+              <h3>Chọn ghế ngồi</h3>
+              <div class="seats-selected">
+                Đã chọn: <strong id="selectedSeatsCount">0</strong> ghế
+              </div>
+            </div>
+
+            <div class="seat-legend">
+              <div class="legend-item">
+                <div class="legend-box available">A1</div>
+                <span>Còn trống</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-box selected">A1</div>
+                <span>Đã chọn</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-box occupied">A1</div>
+                <span>Đã có người</span>
+              </div>
+            </div>
+
+            <div class="bus-layout">
+              <div class="driver-section">
+                <div class="driver-icon">🚗 Tài xế</div>
+              </div>
+              <div class="seats-grid" id="seatsGrid">
+                <!-- Seats will be generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Passenger Info -->
+          <div class="passenger-info-container">
+            <h3>Thông tin hành khách</h3>
+            <form class="passenger-form" id="passengerForm">
+              <!-- Pickup Location (Limousine only) -->
+              <div
+                class="form-group full-width"
+                id="pickupLocationGroup"
+                style="display: none"
+              >
+                <label>Điểm đón <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="pickupLocation"
+                  placeholder="VD: 123 Đường ABC, Quận X, Hà Nội"
+                />
+                <p
+                  style="
+                    font-size: 12px;
+                    color: var(--gray-600);
+                    margin-top: 4px;
+                  "
+                >
+                  📍 Nhập địa chỉ cụ thể để tài xế đến đón bạn
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label>Họ và tên <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="passengerName"
+                  placeholder="VD: Nguyễn Văn A"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Số điện thoại <span class="required">*</span></label>
+                <input
+                  type="tel"
+                  id="passengerPhone"
+                  placeholder="VD: 0912345678"
+                  required
+                />
+              </div>
+              <div class="form-group full-width">
+                <label>Email</label>
+                <input
+                  type="email"
+                  id="passengerEmail"
+                  placeholder="VD: user@example.com"
+                />
+              </div>
+              <div class="form-group full-width">
+                <label>Ghi chú</label>
+                <input
+                  type="text"
+                  id="passengerNote"
+                  placeholder="Thông tin thêm (nếu có)"
+                />
+              </div>
+            </form>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="payment-method-container">
+            <h3>Phương thức thanh toán</h3>
+            <div class="payment-methods">
+              <!-- Cash Payment -->
+              <div
+                class="payment-method selected"
+                onclick="selectPaymentMethod('cash')"
+                id="payment-cash"
+              >
+                <div class="payment-radio"></div>
+                <div class="payment-icon">💵</div>
+                <div class="payment-info">
+                  <div class="payment-name">Thanh toán tiền mặt</div>
+                  <div class="payment-desc">
+                    Thanh toán trực tiếp cho tài xế
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bank Transfer -->
+              <div
+                class="payment-method"
+                onclick="selectPaymentMethod('bank')"
+                id="payment-bank"
+              >
+                <div class="payment-radio"></div>
+                <div class="payment-icon">🏦</div>
+                <div class="payment-info">
+                  <div class="payment-name">Chuyển khoản ngân hàng</div>
+                  <div class="payment-desc">Chuyển khoản trước chuyến đi</div>
+                </div>
+              </div>
+
+              <!-- E-Wallet -->
+              <div
+                class="payment-method"
+                onclick="selectPaymentMethod('ewallet')"
+                id="payment-ewallet"
+              >
+                <div class="payment-radio"></div>
+                <div class="payment-icon">📱</div>
+                <div class="payment-info">
+                  <div class="payment-name">Ví điện tử</div>
+                  <div class="payment-desc">MoMo, ZaloPay, VNPay</div>
+                </div>
+                <div class="payment-badge">Sắp ra mắt</div>
+              </div>
+
+              <!-- Credit Card -->
+              <div
+                class="payment-method"
+                onclick="selectPaymentMethod('card')"
+                id="payment-card"
+              >
+                <div class="payment-radio"></div>
+                <div class="payment-icon">💳</div>
+                <div class="payment-info">
+                  <div class="payment-name">Thẻ tín dụng/ghi nợ</div>
+                  <div class="payment-desc">Visa, Mastercard, JCB</div>
+                </div>
+                <div class="payment-badge">Sắp ra mắt</div>
+              </div>
+            </div>
+
+            <!-- Payment Notes -->
+            <div class="payment-note show" id="payment-cash-note">
+              <p>
+                💵 <strong>Thanh toán tiền mặt:</strong> Vui lòng chuẩn bị đủ
+                tiền mặt và thanh toán cho tài xế trước khi lên xe. Tài xế sẽ
+                cung cấp hóa đơn sau khi nhận thanh toán.
+              </p>
+            </div>
+
+            <div class="payment-note" id="payment-bank-note">
+              <p>
+                🏦 <strong>Chuyển khoản ngân hàng:</strong><br />
+                • Ngân hàng: Vietcombank<br />
+                • Số TK: 1234567890<br />
+                • Chủ TK: CONG TY THANG LONG EXPRESS<br />
+                • Nội dung: [Mã đặt vé] + [Họ tên]<br />
+                <br />
+                ⚠️ Vui lòng chuyển khoản trong vòng 30 phút và giữ lại biên lai.
+              </p>
+            </div>
+
+            <div class="payment-note" id="payment-ewallet-note">
+              <p>
+                📱 <strong>Ví điện tử:</strong> Tính năng đang được phát triển
+                và sẽ sớm ra mắt. Vui lòng chọn phương thức thanh toán khác.
+              </p>
+            </div>
+
+            <div class="payment-note" id="payment-card-note">
+              <p>
+                💳 <strong>Thẻ tín dụng/ghi nợ:</strong> Tính năng đang được
+                phát triển và sẽ sớm ra mắt. Vui lòng chọn phương thức thanh
+                toán khác.
+              </p>
+            </div>
+          </div>
+
+          <!-- Confirm Button -->
+          <button
+            class="confirm-booking-btn"
+            onclick="confirmBooking()"
+            id="confirmBookingBtn"
+          >
+            💳 Xác nhận đặt vé
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // ============================================
+      // DATA STRUCTURE
+      // ============================================
+
+      // Location mapping
+      const locations = {
+        hanoi: "Hà Nội",
+        haiphong: "Hải Phòng",
+        thaibinh: "Thái Bình",
+        thanhhoa: "Thanh Hóa",
+        nghean: "Nghệ An",
+        hatinh: "Hà Tĩnh",
+      };
+
+      // Routes and prices
+      const routesData = {
+        "hanoi-haiphong": {
+          bus: { price: 130000, duration: "2h30m", distance: "120km" },
+          limousine: { price: 250000, duration: "2h15m", distance: "120km" },
+        },
+        "hanoi-thaibinh": {
+          bus: { price: 130000, duration: "2h45m", distance: "115km" },
+          limousine: { price: 250000, duration: "2h30m", distance: "115km" },
+        },
+        "hanoi-thanhhoa": {
+          bus: { price: 200000, duration: "4h00m", distance: "160km" },
+          limousine: { price: 280000, duration: "3h45m", distance: "160km" },
+        },
+        "hanoi-nghean": {
+          bus: { price: 260000, duration: "5h30m", distance: "290km" },
+          limousine: { price: 320000, duration: "5h00m", distance: "290km" },
+        },
+        "hanoi-hatinh": {
+          bus: { price: 300000, duration: "6h30m", distance: "340km" },
+          limousine: { price: 380000, duration: "6h00m", distance: "340km" },
+        },
+      };
+
+      // Generate departure times
+      const departureTimes = [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "22:00",
+      ];
+
+      // Global variables
+      let allTrips = [];
+      let filteredTrips = [];
+      let currentFilter = "all";
+      let searchParams = {};
+
+      // ============================================
+      // INITIALIZATION
+      // ============================================
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set min date for date picker
+        const dateInput = document.getElementById("date");
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.setAttribute("min", today);
+        dateInput.value = today;
+
+        // Check if user is logged in
+        const savedUser = localStorage.getItem("currentUser");
+        if (savedUser) {
+          currentUser = JSON.parse(savedUser);
+          updateUIForLoggedInUser();
+        }
+
+        // Add password strength checker
+        const registerPassword = document.getElementById("registerPassword");
+        if (registerPassword) {
+          registerPassword.addEventListener("input", checkPasswordStrength);
+        }
+      });
+
+      // ============================================
+      // AUTHENTICATION FUNCTIONS
+      // ============================================
+
+      let currentUser = null;
+
+      /**
+       * Handle user login
+       */
+      function handleLogin(event) {
+        event.preventDefault();
+
+        // Clear previous alerts
+        hideAlert("loginAlert");
+        clearErrors(["loginIdentifier", "loginPassword"]);
+
+        const identifier = document
+          .getElementById("loginIdentifier")
+          .value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        // Validation
+        if (!identifier) {
+          showFieldError(
+            "loginIdentifier",
+            "Vui lòng nhập email hoặc số điện thoại"
+          );
+          return;
+        }
+
+        if (!password) {
+          showFieldError("loginPassword", "Vui lòng nhập mật khẩu");
+          return;
+        }
+
+        // Get stored users
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+        // Find user by email or phone
+        const user = users.find(
+          (u) => u.email === identifier || u.phone === identifier
+        );
+
+        if (!user) {
+          showAlert("loginAlert", "Tài khoản không tồn tại!", "error");
+          return;
+        }
+
+        if (user.password !== password) {
+          showAlert("loginAlert", "Mật khẩu không chính xác!", "error");
+          return;
+        }
+
+        // Login successful
+        currentUser = {
+          fullName: user.fullName,
+          email: user.email,
+          phone: user.phone,
+          loginTime: new Date().toISOString(),
+        };
+
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        // Close login modal and show success modal
+        closeModal("loginModal");
+        showSuccessModal();
+      }
+
+      /**
+       * Handle user registration
+       */
+      function handleRegister(event) {
+        event.preventDefault();
+
+        // Clear previous alerts
+        hideAlert("registerAlert");
+        clearErrors([
+          "registerFullName",
+          "registerEmail",
+          "registerPhone",
+          "registerPassword",
+          "registerConfirmPassword",
+        ]);
+
+        const fullName = document
+          .getElementById("registerFullName")
+          .value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const phone = document.getElementById("registerPhone").value.trim();
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword = document.getElementById(
+          "registerConfirmPassword"
+        ).value;
+        const agreeTerms = document.getElementById("agreeTerms").checked;
+
+        // Validation
+        let hasError = false;
+
+        // Full name validation
+        if (!fullName || fullName.length < 2) {
+          showFieldError("registerFullName", "Họ tên phải có ít nhất 2 ký tự");
+          hasError = true;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          showFieldError("registerEmail", "Email không hợp lệ");
+          hasError = true;
+        }
+
+        // Phone validation
+        const phoneRegex = /^(0|\+84)[0-9]{9}$/;
+        if (!phone || !phoneRegex.test(phone)) {
+          showFieldError(
+            "registerPhone",
+            "Số điện thoại không hợp lệ (VD: 0912345678)"
+          );
+          hasError = true;
+        }
+
+        // Password validation
+        if (!password || password.length < 8) {
+          showFieldError(
+            "registerPassword",
+            "Mật khẩu phải có ít nhất 8 ký tự"
+          );
+          hasError = true;
+        }
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+          showFieldError(
+            "registerConfirmPassword",
+            "Mật khẩu xác nhận không khớp"
+          );
+          hasError = true;
+        }
+
+        // Terms agreement validation
+        if (!agreeTerms) {
+          showAlert(
+            "registerAlert",
+            "Vui lòng đồng ý với điều khoản dịch vụ",
+            "error"
+          );
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Check if user already exists
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+        const emailExists = users.some((u) => u.email === email);
+        if (emailExists) {
+          showAlert("registerAlert", "Email đã được đăng ký!", "error");
+          return;
+        }
+
+        const phoneExists = users.some((u) => u.phone === phone);
+        if (phoneExists) {
+          showAlert("registerAlert", "Số điện thoại đã được đăng ký!", "error");
+          return;
+        }
+
+        // Register new user
+        const newUser = {
+          id: Date.now().toString(),
+          fullName,
+          email,
+          phone,
+          password,
+          createdAt: new Date().toISOString(),
+        };
+
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Auto login after registration
+        currentUser = {
+          fullName: newUser.fullName,
+          email: newUser.email,
+          phone: newUser.phone,
+          loginTime: new Date().toISOString(),
+        };
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        // Close register modal and show success modal
+        closeModal("registerModal");
+        showSuccessModal();
+      }
+
+      /**
+       * Handle user logout
+       */
+      function handleLogout() {
+        if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+          currentUser = null;
+          localStorage.removeItem("currentUser");
+          updateUIForLoggedOutUser();
+        }
+      }
+
+      /**
+       * Update UI when user is logged in
+       */
+      function updateUIForLoggedInUser() {
+        const userActions = document.getElementById("userActions");
+        const initials = currentUser.fullName
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .substring(0, 2);
+
+        userActions.innerHTML = `
+          <div class="user-info">
+            <div class="user-avatar">${initials}</div>
+            <span class="user-name">${currentUser.fullName}</span>
+            <span class="logout-btn" onclick="handleLogout()">Đăng xuất</span>
+          </div>
+        `;
+      }
+
+      /**
+       * Update UI when user is logged out
+       */
+      function updateUIForLoggedOutUser() {
+        const userActions = document.getElementById("userActions");
+        userActions.innerHTML = `
+          <a onclick="showLoginModal()">Đăng nhập</a>
+          <a onclick="showRegisterModal()">Đăng ký</a>
+        `;
+      }
+
+      /**
+       * Show login modal
+       */
+      function showLoginModal() {
+        document.getElementById("loginModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      /**
+       * Show register modal
+       */
+      function showRegisterModal() {
+        document.getElementById("registerModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      /**
+       * Show forgot password modal
+       */
+      function showForgotPasswordModal() {
+        closeModal("loginModal");
+        setTimeout(() => {
+          document.getElementById("forgotPasswordModal").classList.add("show");
+          document.body.style.overflow = "hidden";
+          // Reset to step 1
+          resetForgotPasswordSteps();
+        }, 300);
+      }
+
+      /**
+       * Show success modal after login/register
+       */
+      function showSuccessModal() {
+        document.getElementById("successUserName").textContent =
+          currentUser.fullName;
+        document.getElementById("successUserEmail").textContent =
+          currentUser.email;
+        document.getElementById("successModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      /**
+       * Close success modal and update UI
+       */
+      function closeSuccessModal() {
+        closeModal("successModal");
+        updateUIForLoggedInUser();
+
+        // Reset forms
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        if (loginForm) loginForm.reset();
+        if (registerForm) {
+          registerForm.reset();
+          document.getElementById("passwordStrengthBar").className =
+            "password-strength-bar";
+          document.getElementById("passwordStrengthText").textContent = "";
+        }
+
+        // If there was a pending booking, continue with it
+        if (pendingBookingTripId) {
+          const trip = allTrips.find((t) => t.id === pendingBookingTripId);
+          if (trip) {
+            setTimeout(() => {
+              openBookingModal(trip);
+              pendingBookingTripId = null;
+            }, 300);
+          }
+        }
+      }
+
+      // ============================================
+      // FORGOT PASSWORD FUNCTIONS
+      // ============================================
+
+      let forgotPasswordEmail = "";
+      let generatedOtp = "";
+      let otpExpiry = null;
+
+      /**
+       * Reset forgot password modal to step 1
+       */
+      function resetForgotPasswordSteps() {
+        document.getElementById("forgotPasswordForm").style.display = "block";
+        document.getElementById("verifyOtpForm").style.display = "none";
+        document.getElementById("resetPasswordForm").style.display = "none";
+
+        // Reset modal header
+        document.querySelector("#forgotPasswordModal .modal-icon").textContent =
+          "🔑";
+        document.querySelector("#forgotPasswordModal h2").textContent =
+          "Quên mật khẩu?";
+        document.querySelector(
+          "#forgotPasswordModal .modal-header p"
+        ).textContent = "Nhập email để nhận mã xác nhận";
+
+        hideAlert("forgotPasswordAlert");
+
+        // Clear forms
+        document.getElementById("forgotEmail").value = "";
+        document.getElementById("otpCode").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmNewPassword").value = "";
+
+        forgotPasswordEmail = "";
+        generatedOtp = "";
+        otpExpiry = null;
+      }
+
+      /**
+       * Handle forgot password - Step 1: Send OTP
+       */
+      function handleForgotPassword(event) {
+        event.preventDefault();
+
+        hideAlert("forgotPasswordAlert");
+        clearErrors(["forgotEmail"]);
+
+        const email = document.getElementById("forgotEmail").value.trim();
+
+        // Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          showFieldError("forgotEmail", "Email không hợp lệ");
+          return;
+        }
+
+        // Check if email exists
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const user = users.find((u) => u.email === email);
+
+        if (!user) {
+          showAlert("forgotPasswordAlert", "Email chưa được đăng ký!", "error");
+          return;
+        }
+
+        // Generate OTP (6 digits)
+        generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+        otpExpiry = Date.now() + 5 * 60 * 1000; // 5 minutes
+        forgotPasswordEmail = email;
+
+        // In real app, send OTP via email
+        console.log("🔐 Generated OTP:", generatedOtp);
+
+        // Show success and move to step 2
+        showAlert(
+          "forgotPasswordAlert",
+          `Mã xác nhận đã được gửi đến ${email}. Mã OTP: ${generatedOtp}`,
+          "success"
+        );
+
+        setTimeout(() => {
+          document.getElementById("forgotPasswordForm").style.display = "none";
+          document.getElementById("verifyOtpForm").style.display = "block";
+
+          // Update modal header
+          document.querySelector(
+            "#forgotPasswordModal .modal-icon"
+          ).textContent = "📧";
+          document.querySelector("#forgotPasswordModal h2").textContent =
+            "Xác nhận mã OTP";
+          document.querySelector(
+            "#forgotPasswordModal .modal-header p"
+          ).textContent = "Nhập mã xác nhận đã gửi đến email";
+
+          hideAlert("forgotPasswordAlert");
+        }, 2000);
+      }
+
+      /**
+       * Resend OTP
+       */
+      function resendOtp() {
+        if (!forgotPasswordEmail) return;
+
+        // Generate new OTP
+        generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+        otpExpiry = Date.now() + 5 * 60 * 1000;
+
+        console.log("🔐 Resent OTP:", generatedOtp);
+        showAlert(
+          "forgotPasswordAlert",
+          `Mã xác nhận mới: ${generatedOtp}`,
+          "success"
+        );
+
+        setTimeout(() => {
+          hideAlert("forgotPasswordAlert");
+        }, 3000);
+      }
+
+      /**
+       * Handle verify OTP - Step 2
+       */
+      function handleVerifyOtp(event) {
+        event.preventDefault();
+
+        hideAlert("forgotPasswordAlert");
+        clearErrors(["otpCode"]);
+
+        const otp = document.getElementById("otpCode").value.trim();
+
+        // Validation
+        if (!otp || otp.length !== 6) {
+          showFieldError("otpCode", "Vui lòng nhập mã OTP 6 số");
+          return;
+        }
+
+        // Check OTP expiry
+        if (Date.now() > otpExpiry) {
+          showAlert(
+            "forgotPasswordAlert",
+            "Mã OTP đã hết hạn. Vui lòng gửi lại mã mới.",
+            "error"
+          );
+          return;
+        }
+
+        // Verify OTP
+        if (otp !== generatedOtp) {
+          showAlert("forgotPasswordAlert", "Mã OTP không chính xác!", "error");
+          return;
+        }
+
+        // OTP correct, move to step 3
+        showAlert("forgotPasswordAlert", "Xác nhận thành công!", "success");
+
+        setTimeout(() => {
+          document.getElementById("verifyOtpForm").style.display = "none";
+          document.getElementById("resetPasswordForm").style.display = "block";
+
+          // Update modal header
+          document.querySelector(
+            "#forgotPasswordModal .modal-icon"
+          ).textContent = "🔒";
+          document.querySelector("#forgotPasswordModal h2").textContent =
+            "Đặt lại mật khẩu";
+          document.querySelector(
+            "#forgotPasswordModal .modal-header p"
+          ).textContent = "Nhập mật khẩu mới cho tài khoản";
+
+          hideAlert("forgotPasswordAlert");
+
+          // Add password strength checker for new password
+          const newPasswordInput = document.getElementById("newPassword");
+          newPasswordInput.removeEventListener(
+            "input",
+            checkNewPasswordStrength
+          );
+          newPasswordInput.addEventListener("input", checkNewPasswordStrength);
+        }, 1500);
+      }
+
+      /**
+       * Handle reset password - Step 3
+       */
+      function handleResetPassword(event) {
+        event.preventDefault();
+
+        hideAlert("forgotPasswordAlert");
+        clearErrors(["newPassword", "confirmNewPassword"]);
+
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmNewPassword =
+          document.getElementById("confirmNewPassword").value;
+
+        // Validation
+        let hasError = false;
+
+        if (!newPassword || newPassword.length < 8) {
+          showFieldError("newPassword", "Mật khẩu phải có ít nhất 8 ký tự");
+          hasError = true;
+        }
+
+        if (newPassword !== confirmNewPassword) {
+          showFieldError("confirmNewPassword", "Mật khẩu xác nhận không khớp");
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Update password in storage
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const userIndex = users.findIndex(
+          (u) => u.email === forgotPasswordEmail
+        );
+
+        if (userIndex !== -1) {
+          users[userIndex].password = newPassword;
+          localStorage.setItem("users", JSON.stringify(users));
+
+          showAlert(
+            "forgotPasswordAlert",
+            "Đặt lại mật khẩu thành công!",
+            "success"
+          );
+
+          setTimeout(() => {
+            closeModal("forgotPasswordModal");
+            showLoginModal();
+            showAlert(
+              "loginAlert",
+              "Vui lòng đăng nhập với mật khẩu mới",
+              "success"
+            );
+
+            setTimeout(() => {
+              hideAlert("loginAlert");
+            }, 3000);
+          }, 1500);
+        } else {
+          showAlert(
+            "forgotPasswordAlert",
+            "Có lỗi xảy ra. Vui lòng thử lại!",
+            "error"
+          );
+        }
+      }
+
+      /**
+       * Check new password strength for forgot password flow
+       */
+      function checkNewPasswordStrength() {
+        const password = document.getElementById("newPassword").value;
+        const strengthBar = document.getElementById("newPasswordStrengthBar");
+        const strengthText = document.getElementById("newPasswordStrengthText");
+
+        if (!password) {
+          strengthBar.className = "password-strength-bar";
+          strengthText.textContent = "";
+          return;
+        }
+
+        let strength = 0;
+
+        if (password.length >= 8) strength++;
+        if (password.length >= 12) strength++;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+        if (strength <= 2) {
+          strengthBar.className = "password-strength-bar weak";
+          strengthText.textContent = "Mật khẩu yếu";
+          strengthText.style.color = "var(--danger-color)";
+        } else if (strength <= 4) {
+          strengthBar.className = "password-strength-bar medium";
+          strengthText.textContent = "Mật khẩu trung bình";
+          strengthText.style.color = "var(--warning-color)";
+        } else {
+          strengthBar.className = "password-strength-bar strong";
+          strengthText.textContent = "Mật khẩu mạnh";
+          strengthText.style.color = "var(--success-color)";
+        }
+      }
+
+      /**
+       * Close modal
+       */
+      function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove("show");
+        document.body.style.overflow = "auto";
+
+        // Reset form and alerts
+        const modal = document.getElementById(modalId);
+        const form = modal.querySelector("form");
+        if (form) form.reset();
+
+        const alert = modal.querySelector(".alert");
+        if (alert) alert.classList.remove("show");
+
+        // Clear all error messages
+        const errorMessages = modal.querySelectorAll(".error-message");
+        errorMessages.forEach((msg) => msg.classList.remove("show"));
+
+        // Clear error styling
+        const inputs = modal.querySelectorAll("input");
+        inputs.forEach((input) => input.classList.remove("error"));
+
+        // Reset password strength bar
+        if (modalId === "registerModal") {
+          document.getElementById("passwordStrengthBar").className =
+            "password-strength-bar";
+          document.getElementById("passwordStrengthText").textContent = "";
+        }
+
+        // Reset forgot password modal
+        if (modalId === "forgotPasswordModal") {
+          resetForgotPasswordSteps();
+        }
+      }
+
+      /**
+       * Switch from login to register modal
+       */
+      function switchToRegister() {
+        closeModal("loginModal");
+        setTimeout(() => showRegisterModal(), 300);
+      }
+
+      /**
+       * Switch from register to login modal
+       */
+      function switchToLogin() {
+        closeModal("registerModal");
+        setTimeout(() => showLoginModal(), 300);
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          const modalId = event.target.id;
+          closeModal(modalId);
+        }
+      };
+
+      /**
+       * Show alert message
+       */
+      function showAlert(alertId, message, type = "error") {
+        const alert = document.getElementById(alertId);
+        const alertMessage = document.getElementById(alertId + "Message");
+
+        alert.className = `alert alert-${type} show`;
+        alertMessage.textContent = message;
+      }
+
+      /**
+       * Hide alert message
+       */
+      function hideAlert(alertId) {
+        const alert = document.getElementById(alertId);
+        alert.classList.remove("show");
+      }
+
+      /**
+       * Show field error message
+       */
+      function showFieldError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(fieldId + "Error");
+
+        field.classList.add("error");
+        errorDiv.textContent = message;
+        errorDiv.classList.add("show");
+      }
+
+      /**
+       * Clear error messages for multiple fields
+       */
+      function clearErrors(fieldIds) {
+        fieldIds.forEach((fieldId) => {
+          const field = document.getElementById(fieldId);
+          const errorDiv = document.getElementById(fieldId + "Error");
+
+          if (field) field.classList.remove("error");
+          if (errorDiv) {
+            errorDiv.textContent = "";
+            errorDiv.classList.remove("show");
+          }
+        });
+      }
+
+      /**
+       * Toggle password visibility
+       */
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const type =
+          input.getAttribute("type") === "password" ? "text" : "password";
+        input.setAttribute("type", type);
+      }
+
+      /**
+       * Check password strength
+       */
+      function checkPasswordStrength() {
+        const password = document.getElementById("registerPassword").value;
+        const strengthBar = document.getElementById("passwordStrengthBar");
+        const strengthText = document.getElementById("passwordStrengthText");
+
+        if (!password) {
+          strengthBar.className = "password-strength-bar";
+          strengthText.textContent = "";
+          return;
+        }
+
+        let strength = 0;
+
+        // Length check
+        if (password.length >= 8) strength++;
+        if (password.length >= 12) strength++;
+
+        // Character variety checks
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+        // Update UI based on strength
+        if (strength <= 2) {
+          strengthBar.className = "password-strength-bar weak";
+          strengthText.textContent = "Mật khẩu yếu";
+          strengthText.style.color = "var(--danger-color)";
+        } else if (strength <= 4) {
+          strengthBar.className = "password-strength-bar medium";
+          strengthText.textContent = "Mật khẩu trung bình";
+          strengthText.style.color = "var(--warning-color)";
+        } else {
+          strengthBar.className = "password-strength-bar strong";
+          strengthText.textContent = "Mật khẩu mạnh";
+          strengthText.style.color = "var(--success-color)";
+        }
+      }
+
+      // ============================================
+      // SEARCH FUNCTION
+      // ============================================
+
+      function handleBookingSearch(event) {
+        event.preventDefault();
+
+        const from = document.getElementById("from").value;
+        const to = document.getElementById("to").value;
+        const date = document.getElementById("date").value;
+        const passengers = document.getElementById("passengers").value;
+
+        // Validation
+        if (!from || !to) {
+          alert("⚠️ Vui lòng chọn điểm đi và điểm đến!");
+          return;
+        }
+
+        if (from === to) {
+          alert("⚠️ Điểm đi và điểm đến không thể giống nhau!");
+          return;
+        }
+
+        // Save search params
+        searchParams = {
+          from,
+          to,
+          date,
+          passengers: parseInt(passengers),
+        };
+
+        // Show loading state
+        showLoadingState();
+
+        // Simulate API call delay
+        setTimeout(() => {
+          performSearch(from, to, date, passengers);
+        }, 800);
+      }
+
+      function performSearch(from, to, date, passengers) {
+        // Create route key (both directions)
+        const routeKey1 = `${from}-${to}`;
+        const routeKey2 = `${to}-${from}`;
+
+        // Check if route exists
+        const routeData =
+          routesData[routeKey1] || routesData[routeKey2] || null;
+
+        if (!routeData) {
+          showNoResults();
+          return;
+        }
+
+        // Generate trips for this route
+        allTrips = generateTrips(from, to, date, routeData);
+        filteredTrips = [...allTrips];
+
+        // Display results
+        displayResults();
+      }
+
+      function generateTrips(from, to, date, routeData) {
+        const trips = [];
+        const tripId = Date.now();
+
+        // Generate bus trips
+        departureTimes.forEach((time, index) => {
+          const availableSeats = Math.floor(Math.random() * 20) + 25;
+
+          trips.push({
+            id: `${tripId}-bus-${index}`,
+            type: "bus",
+            typeName: "Xe khách",
+            from: locations[from],
+            to: locations[to],
+            departureTime: time,
+            arrivalTime: calculateArrivalTime(time, routeData.bus.duration),
+            date: date,
+            price: routeData.bus.price,
+            duration: routeData.bus.duration,
+            distance: routeData.bus.distance,
+            availableSeats: availableSeats,
+            totalSeats: 45,
+            vehicleNumber: `45B-${Math.floor(Math.random() * 9000) + 1000}`,
+            amenities: ["🌡️ Điều hòa", "💺 Ghế ngồi", "📶 WiFi", "🔌 Sạc điện"],
+          });
+        });
+
+        // Generate limousine trips
+        const limoDepartures = ["07:00", "09:00", "13:00", "15:00", "19:00"];
+        limoDepartures.forEach((time, index) => {
+          const availableSeats = Math.floor(Math.random() * 10) + 10;
+
+          trips.push({
+            id: `${tripId}-limo-${index}`,
+            type: "limousine",
+            typeName: "Limousine",
+            from: locations[from],
+            to: locations[to],
+            departureTime: time,
+            arrivalTime: calculateArrivalTime(
+              time,
+              routeData.limousine.duration
+            ),
+            date: date,
+            price: routeData.limousine.price,
+            duration: routeData.limousine.duration,
+            distance: routeData.limousine.distance,
+            availableSeats: availableSeats,
+            totalSeats: 24,
+            vehicleNumber: `VIP-${Math.floor(Math.random() * 9000) + 1000}`,
+            amenities: [
+              "🌡️ Điều hòa",
+              "🛋️ Ghế massage",
+              "📺 TV",
+              "📶 WiFi",
+              "🔌 Sạc điện",
+              "🍹 Nước uống",
+            ],
+          });
+        });
+
+        trips.sort((a, b) => a.departureTime.localeCompare(b.departureTime));
+
+        return trips;
+      }
+
+      function calculateArrivalTime(departureTime, duration) {
+        const [hours, minutes] = departureTime.split(":").map(Number);
+        const [durationHours, durationMinutes] = duration
+          .replace("h", ":")
+          .replace("m", "")
+          .split(":")
+          .map(Number);
+
+        let totalMinutes =
+          hours * 60 + minutes + durationHours * 60 + durationMinutes;
+
+        if (totalMinutes >= 1440) {
+          totalMinutes -= 1440;
+        }
+
+        const arrivalHours = Math.floor(totalMinutes / 60);
+        const arrivalMinutes = totalMinutes % 60;
+
+        return `${String(arrivalHours).padStart(2, "0")}:${String(
+          arrivalMinutes
+        ).padStart(2, "0")}`;
+      }
+
+      // ============================================
+      // DISPLAY FUNCTIONS
+      // ============================================
+
+      function displayResults() {
+        hideAllStates();
+
+        // Show results section
+        document.getElementById("resultsSection").classList.add("show");
+
+        // Update header
+        document.getElementById("routeTitle").textContent = `${
+          locations[searchParams.from]
+        } → ${locations[searchParams.to]}`;
+        document.getElementById("tripCount").textContent = filteredTrips.length;
+        document.getElementById("selectedDate").textContent = formatDate(
+          searchParams.date
+        );
+
+        // Render trip cards
+        const tripsGrid = document.getElementById("tripsGrid");
+        tripsGrid.innerHTML = "";
+
+        if (filteredTrips.length === 0) {
+          showNoResults();
+          return;
+        }
+
+        filteredTrips.forEach((trip) => {
+          tripsGrid.appendChild(createTripCard(trip));
+        });
+
+        // Scroll to results
+        document.getElementById("resultsSection").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      function createTripCard(trip) {
+        const card = document.createElement("div");
+        card.className = "trip-card";
+        card.setAttribute("data-type", trip.type);
+
+        const seatStatus =
+          trip.availableSeats > 10
+            ? "success"
+            : trip.availableSeats > 0
+            ? "warning"
+            : "danger";
+        const seatText =
+          trip.availableSeats > 0
+            ? `Còn ${trip.availableSeats} chỗ`
+            : "Hết chỗ";
+
+        card.innerHTML = `
+          <div class="trip-header">
+            <div class="trip-type ${trip.type}">
+              ${trip.type === "bus" ? "🚌" : "✨"} ${trip.typeName}
+            </div>
+            <div class="trip-price">
+              <div class="price-amount">${formatPrice(trip.price)}</div>
+              <div class="price-label">VNĐ/khách</div>
+            </div>
+          </div>
+
+          <div class="trip-route">
+            <div class="route-location">
+              <div class="location-label">Điểm đi</div>
+              <div class="location-name">${trip.from}</div>
+            </div>
+            <div class="route-arrow">→</div>
+            <div class="route-location">
+              <div class="location-label">Điểm đến</div>
+              <div class="location-name">${trip.to}</div>
+            </div>
+          </div>
+
+          <div class="trip-details">
+            <div class="trip-detail">
+              <div class="detail-icon">🕐</div>
+              <div class="detail-info">
+                <div class="detail-label">Giờ khởi hành</div>
+                <div class="detail-value">${trip.departureTime}</div>
+              </div>
+            </div>
+            <div class="trip-detail">
+              <div class="detail-icon">🕐</div>
+              <div class="detail-info">
+                <div class="detail-label">Giờ đến dự kiến</div>
+                <div class="detail-value">${trip.arrivalTime}</div>
+              </div>
+            </div>
+            <div class="trip-detail">
+              <div class="detail-icon">⏱️</div>
+              <div class="detail-info">
+                <div class="detail-label">Thời gian</div>
+                <div class="detail-value">${trip.duration}</div>
+              </div>
+            </div>
+            <div class="trip-detail">
+              <div class="detail-icon">📏</div>
+              <div class="detail-info">
+                <div class="detail-label">Khoảng cách</div>
+                <div class="detail-value">${trip.distance}</div>
+              </div>
+            </div>
+            <div class="trip-detail">
+              <div class="detail-icon">💺</div>
+              <div class="detail-info">
+                <div class="detail-label">Số ghế</div>
+                <div class="detail-value">
+                  <span class="badge badge-${seatStatus}">${seatText}</span>
+                </div>
+              </div>
+            </div>
+            <div class="trip-detail">
+              <div class="detail-icon">🚗</div>
+              <div class="detail-info">
+                <div class="detail-label">Biển số</div>
+                <div class="detail-value">${trip.vehicleNumber}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trip-actions">
+            <button class="btn-book" onclick="bookTrip('${trip.id}')">
+              🎫 Đặt vé ngay
+            </button>
+          </div>
+        `;
+
+        return card;
+      }
+
+      // ============================================
+      // FILTER & SORT FUNCTIONS
+      // ============================================
+
+      function filterTrips(filterType) {
+        currentFilter = filterType;
+
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          if (btn.getAttribute("data-filter") === filterType) {
+            btn.classList.add("active");
+          }
+        });
+
+        if (filterType === "all") {
+          filteredTrips = [...allTrips];
+        } else {
+          filteredTrips = allTrips.filter((trip) => trip.type === filterType);
+        }
+
+        sortTrips();
+      }
+
+      function sortTrips() {
+        const sortType = document.getElementById("sortSelect").value;
+
+        switch (sortType) {
+          case "price-asc":
+            filteredTrips.sort((a, b) => a.price - b.price);
+            break;
+          case "price-desc":
+            filteredTrips.sort((a, b) => b.price - a.price);
+            break;
+          case "time-asc":
+            filteredTrips.sort((a, b) =>
+              a.departureTime.localeCompare(b.departureTime)
+            );
+            break;
+          case "time-desc":
+            filteredTrips.sort((a, b) =>
+              b.departureTime.localeCompare(a.departureTime)
+            );
+            break;
+        }
+
+        displayResults();
+      }
+
+      // ============================================
+      // STATE MANAGEMENT
+      // ============================================
+
+      function showLoadingState() {
+        hideAllStates();
+        document.getElementById("resultsSection").classList.add("show");
+        document.getElementById("loadingState").classList.add("show");
+      }
+
+      function showNoResults() {
+        hideAllStates();
+        document.getElementById("resultsSection").classList.add("show");
+        document.getElementById("noResultsState").classList.add("show");
+      }
+
+      function hideAllStates() {
+        document.getElementById("loadingState").classList.remove("show");
+        document.getElementById("noResultsState").classList.remove("show");
+        document.getElementById("tripsGrid").innerHTML = "";
+      }
+
+      // ============================================
+      // ACTION HANDLERS
+      // ============================================
+
+      let currentBookingTrip = null;
+      let selectedSeats = [];
+      let occupiedSeats = [];
+      let pendingBookingTripId = null;
+      let selectedPaymentMethod = "cash"; // Default payment method
+
+      function bookTrip(tripId) {
+        const trip = allTrips.find((t) => t.id === tripId);
+        if (!trip) return;
+
+        if (trip.availableSeats === 0) {
+          alert("⚠️ Xin lỗi, chuyến xe này đã hết chỗ!");
+          return;
+        }
+
+        // Check if user is logged in
+        if (!currentUser) {
+          // Store trip ID for later
+          pendingBookingTripId = tripId;
+
+          // Show login required modal
+          document.getElementById("loginRequiredModal").classList.add("show");
+          document.body.style.overflow = "hidden";
+          return;
+        }
+
+        // Continue with booking
+        openBookingModal(trip);
+      }
+
+      function openBookingModal(trip) {
+        // Set current booking trip
+        currentBookingTrip = trip;
+        selectedSeats = [];
+
+        // Update modal content
+        document.getElementById(
+          "bookingModalTitle"
+        ).textContent = `Đặt vé ${trip.typeName}`;
+        document.getElementById("bookingModalSubtitle").textContent =
+          trip.type === "bus"
+            ? "Chọn ghế và điền thông tin hành khách"
+            : "Điền thông tin hành khách và điểm đón";
+
+        // Update trip summary
+        document.getElementById(
+          "summaryRoute"
+        ).textContent = `${trip.from} → ${trip.to}`;
+        document.getElementById("summaryDate").textContent = formatDate(
+          trip.date
+        );
+        document.getElementById("summaryTime").textContent = trip.departureTime;
+        document.getElementById("summaryType").textContent = trip.typeName;
+        document.getElementById("summaryPrice").textContent = `${formatPrice(
+          trip.price
+        )} VNĐ`;
+        document.getElementById("summaryTotal").textContent = `${formatPrice(
+          trip.price
+        )} VNĐ`;
+
+        // Pre-fill passenger info if logged in
+        if (currentUser) {
+          document.getElementById("passengerName").value = currentUser.fullName;
+          document.getElementById("passengerPhone").value =
+            currentUser.phone || "";
+          document.getElementById("passengerEmail").value = currentUser.email;
+        }
+
+        // Show/hide pickup location based on vehicle type
+        const pickupLocationGroup = document.getElementById(
+          "pickupLocationGroup"
+        );
+        const pickupLocationInput = document.getElementById("pickupLocation");
+
+        if (trip.type === "limousine") {
+          pickupLocationGroup.style.display = "block";
+          pickupLocationInput.setAttribute("required", "required");
+        } else {
+          pickupLocationGroup.style.display = "none";
+          pickupLocationInput.removeAttribute("required");
+          pickupLocationInput.value = "";
+        }
+
+        // Show/hide seat selection based on vehicle type
+        if (trip.type === "bus") {
+          document.getElementById("seatSelectionContainer").style.display =
+            "block";
+          generateSeats(trip);
+        } else {
+          document.getElementById("seatSelectionContainer").style.display =
+            "none";
+        }
+
+        // Show modal
+        document.getElementById("bookingModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function proceedToLogin() {
+        // Close login required modal
+        closeLoginRequired();
+
+        // Show login modal
+        showLoginModal();
+      }
+
+      function closeLoginRequired() {
+        document.getElementById("loginRequiredModal").classList.remove("show");
+        document.body.style.overflow = "auto";
+        pendingBookingTripId = null;
+      }
+
+      function generateSeats(trip) {
+        const seatsGrid = document.getElementById("seatsGrid");
+        seatsGrid.innerHTML = "";
+
+        // Generate random occupied seats
+        const totalSeats = trip.totalSeats;
+        const numOccupied = totalSeats - trip.availableSeats;
+        occupiedSeats = [];
+
+        while (occupiedSeats.length < numOccupied) {
+          const randomSeat = Math.floor(Math.random() * totalSeats) + 1;
+          if (!occupiedSeats.includes(randomSeat)) {
+            occupiedSeats.push(randomSeat);
+          }
+        }
+
+        // Create seat layout (5 columns: 2 + aisle + 2 + 1)
+        const rows = Math.ceil(totalSeats / 4); // 4 seats per row (excluding aisle)
+        let seatNumber = 1;
+
+        for (let row = 0; row < rows; row++) {
+          // Left side (2 seats)
+          for (let i = 0; i < 2; i++) {
+            if (seatNumber <= totalSeats) {
+              const seat = createSeatElement(seatNumber);
+              seatsGrid.appendChild(seat);
+              seatNumber++;
+            }
+          }
+
+          // Aisle
+          const aisle = document.createElement("div");
+          aisle.className = "seat aisle";
+          seatsGrid.appendChild(aisle);
+
+          // Right side (2 seats)
+          for (let i = 0; i < 2; i++) {
+            if (seatNumber <= totalSeats) {
+              const seat = createSeatElement(seatNumber);
+              seatsGrid.appendChild(seat);
+              seatNumber++;
+            }
+          }
+        }
+
+        updateSelectedSeatsDisplay();
+      }
+
+      function createSeatElement(seatNumber) {
+        const seat = document.createElement("div");
+        seat.className = "seat";
+        seat.textContent = seatNumber;
+        seat.setAttribute("data-seat", seatNumber);
+
+        if (occupiedSeats.includes(seatNumber)) {
+          seat.classList.add("occupied");
+        } else {
+          seat.classList.add("available");
+          seat.onclick = () => toggleSeat(seatNumber);
+        }
+
+        return seat;
+      }
+
+      function toggleSeat(seatNumber) {
+        if (occupiedSeats.includes(seatNumber)) return;
+
+        const seatElement = document.querySelector(
+          `[data-seat="${seatNumber}"]`
+        );
+
+        if (selectedSeats.includes(seatNumber)) {
+          // Deselect
+          selectedSeats = selectedSeats.filter((s) => s !== seatNumber);
+          seatElement.classList.remove("selected");
+          seatElement.classList.add("available");
+        } else {
+          // Check if limit reached
+          if (selectedSeats.length >= searchParams.passengers) {
+            alert(
+              `⚠️ Bạn chỉ có thể chọn tối đa ${searchParams.passengers} ghế (theo số hành khách tìm kiếm)`
+            );
+            return;
+          }
+
+          // Select
+          selectedSeats.push(seatNumber);
+          seatElement.classList.remove("available");
+          seatElement.classList.add("selected");
+        }
+
+        updateSelectedSeatsDisplay();
+        updateTotalPrice();
+      }
+
+      function updateSelectedSeatsDisplay() {
+        document.getElementById("selectedSeatsCount").textContent =
+          selectedSeats.length;
+
+        // Update confirm button state
+        const confirmBtn = document.getElementById("confirmBookingBtn");
+        if (currentBookingTrip && currentBookingTrip.type === "bus") {
+          if (selectedSeats.length === 0) {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = "⚠️ Vui lòng chọn ghế";
+          } else {
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = "💳 Xác nhận đặt vé";
+          }
+        } else {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = "💳 Xác nhận đặt vé";
+        }
+      }
+
+      function updateTotalPrice() {
+        if (!currentBookingTrip) return;
+
+        const numSeats =
+          currentBookingTrip.type === "bus"
+            ? selectedSeats.length
+            : searchParams.passengers;
+
+        const total = currentBookingTrip.price * numSeats;
+        document.getElementById("summaryTotal").textContent = `${formatPrice(
+          total
+        )} VNĐ`;
+      }
+
+      // ============================================
+      // PAYMENT METHOD FUNCTIONS
+      // ============================================
+
+      function selectPaymentMethod(method) {
+        // Check if method is available
+        if (method === "ewallet" || method === "card") {
+          alert(
+            "⚠️ Phương thức thanh toán này đang được phát triển. Vui lòng chọn phương thức khác!"
+          );
+          return;
+        }
+
+        selectedPaymentMethod = method;
+
+        // Update UI
+        document.querySelectorAll(".payment-method").forEach((pm) => {
+          pm.classList.remove("selected");
+        });
+        document.getElementById(`payment-${method}`).classList.add("selected");
+
+        // Show/hide notes
+        document.querySelectorAll(".payment-note").forEach((note) => {
+          note.classList.remove("show");
+        });
+        document.getElementById(`payment-${method}-note`).classList.add("show");
+      }
+
+      // ============================================
+      // BOOKING CONFIRMATION
+      // ============================================
+
+      function confirmBooking() {
+        if (!currentBookingTrip) return;
+
+        // Validate seat selection for bus
+        if (currentBookingTrip.type === "bus" && selectedSeats.length === 0) {
+          alert("⚠️ Vui lòng chọn ít nhất 1 ghế!");
+          return;
+        }
+
+        // Validate passenger info
+        const name = document.getElementById("passengerName").value.trim();
+        const phone = document.getElementById("passengerPhone").value.trim();
+        const pickupLocation = document
+          .getElementById("pickupLocation")
+          .value.trim();
+
+        if (!name) {
+          alert("⚠️ Vui lòng nhập họ tên!");
+          document.getElementById("passengerName").focus();
+          return;
+        }
+
+        if (!phone) {
+          alert("⚠️ Vui lòng nhập số điện thoại!");
+          document.getElementById("passengerPhone").focus();
+          return;
+        }
+
+        // Phone validation
+        const phoneRegex = /^(0|\+84)[0-9]{9}$/;
+        if (!phoneRegex.test(phone)) {
+          alert("⚠️ Số điện thoại không hợp lệ!");
+          document.getElementById("passengerPhone").focus();
+          return;
+        }
+
+        // Validate pickup location for limousine
+        if (currentBookingTrip.type === "limousine") {
+          if (!pickupLocation) {
+            alert("⚠️ Vui lòng nhập điểm đón!");
+            document.getElementById("pickupLocation").focus();
+            return;
+          }
+
+          if (pickupLocation.length < 10) {
+            alert("⚠️ Vui lòng nhập địa chỉ đón cụ thể (tối thiểu 10 ký tự)!");
+            document.getElementById("pickupLocation").focus();
+            return;
+          }
+        }
+
+        // Create booking
+        const booking = {
+          id: Date.now().toString(),
+          tripId: currentBookingTrip.id,
+          userId: currentUser.email,
+          trip: {
+            from: currentBookingTrip.from,
+            to: currentBookingTrip.to,
+            date: currentBookingTrip.date,
+            departureTime: currentBookingTrip.departureTime,
+            type: currentBookingTrip.typeName,
+            vehicleNumber: currentBookingTrip.vehicleNumber,
+            price: currentBookingTrip.price,
+          },
+          passenger: {
+            name: name,
+            phone: phone,
+            email: document.getElementById("passengerEmail").value.trim(),
+            note: document.getElementById("passengerNote").value.trim(),
+          },
+          pickupLocation:
+            currentBookingTrip.type === "limousine" ? pickupLocation : null,
+          seats: currentBookingTrip.type === "bus" ? selectedSeats : [],
+          numPassengers:
+            currentBookingTrip.type === "bus"
+              ? selectedSeats.length
+              : searchParams.passengers,
+          totalPrice:
+            currentBookingTrip.price *
+            (currentBookingTrip.type === "bus"
+              ? selectedSeats.length
+              : searchParams.passengers),
+          paymentMethod: selectedPaymentMethod,
+          paymentStatus:
+            selectedPaymentMethod === "cash" ? "pending" : "pending",
+          status: "confirmed",
+          createdAt: new Date().toISOString(),
+        };
+
+        // Save booking
+        const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+        bookings.push(booking);
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+
+        // Payment method names
+        const paymentNames = {
+          cash: "Tiền mặt",
+          bank: "Chuyển khoản ngân hàng",
+          ewallet: "Ví điện tử",
+          card: "Thẻ tín dụng/ghi nợ",
+        };
+
+        // Show success message
+        const seatInfo =
+          currentBookingTrip.type === "bus"
+            ? `\n🪑 Ghế: ${selectedSeats.sort((a, b) => a - b).join(", ")}`
+            : "";
+
+        const pickupInfo =
+          currentBookingTrip.type === "limousine"
+            ? `\n📍 Điểm đón: ${pickupLocation}`
+            : "";
+
+        const paymentInfo =
+          selectedPaymentMethod === "bank"
+            ? `\n\n💳 THÔNG TIN CHUYỂN KHOẢN:\n• Ngân hàng: Vietcombank\n• Số TK: 1234567890\n• Chủ TK: CONG TY THANG LONG EXPRESS\n• Số tiền: ${formatPrice(
+                booking.totalPrice
+              )} VNĐ\n• Nội dung: ${
+                booking.id
+              } ${name}\n⚠️ Vui lòng chuyển khoản trong 30 phút!`
+            : "";
+
+        alert(`
+✅ ĐẶT VÉ THÀNH CÔNG!
+
+📋 Mã đặt vé: ${booking.id}
+📍 Tuyến: ${booking.trip.from} → ${booking.trip.to}
+🚌 Loại xe: ${booking.trip.type}
+📅 Ngày: ${formatDate(booking.trip.date)}
+🕐 Giờ: ${booking.trip.departureTime}${pickupInfo}${seatInfo}
+👤 Tên: ${booking.passenger.name}
+📞 SĐT: ${booking.passenger.phone}
+💰 Tổng tiền: ${formatPrice(booking.totalPrice)} VNĐ
+💳 Thanh toán: ${paymentNames[selectedPaymentMethod]}${paymentInfo}
+
+${
+  currentBookingTrip.type === "limousine"
+    ? "Tài xế sẽ liên hệ trước 30 phút để xác nhận điểm đón!"
+    : "Vui lòng đến điểm đón trước giờ khởi hành 15 phút!"
+}
+        `);
+
+        // Close modal and reset
+        closeBookingModal();
+      }
+
+      function closeBookingModal() {
+        document.getElementById("bookingModal").classList.remove("show");
+        document.body.style.overflow = "auto";
+
+        // Reset form
+        document.getElementById("passengerForm").reset();
+        document.getElementById("pickupLocation").value = "";
+        selectedSeats = [];
+        occupiedSeats = [];
+        currentBookingTrip = null;
+
+        // Reset payment method to default
+        selectedPaymentMethod = "cash";
+        document.querySelectorAll(".payment-method").forEach((pm) => {
+          pm.classList.remove("selected");
+        });
+        document.getElementById("payment-cash").classList.add("selected");
+        document.querySelectorAll(".payment-note").forEach((note) => {
+          note.classList.remove("show");
+        });
+        document.getElementById("payment-cash-note").classList.add("show");
+      }
+
+      // ============================================
+      // UTILITY FUNCTIONS
+      // ============================================
+
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN");
+      }
+
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+      }
+
+      function toggleMobileMenu() {
+        const nav = document.getElementById("mainNav");
+        nav.classList.toggle("show");
+      }
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      console.log("🚌 Thăng Long Express - Website hoàn chỉnh!");
+      console.log("✅ Hero + Booking + Search + Features + Auth!");
+    </script>
+  </body>
+</html>
