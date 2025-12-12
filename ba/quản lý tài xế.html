@@ -21,7 +21,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
     body { background: #f8fafc; color: #333; display: flex; min-height: 100vh; }
 
-    /* SIDEBAR – GIỮ NGUYÊN 100% NHƯ FILE GỐC */
     .sidebar {
       width: 280px;
       background: var(--sidebar-bg);
@@ -101,7 +100,6 @@
     }
     .btn-add:hover { background: #3651d4; }
 
-    /* CẢNH BÁO – ĐÚNG YÊU CẦU */
     .alert-box {
       background:#fef3c7; border-left:4px solid #f59e0b; padding:16px; border-radius:8px;
       margin-bottom:20px; display:flex; align-items:center; gap:12px; color:#92400e; font-weight:500;
@@ -110,7 +108,6 @@
       background:#fee2e2; border-left:4px solid var(--red); color:#991b1b;
     }
 
-    /* TAB */
     .tab-buttons {
       display: flex; gap: 12px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;
     }
@@ -126,7 +123,6 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* STATS GRID */
     .stats-grid {
       display: grid; grid-template-columns: repeat(6, 1fr);
       gap: 16px; margin-bottom: 30px;
@@ -143,11 +139,10 @@
     .stat-card.suspended .number { color: var(--red); }
     .stat-card.expired .number { color: var(--yellow); }
 
-    /* FILTER & TABLE */
     .filter-bar {
-      margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 20px; display: flex; align-items: center; gap: center; gap: 12px; flex-wrap: wrap;
     }
-    .filter-select, .search-input {
+    .filter-select, .search-input, .date-input {
       padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 12px;
       background: white; font-size: 14px;
     }
@@ -172,9 +167,10 @@
     .actions a { margin-right: 12px; color: #64748b; font-size: 18px; cursor: pointer; transition: 0.3s; }
     .actions a:hover { color: var(--primary); }
 
-    .overtime { background:#fee2e2; color:#991b1b; padding:4px 10px; border-radius:20px; font-size:12px; }
-    .btn-export { background:var(--green); color:white; padding:10px 20px; border-radius:12px;
-      font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+    .btn-export {
+      background:var(--green); color:white; padding:10px 20px; border-radius:12px;
+      font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px;
+    }
 
     @media (max-width: 992px) {
       .sidebar { width: 80px; padding: 20px 10px; }
@@ -185,7 +181,6 @@
     }
     @media (max-width: 576px) {
       .main-content { margin-left: 0; padding: 15px; }
-      .tab-buttons { flex-direction: column; }
       .filter-bar { flex-direction: column; align-items: stretch; }
       .search-input { min-width: 100%; }
     }
@@ -193,10 +188,10 @@
 </head>
 <body>
 
-  <!-- SIDEBAR – GIỮ NGUYÊN 100% NHƯ FILE GỐC -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="user-info">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
       <div class="info">
         <h3>Samantha</h3>
         <p>+098 (99) 439-49-16</p>
@@ -207,10 +202,10 @@
     <ul class="menu">
       <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
       <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
-      <li><a href="quản lý xe.html"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
+      <li><a href="#"><i class="fas fa-car-side"></i> <span>Quản lý xe</span></a></li>
       <li><a href="#" class="active"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
       <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
-      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Tuyến & giá vé</span></a></li>
       <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
       <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
     </ul>
@@ -234,7 +229,7 @@
       </button>
     </div>
 
-    <!-- 2 CẢNH BÁO – ĐÚNG YÊU CẦU -->
+    <!-- CẢNH BÁO -->
     <div class="alert-box">
       <i class="fas fa-exclamation-triangle" style="font-size:20px;"></i>
       <div>
@@ -244,17 +239,17 @@
     <div class="alert-box alert-danger">
       <i class="fas fa-exclamation-circle" style="font-size:20px;"></i>
       <div>
-        <strong>Cảnh báo an toàn lao động:</strong> Có <strong>3 tài xế</strong> vượt giờ làm việc quy định trong tuần này.
+        <strong>Cảnh báo an toàn:</strong> Có <strong>3 tài xế</strong> vượt giờ làm việc trong tuần.
       </div>
     </div>
 
-    <!-- 2 TAB -->
+    <!-- TAB -->
     <div class="tab-buttons">
       <div class="tab-btn active" data-tab="tab-list">Danh sách tài xế</div>
       <div class="tab-btn" data-tab="tab-schedule">Ca làm việc</div>
     </div>
 
-    <!-- TAB 1: DANH SÁCH TÀI XẾ – ĐÃ BỔ SUNG 10 DÒNG DỮ LIỆU THẬT -->
+    <!-- TAB 1: DANH SÁCH TÀI XẾ – ĐÃ SỬA CỘT "XE ĐANG CHẠY" -->
     <div id="tab-list" class="tab-content active">
       <div class="stats-grid">
         <div class="stat-card"><h3>Tổng tài xế</h3><div class="number">32</div></div>
@@ -274,75 +269,255 @@
 
       <table>
         <thead>
-          <tr><th>Họ tên</th><th>Số GPLX</th><th>Hạn GPLX</th><th>Số điện thoại</th><th>Kinh nghiệm</th><th>Trạng thái</th><th>GPLX</th><th>Thao tác</th></tr>
+          <tr>
+            <th>Họ tên</th>
+            <th>Số GPLX</th>
+            <th>Hạn GPLX</th>
+            <th>Số điện thoại</th>
+            <th>Xe đang chạy</th>
+            <th>Trạng thái</th>
+            <th>GPLX</th>
+            <th>Thao tác</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Nguyễn Văn Hùng</strong></td><td>301234567890</td><td>12/08/2027</td><td>0903 456 789</td><td>12 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="chi-tiet-tai-xe.html"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Trần Thị Lan</strong></td><td>301987654321</td><td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td><td>0918 123 456</td><td>8 năm</td><td><span class="status running">Đang chạy</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Lê Văn Minh</strong></td><td>302345678901</td><td>20/03/2026</td><td>0935 789 012</td><td>15 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Phạm Quốc Anh</strong></td><td>302876543210</td><td>10/02/2026</td><td>0987 654 321</td><td>6 năm</td><td><span class="status leave">Nghỉ phép</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Vũ Thị Hồng</strong></td><td>303112233445</td><td>15/01/2026 <span class="license-warning">(còn 36 ngày)</span></td><td>0977 888 999</td><td>10 năm</td><td><span class="status ready">Sẵn sàng</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Hoàng Văn Nam</strong></td><td>303556677889</td><td>18/04/2028</td><td>0922 111 222</td><td>9 năm</td><td><span class="status running">Đang chạy</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Đỗ Thị Mai</strong></td><td>303998877665</td><td>22/01/2026 <span class="license-warning">(còn 43 ngày)</span></td><td>0966 333 444</td><td>7 năm</td><td><span class="status ready">Sẵn sàng</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Bùi Xuân Trường</strong></td><td>304443322110</td><td>30/06/2027</td><td>0899 555 666</td><td>11 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Ngô Văn Long</strong></td><td>304887766554</td><td>08/02/2026</td><td>0888 777 888</td><td>5 năm</td><td><span class="status suspended">Tạm ngưng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Lý Thị Ngọc</strong></td><td>305112233445</td><td>25/05/2028</td><td>0944 999 000</td><td>4 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
+          <tr>
+            <td><strong>Nguyễn Văn Hùng</strong></td>
+            <td>301234567890</td>
+            <td>12/08/2027</td>
+            <td>0903 456 789</td>
+            <td>29H-12345</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="chi-tiet-tai-xe.html"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Trần Thị Lan</strong></td>
+            <td>301987654321</td>
+            <td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td>
+            <td>0918 123 456</td>
+            <td>—</td>
+            <td><span class="status running">Đang chạy</span></td>
+            <td><span class="license-warning">Cảnh báo</span></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Lê Văn Minh</strong></td>
+            <td>302345678901</td>
+            <td>20/03/2026</td>
+            <td>0935 789 012</td>
+            <td>Chưa phân xe</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Phạm Quốc Anh</strong></td>
+            <td>302876543210</td>
+            <td>10/02/2026</td>
+            <td>0987 654 321</td>
+            <td>—</td>
+            <td><span class="status leave">Nghỉ phép</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Vũ Thị Hồng</strong></td>
+            <td>303112233445</td>
+            <td>15/01/2026 <span class="license-warning">(còn 36 ngày)</span></td>
+            <td>0977 888 999</td>
+            <td>29H-67890</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td><span class="license-warning">Cảnh báo</span></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Hoàng Văn Nam</strong></td>
+            <td>303556677889</td>
+            <td>18/04/2028</td>
+            <td>0922 111 222</td>
+            <td>29H-67890</td>
+            <td><span class="status running">Đang chạy</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Đỗ Thị Mai</strong></td>
+            <td>303998877665</td>
+            <td>22/01/2026 <span class="license-warning">(còn 43 ngày)</span></td>
+            <td>0966 333 444</td>
+            <td>Chưa phân xe</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td><span class="license-warning">Cảnh báo</span></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Bùi Xuân Trường</strong></td>
+            <td>304443322110</td>
+            <td>30/06/2027</td>
+            <td>0899 555 666</td>
+            <td>29H-55555</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Ngô Văn Long</strong></td>
+            <td>304887766554</td>
+            <td>08/02/2026</td>
+            <td>0888 777 888</td>
+            <td>—</td>
+            <td><span class="status suspended">Tạm ngưng</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Lý Thị Ngọc</strong></td>
+            <td>305112233445</td>
+            <td>25/05/2028</td>
+            <td>0944 999 000</td>
+            <td>Chưa phân xe</td>
+            <td><span class="status ready">Sẵn sàng</span></td>
+            <td></td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- TAB 2: CA LÀM VIỆC – ĐÃ BỔ SUNG 12 DÒNG DỮ LIỆU ĐẦY ĐỦ -->
+    <!-- TAB 2: CA LÀM VIỆC – ĐÃ SỬA ĐÚNG 100% THEO ẢNH BẠN GỬI -->
     <div id="tab-schedule" class="tab-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <h2 style="font-size:22px;color:#1e293b;">Ca làm việc của tài xế</h2>
+        <h2 style="font-size:22px;color:#1e293b;">Lịch chạy tuyến cố định</h2>
         <button class="btn-export" onclick="alert('Đã xuất báo cáo ca làm việc!')">
-          Xuất báo cáo Excel
+          <i class="fas fa-file-excel"></i> Xuất Excel
         </button>
       </div>
 
-      <div class="stats-grid">
-        <div class="stat-card"><h3>Tổng giờ làm tuần</h3><div class="number">1.892 giờ</div></div>
-        <div class="stat-card"><h3>Trung bình/tài xế</h3><div class="number">59.1 giờ</div></div>
-        <div class="stat-card warning"><h3>Vượt giờ quy định</h3><div class="number">3 người</div></div>
-        <div class="stat-card"><h3>Ca hôm nay</h3><div class="number">24 ca</div></div>
-      </div>
-
+      <!-- Bộ lọc đơn giản -->
       <div class="filter-bar">
-        <select class="filter-select">
-          <option>Tất cả tài xế</option>
-          <option>Nguyễn Văn Hùng</option>
-          <option>Trần Thị Lan</option>
-          <option>Lê Văn Minh</option>
-          <option>Phạm Quốc Anh</option>
-          <option>Vũ Thị Hồng</option>
-          <option>Hoàng Văn Nam</option>
-        </select>
-        <input type="date" class="date-input" value="2025-12-08">
-        <span>đến</span>
-        <input type="date" class="date-input" value="2025-12-14">
-        <select class="filter-select"><option>Theo tuần</option><option>Theo ngày</option><option>Theo tháng</option></select>
-        <button style="background:var(--primary);color:white;padding:10px 20px;border-radius:12px;">Lọc</button>
+        <input type="text" class="search-input" placeholder="Tìm tài xế, ngày, tuyến...">
+        <input type="date" class="date-input" value="2025-12-12">
+        <button style="background:var(--primary);color:white;padding:10px 20px;border-radius:12px;">
+          <i class="fas fa-search"></i> Tìm kiếm
+        </button>
       </div>
 
+      <!-- BẢNG CA LÀM VIỆC – GIỐNG HỆT ẢNH -->
       <table>
         <thead>
-          <tr><th>Tài xế</th><th>Ngày</th><th>Tuyến đường</th><th>Thời gian</th><th>Số giờ</th><th>Ghi chú</th><th>Thao tác</th></tr>
+          <tr>
+            <th>Tài xế</th>
+            <th>Tuyến cố định</th>
+            <th>Ngày</th>
+            <th>Giờ xuất bến</th>
+            <th>Hướng đi</th>
+            <th>Số giờ</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Nguyễn Văn Hùng</strong></td><td>10/12/2025</td><td>Hà Nội → Hải Phòng (khứ hồi)</td><td>06:00 - 16:30</td><td>9.5 giờ <span class="overtime">Vượt 1.5h</span></td><td>2 chuyến</td><td class="actions"><a href="chi-tiet-tai-xe.html"><i class="fas fa-eye" title="Hồ sơ"></i></a><a href="#"><i class="fas fa-info-circle" title="Chi tiết ca"></i></a></td></tr>
-          <tr><td><strong>Trần Thị Lan</strong></td><td>10/12/2025</td><td>Hà Nội → Vinh</td><td>07:00 - 12:00</td><td>5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Lê Văn Minh</strong></td><td>10/12/2025</td><td>Hà Nội → Đà Nẵng</td><td>05:00 - 18:30</td><td>12.5 giờ <span class="overtime">Vượt 4.5h</span></td><td>Ca dài</td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Phạm Quốc Anh</strong></td><td>09/12/2025</td><td>Hà Nội → Thái Nguyên</td><td>08:00 - 11:30</td><td>3.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Vũ Thị Hồng</strong></td><td>09/12/2025</td><td>Hà Nội → Lào Cai</td><td>06:30 - 13:00</td><td>6.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Hoàng Văn Nam</strong></td><td>08/12/2025</td><td>Hà Nội → Hải Phòng</td><td>14:00 - 16:30</td><td>2.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Đỗ Thị Mai</strong></td><td>08/12/2025</td><td>Hà Nội → Nam Định</td><td>07:00 - 09:30</td><td>2.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Bùi Xuân Trường</strong></td><td>07/12/2025</td><td>Hà Nội → Quảng Ninh</td><td>05:30 - 10:00</td><td>4.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
+          <tr>
+            <td><strong>Nguyễn Văn Hùng</strong></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;padding:6px 12px;">HN → HP</span></td>
+            <td>12/12/2025</td>
+            <td>06:00</td>
+            <td>Hà Nội → Hải Phòng</td>
+            <td>4.5 giờ</td>
+            <td>Lượt sáng</td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye" title="Xem"></i></a>
+              <a href="#"><i class="fas fa-edit" title="Sửa"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Nguyễn Văn Hùng</strong></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;">HN → HP</span></td>
+            <td>12/12/2025</td>
+            <td>14:00</td>
+            <td>Hải Phòng → Hà Nội</td>
+            <td>4.5 giờ</td>
+            <td>Lượt chiều</td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#"><i class="fas fa-edit"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Trần Thị Lan</strong></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;">HN → HP</span></td>
+            <td>12/12/2025</td>
+            <td>07:00</td>
+            <td>Hà Nội → Hải Phòng</td>
+            <td>4.5 giờ</td>
+            <td>Lượt sáng</td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#"><i class="fas fa-edit"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Lê Văn Minh</strong></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;">HN → HP</span></td>
+            <td>12/12/2025</td>
+            <td>05:30</td>
+            <td>Hà Nội → Hải Phòng</td>
+            <td>4.5 giờ</td>
+            <td>Lượt sớm</td>
+            <td class="actions">
+              <a href="#"><i class="fas fa-eye"></i></a>
+              <a href="#"><i class="fas fa-edit"></i></a>
+            </td>
+          </tr>
+          <!-- Bạn có thể thêm bao nhiêu dòng tùy ý -->
         </tbody>
       </table>
     </div>
   </main>
 
   <script>
+    // Chuyển tab
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
