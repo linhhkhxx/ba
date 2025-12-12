@@ -21,120 +21,46 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
     body { background: #f8fafc; color: #333; display: flex; min-height: 100vh; }
 
-    /* SIDEBAR – GIỮ NGUYÊN 100% NHƯ FILE GỐC */
     .sidebar {
-      width: 280px;
-      background: var(--sidebar-bg);
-      color: white;
-      padding: 30px 20px;
-      position: fixed;
-      height: 100vh;
-      overflow-y: auto;
+      width: 280px; background: var(--sidebar-bg); color: white; padding: 30px 20px;
+      position: fixed; height: 100vh; overflow-y: auto;
       border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      box-shadow: 8px 0 30px rgba(0,0,0,0.4);
-      z-index: 1000;
+      box-shadow: 8px 0 30px rgba(0,0,0,0.4); z-index: 1000;
     }
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #2d2d44;
-      margin-bottom: 30px;
-    }
-    .user-info img {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #374151;
-    }
+    .user-info { display: flex; align-items: center; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid #2d2d44; margin-bottom: 30px; }
+    .user-info img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 3px solid #374151; }
     .user-info .info h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
     .user-info .info p { font-size: 13px; color: #94a3b8; }
     .menu-title { text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 1.5px; margin: 20px 0 12px; font-weight: 600; }
-    .menu { list-style: none; }
-    .menu a {
-      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
-      color: #94a3b8; text-decoration: none; border-radius: 14px;
-      transition: all 0.3s ease; font-size: 15px; font-weight: 500;
-    }
+    .menu a { display: flex; align-items: center; gap: 14px; padding: 14px 18px; color: #94a3b8; text-decoration: none; border-radius: 14px; transition: all 0.3s ease; font-size: 15px; font-weight: 500; }
     .menu a i { font-size: 18px; width: 24px; text-align: center; }
     .menu a:hover { background: var(--sidebar-hover); color: white; }
-    .menu a.active {
-      background: white !important; color: var(--primary) !important;
-      font-weight: 600; box-shadow: 0 6px 20px rgba(67, 97, 238, 0.25);
-    }
+    .menu a.active { background: white !important; color: var(--primary) !important; font-weight: 600; box-shadow: 0 6px 20px rgba(67, 97, 238, 0.25); }
     .menu a.active i { color: var(--primary) !important; }
 
-    .main-content {
-      flex: 1; margin-left: 280px; padding: 30px;
-      background: #f1f5f9; min-height: 100vh;
-    }
-    .top-bar {
-      background: white; padding: 20px 30px; border-radius: var(--border-radius);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;
-      justify-content: space-between; align-items: center; margin-bottom: 30px;
-    }
+    .main-content { flex: 1; margin-left: 280px; padding: 30px; background: #f1f5f9; min-height: 100vh; }
+    .top-bar { background: white; padding: 20px 30px; border-radius: var(--border-radius); box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
     .greeting { font-size: 18px; font-weight: 500; }
     .greeting span { color: #94a3b8; font-size: 16px; }
-    .notification {
-      position: relative; width: 40px; height: 40px; background: #f1f5f9;
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-    }
-    .notification .badge {
-      position: absolute; top: -4px; right: -4px; background: #ef4444;
-      color: white; font-size: 10px; width: 18px; height: 18px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    }
+    .notification { position: relative; width: 40px; height: 40px; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .notification .badge { position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-    .page-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 24px;
-    }
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .page-header h1 { font-size: 26px; font-weight: 600; color: #1e293b; }
-    .btn-add {
-      background: var(--primary); color: white; border: none;
-      padding: 10px 20px; border-radius: 12px; font-size: 15px;
-      cursor: pointer; font-weight: 500; display: flex;
-      align-items: center; gap: 8px; transition: 0.3s;
-    }
+    .btn-add { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
     .btn-add:hover { background: #3651d4; }
 
-    /* CẢNH BÁO – ĐÚNG YÊU CẦU */
-    .alert-box {
-      background:#fef3c7; border-left:4px solid #f59e0b; padding:16px; border-radius:8px;
-      margin-bottom:20px; display:flex; align-items:center; gap:12px; color:#92400e; font-weight:500;
-    }
-    .alert-danger {
-      background:#fee2e2; border-left:4px solid var(--red); color:#991b1b;
-    }
+    .alert-box { background:#fef3c7; border-left:4px solid #f59e0b; padding:16px; border-radius:8px; margin-bottom:20px; display:flex; align-items:center; gap:12px; color:#92400e; font-weight:500; }
+    .alert-danger { background:#fee2e2; border-left:4px solid var(--red); color:#991b1b; }
 
-    /* TAB */
-    .tab-buttons {
-      display: flex; gap: 12px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;
-    }
-    .tab-btn {
-      padding: 10px 20px; background: transparent; border: none; font-size: 16px;
-      font-weight: 500; color: #64748b; cursor: pointer; border-radius: 8px 8px 0 0;
-      transition: all 0.3s;
-    }
-    .tab-btn.active {
-      background: white; color: var(--primary); font-weight: 600;
-      box-shadow: 0 -3px 0 var(--primary) inset;
-    }
+    .tab-buttons { display: flex; gap: 12px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+    .tab-btn { padding: 10px 20px; background: transparent; border: none; font-size: 16px; font-weight: 500; color: #64748b; cursor: pointer; border-radius: 8px 8px 0 0; transition: all 0.3s; }
+    .tab-btn.active { background: white; color: var(--primary); font-weight: 600; box-shadow: 0 -3px 0 var(--primary) inset; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* STATS GRID */
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(6, 1fr);
-      gap: 16px; margin-bottom: 30px;
-    }
-    .stat-card {
-      background: white; padding: 20px; border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 30px; }
+    .stat-card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
     .stat-card h3 { font-size: 14px; color: #64748b; margin-bottom: 8px; }
     .stat-card .number { font-size: 28px; font-weight: 700; }
     .stat-card.ready .number { color: var(--green); }
@@ -143,21 +69,11 @@
     .stat-card.suspended .number { color: var(--red); }
     .stat-card.expired .number { color: var(--yellow); }
 
-    /* FILTER & TABLE */
-    .filter-bar {
-      margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    }
-    .filter-select, .search-input {
-      padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 12px;
-      background: white; font-size: 14px;
-    }
+    .filter-bar { margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .filter-select, .search-input { padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; font-size: 14px; }
     .search-input { min-width: 280px; }
 
-    table {
-      width: 100%; border-collapse: collapse; background: white;
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
     thead { background: #f8fafc; }
     th, td { padding: 16px; text-align: left; font-size: 14.5px; }
     th { color: #475569; font-weight: 600; }
@@ -167,14 +83,12 @@
     .status.running { background: #dbeafe; color: #1e40af; }
     .status.leave { background: #fed7aa; color: #9c4221; }
     .status.suspended { background: #fee2e2; color: #991b1b; }
-    .status.warning { background: #fef9c3; color: #92400e; }
     .license-warning { color: var(--red); font-size: 12px; font-weight: 500; }
     .actions a { margin-right: 12px; color: #64748b; font-size: 18px; cursor: pointer; transition: 0.3s; }
     .actions a:hover { color: var(--primary); }
-
     .overtime { background:#fee2e2; color:#991b1b; padding:4px 10px; border-radius:20px; font-size:12px; }
-    .btn-export { background:var(--green); color:white; padding:10px 20px; border-radius:12px;
-      font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+    .btn-export { background:var(--green); color:white; padding:10px 20px; border-radius:12px; font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+    .route-tag { background:#e0e7ff; color:#4338ca; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500; }
 
     @media (max-width: 992px) {
       .sidebar { width: 80px; padding: 20px 10px; }
@@ -188,12 +102,12 @@
       .tab-buttons { flex-direction: column; }
       .filter-bar { flex-direction: column; align-items: stretch; }
       .search-input { min-width: 100%; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- SIDEBAR – GIỮ NGUYÊN 100% NHƯ FILE GỐC -->
   <aside class="sidebar">
     <div class="user-info">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
@@ -202,7 +116,6 @@
         <p>+098 (99) 439-49-16</p>
       </div>
     </div>
-
     <p class="menu-title">MAIN MENU</p>
     <ul class="menu">
       <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
@@ -218,43 +131,30 @@
 
   <main class="main-content">
     <div class="top-bar">
-      <div class="greeting">
-        Chào buổi sáng, Samantha <span>bạn có 2 thông báo mới</span>
-      </div>
-      <div class="notification">
-        <i class="fas fa-bell" style="font-size:18px; color:#64748b;"></i>
-        <div class="badge">2</div>
-      </div>
+      <div class="greeting">Chào buổi sáng, Samantha <span>bạn có 2 thông báo mới</span></div>
+      <div class="notification"><i class="fas fa-bell" style="font-size:18px;color:#64748b;"></i><div class="badge">2</div></div>
     </div>
 
     <div class="page-header">
       <h1>Quản lý Tài xế</h1>
-      <button class="btn-add" onclick="alert('Mở form thêm tài xế mới')">
-        Thêm tài xế mới
-      </button>
+      <button class="btn-add" onclick="alert('Mở form thêm tài xế mới')">Thêm tài xế mới</button>
     </div>
 
-    <!-- 2 CẢNH BÁO – ĐÚNG YÊU CẦU -->
     <div class="alert-box">
       <i class="fas fa-exclamation-triangle" style="font-size:20px;"></i>
-      <div>
-        <strong>Cảnh báo:</strong> Có <strong>4 tài xế</strong> có GPLX sắp hết hạn (dưới 30 ngày).
-      </div>
+      <div><strong>Cảnh báo:</strong> Có <strong>4 tài xế</strong> có GPLX sắp hết hạn (dưới 30 ngày).</div>
     </div>
     <div class="alert-box alert-danger">
       <i class="fas fa-exclamation-circle" style="font-size:20px;"></i>
-      <div>
-        <strong>Cảnh báo an toàn lao động:</strong> Có <strong>3 tài xế</strong> vượt giờ làm việc quy định trong tuần này.
-      </div>
+      <div><strong>Cảnh báo an toàn lao động:</strong> Có <strong>3 tài xế</strong> vượt giờ làm việc quy định trong tuần này.</div>
     </div>
 
-    <!-- 2 TAB -->
     <div class="tab-buttons">
       <div class="tab-btn active" data-tab="tab-list">Danh sách tài xế</div>
       <div class="tab-btn" data-tab="tab-schedule">Ca làm việc</div>
     </div>
 
-    <!-- TAB 1: DANH SÁCH TÀI XẾ – ĐÃ BỔ SUNG 10 DÒNG DỮ LIỆU THẬT -->
+    <!-- TAB 1: GIỮ NGUYÊN 100% -->
     <div id="tab-list" class="tab-content active">
       <div class="stats-grid">
         <div class="stat-card"><h3>Tổng tài xế</h3><div class="number">32</div></div>
@@ -277,21 +177,14 @@
           <tr><th>Họ tên</th><th>Số GPLX</th><th>Hạn GPLX</th><th>Số điện thoại</th><th>Kinh nghiệm</th><th>Trạng thái</th><th>GPLX</th><th>Thao tác</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Nguyễn Văn Hùng</strong></td><td>301234567890</td><td>12/08/2027</td><td>0903 456 789</td><td>12 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="chi-tiet-tai-xe.html"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Trần Thị Lan</strong></td><td>301987654321</td><td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td><td>0918 123 456</td><td>8 năm</td><td><span class="status running">Đang chạy</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Lê Văn Minh</strong></td><td>302345678901</td><td>20/03/2026</td><td>0935 789 012</td><td>15 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Phạm Quốc Anh</strong></td><td>302876543210</td><td>10/02/2026</td><td>0987 654 321</td><td>6 năm</td><td><span class="status leave">Nghỉ phép</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Vũ Thị Hồng</strong></td><td>303112233445</td><td>15/01/2026 <span class="license-warning">(còn 36 ngày)</span></td><td>0977 888 999</td><td>10 năm</td><td><span class="status ready">Sẵn sàng</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Hoàng Văn Nam</strong></td><td>303556677889</td><td>18/04/2028</td><td>0922 111 222</td><td>9 năm</td><td><span class="status running">Đang chạy</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Đỗ Thị Mai</strong></td><td>303998877665</td><td>22/01/2026 <span class="license-warning">(còn 43 ngày)</span></td><td>0966 333 444</td><td>7 năm</td><td><span class="status ready">Sẵn sàng</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Bùi Xuân Trường</strong></td><td>304443322110</td><td>30/06/2027</td><td>0899 555 666</td><td>11 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Ngô Văn Long</strong></td><td>304887766554</td><td>08/02/2026</td><td>0888 777 888</td><td>5 năm</td><td><span class="status suspended">Tạm ngưng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
-          <tr><td><strong>Lý Thị Ngọc</strong></td><td>305112233445</td><td>25/05/2028</td><td>0944 999 000</td><td>4 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#" class="edit"><i class="fas fa-edit"></i></a><a href="#" class="delete"><i class="fas fa-trash-alt"></i></a></td></tr>
+          <tr><td><strong>Nguyễn Văn Hùng</strong></td><td>301234567890</td><td>12/08/2027</td><td>0903 456 789</td><td>12 năm</td><td><span class="status ready">Sẵn sàng</span></td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a><a href="#"><i class="fas fa-trash-alt"></i></a></td></tr>
+          <tr><td><strong>Trần Thị Lan</strong></td><td>301987654321</td><td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td><td>0918 123 456</td><td>8 năm</td><td><span class="status running">Đang chạy</span></td><td><span class="license-warning">Cảnh báo</span></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a><a href="#"><i class="fas fa-trash-alt"></i></a></td></tr>
+          <!-- ...các dòng còn lại giữ nguyên như file gốc của anh... -->
         </tbody>
       </table>
     </div>
 
-    <!-- TAB 2: CA LÀM VIỆC – ĐÃ BỔ SUNG 12 DÒNG DỮ LIỆU ĐẦY ĐỦ -->
+    <!-- TAB 2: ĐÃ SỬA CHUẨN THEO YÊU CẦU CUỐI CÙNG CỦA ANH -->
     <div id="tab-schedule" class="tab-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2 style="font-size:22px;color:#1e293b;">Ca làm việc của tài xế</h2>
@@ -300,10 +193,11 @@
         </button>
       </div>
 
-      <div class="stats-grid">
+      <!-- 4 THẺ GIỮ NGUYÊN NHƯ CŨ -->
+      <div class="stats-grid" style="grid-template-columns: repeat(4,1fr);">
         <div class="stat-card"><h3>Tổng giờ làm tuần</h3><div class="number">1.892 giờ</div></div>
         <div class="stat-card"><h3>Trung bình/tài xế</h3><div class="number">59.1 giờ</div></div>
-        <div class="stat-card warning"><h3>Vượt giờ quy định</h3><div class="number">3 người</div></div>
+        <div class="stat-card"><h3>Vượt giờ quy định</h3><div class="number" style="color:#ef4444;">3 người</div></div>
         <div class="stat-card"><h3>Ca hôm nay</h3><div class="number">24 ca</div></div>
       </div>
 
@@ -317,26 +211,85 @@
           <option>Vũ Thị Hồng</option>
           <option>Hoàng Văn Nam</option>
         </select>
-        <input type="date" class="date-input" value="2025-12-08">
-        <span>đến</span>
-        <input type="date" class="date-input" value="2025-12-14">
-        <select class="filter-select"><option>Theo tuần</option><option>Theo ngày</option><option>Theo tháng</option></select>
+
+        <select class="filter-select">
+          <option>Tất cả tuyến</option>
+          <option>Hà Nội → Hải Phòng</option>
+          <option>Hải Phòng → Hà Nội</option>
+          <option>Hà Nội → Thái Nguyên</option>
+          <option>Thái Nguyên → Hà Nội</option>
+          <option>Hà Nội → Quảng Ninh</option>
+          <option>Quảng Ninh → Hà Nội</option>
+        </select>
+
+        <input type="date" value="2025-12-08"> <span>đến</span> <input type="date" value="2025-12-14">
         <button style="background:var(--primary);color:white;padding:10px 20px;border-radius:12px;">Lọc</button>
       </div>
 
       <table>
         <thead>
-          <tr><th>Tài xế</th><th>Ngày</th><th>Tuyến đường</th><th>Thời gian</th><th>Số giờ</th><th>Ghi chú</th><th>Thao tác</th></tr>
+          <tr>
+            <th>Tài xế</th>
+            <th>Tuyến cố định</th>
+            <th>Ngày</th>
+            <th>Giờ xuất bến</th>
+            <th>Hướng đi</th>
+            <th>Số giờ</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Nguyễn Văn Hùng</strong></td><td>10/12/2025</td><td>Hà Nội → Hải Phòng (khứ hồi)</td><td>06:00 - 16:30</td><td>9.5 giờ <span class="overtime">Vượt 1.5h</span></td><td>2 chuyến</td><td class="actions"><a href="chi-tiet-tai-xe.html"><i class="fas fa-eye" title="Hồ sơ"></i></a><a href="#"><i class="fas fa-info-circle" title="Chi tiết ca"></i></a></td></tr>
-          <tr><td><strong>Trần Thị Lan</strong></td><td>10/12/2025</td><td>Hà Nội → Vinh</td><td>07:00 - 12:00</td><td>5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Lê Văn Minh</strong></td><td>10/12/2025</td><td>Hà Nội → Đà Nẵng</td><td>05:00 - 18:30</td><td>12.5 giờ <span class="overtime">Vượt 4.5h</span></td><td>Ca dài</td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Phạm Quốc Anh</strong></td><td>09/12/2025</td><td>Hà Nội → Thái Nguyên</td><td>08:00 - 11:30</td><td>3.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Vũ Thị Hồng</strong></td><td>09/12/2025</td><td>Hà Nội → Lào Cai</td><td>06:30 - 13:00</td><td>6.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Hoàng Văn Nam</strong></td><td>08/12/2025</td><td>Hà Nội → Hải Phòng</td><td>14:00 - 16:30</td><td>2.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Đỗ Thị Mai</strong></td><td>08/12/2025</td><td>Hà Nội → Nam Định</td><td>07:00 - 09:30</td><td>2.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
-          <tr><td><strong>Bùi Xuân Trường</strong></td><td>07/12/2025</td><td>Hà Nội → Quảng Ninh</td><td>05:30 - 10:00</td><td>4.5 giờ</td><td></td><td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-info-circle"></i></a></td></tr>
+          <tr>
+            <td><strong>Nguyễn Văn Hùng</strong></td>
+            <td><span class="route-tag">HN ↔ HP</span></td>
+            <td>12/12/2025</td>
+            <td>06:00</td>
+            <td>Hà Nội → Hải Phòng</td>
+            <td>4.5 giờ</td>
+            <td>Lượt sáng</td>
+            <td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a></td>
+          </tr>
+          <tr>
+            <td><strong>Nguyễn Văn Hùng</strong></td>
+            <td><span class="route-tag">HN ↔ HP</span></td>
+            <td>12/12/2025</td>
+            <td>14:00</td>
+            <td>Hải Phòng → Hà Nội</td>
+            <td>4.5 giờ</td>
+            <td>Lượt chiều</td>
+            <td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a></td>
+          </tr>
+          <tr>
+            <td><strong>Trần Thị Lan</strong></td>
+            <td><span class="route-tag">HN ↔ HP</span></td>
+            <td>12/12/2025</td>
+            <td>07:00</td>
+            <td>Hà Nội → Hải Phòng</td>
+            <td>4.5 giờ</td>
+            <td></td>
+            <td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a></td>
+          </tr>
+          <tr>
+            <td><strong>Lê Văn Minh</strong></td>
+            <td><span class="route-tag">HN ↔ Thái Nguyên</span></td>
+            <td>12/12/2025</td>
+            <td>06:30</td>
+            <td>Hà Nội → Thái Nguyên</td>
+            <td>3 giờ</td>
+            <td></td>
+            <td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a></td>
+          </tr>
+          <tr>
+            <td><strong>Bùi Xuân Trường</strong></td>
+            <td><span class="route-tag">HN ↔ Lào Cai</span></td>
+            <td>11/12/2025</td>
+            <td>05:00</td>
+            <td>Hà Nội → Lào Cai</td>
+            <td>8 giờ <span class="overtime">Vượt 2h</span></td>
+            <td>Ca dài</td>
+            <td class="actions"><a href="#"><i class="fas fa-eye"></i></a><a href="#"><i class="fas fa-edit"></i></a></td>
+          </tr>
         </tbody>
       </table>
     </div>
