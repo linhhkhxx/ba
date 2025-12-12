@@ -3096,15 +3096,32 @@
         }
 
         // Password validation
+        // Password validation - check all requirements
+        const passwordErrors = [];
         if (!password || password.length < 8) {
+          passwordErrors.push("Tối thiểu 8 ký tự");
+        }
+        if (!/[a-z]/.test(password)) {
+          passwordErrors.push("Ít nhất 1 chữ thường (a-z)");
+        }
+        if (!/[A-Z]/.test(password)) {
+          passwordErrors.push("Ít nhất 1 chữ hoa (A-Z)");
+        }
+        if (!/[0-9]/.test(password)) {
+          passwordErrors.push("Ít nhất 1 chữ số (0-9)");
+        }
+        if (!/[^a-zA-Z0-9]/.test(password)) {
+          passwordErrors.push("Ít nhất 1 ký tự đặc biệt (!@#$%^&*...)");
+        }
+
+        if (passwordErrors.length > 0) {
           showFieldError(
             "registerPassword",
-            "Mật khẩu phải có ít nhất 8 ký tự"
+            "Mật khẩu thiếu: " + passwordErrors.join(", ")
           );
           hasError = true;
         }
-
-        // Confirm password validation
+        // Check if confirmed password matches (Đã cập nhật)
         if (password !== confirmPassword) {
           showFieldError(
             "registerConfirmPassword",
@@ -3112,7 +3129,6 @@
           );
           hasError = true;
         }
-
         // Terms agreement validation
         if (!agreeTerms) {
           showAlert(
