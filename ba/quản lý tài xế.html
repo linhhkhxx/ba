@@ -10,7 +10,6 @@
       --primary: #4361ee;
       --sidebar-bg: #0f0f1a;
       --sidebar-hover: #1e1e2e;
-      --text-light: #cbd5e1;
       --border-radius: 20px;
       --green: #10b981;
       --blue: #3b82f6;
@@ -22,81 +21,51 @@
     body { background: #f8fafc; color: #333; display: flex; min-height: 100vh; }
 
     .sidebar {
-      width: 280px;
-      background: var(--sidebar-bg);
-      color: white;
-      padding: 30px 20px;
-      position: fixed;
-      height: 100vh;
-      overflow-y: auto;
+      width: 280px; background: var(--sidebar-bg); color: white; padding: 30px 20px;
+      position: fixed; height: 100vh; overflow-y: auto;
       border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      box-shadow: 8px 0 30px rgba(0,0,0,0.4);
-      z-index: 1000;
+      box-shadow: 8px 0 30px rgba(0,0,0,0.4); z-index: 1000;
     }
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #2d2d44;
-      margin-bottom: 30px;
-    }
-    .user-info img {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #374151;
-    }
+    .user-info { display: flex; align-items: center; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid #2d2d44; margin-bottom: 30px; }
+    .user-info img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 3px solid #374151; }
     .user-info .info h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
     .user-info .info p { font-size: 13px; color: #94a3b8; }
-    .menu-title { text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 1.5px; margin: 20px 0 12px; font-weight: 600; }
+    .menu-title { text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 1.5px; margin:20px 0 12px; font-weight:600; }
+
     .menu { list-style: none; }
     .menu a {
-      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
-      color: #94a3b8; text-decoration: none; border-radius: 14px;
-      transition: all 0.3s ease; font-size: 15px; font-weight: 500;
+      display: flex; align-items: center; gap: 14px; padding: 14px 18px; color: #94a3b8;
+      text-decoration: none; border-radius: 14px; transition: all .3s; font-size: 15px; font-weight: 500;
     }
     .menu a i { font-size: 18px; width: 24px; text-align: center; }
     .menu a:hover { background: var(--sidebar-hover); color: white; }
-    .menu a.active {
-      background: white !important; color: var(--primary) !important;
-      font-weight: 600; box-shadow: 0 6px 20px rgba(67, 97, 238, 0.25);
-    }
+    .menu a.active { background: white !important; color: var(--primary) !important; font-weight: 600; box-shadow: 0 6px 20px rgba(67,97,238,.25); }
     .menu a.active i { color: var(--primary) !important; }
 
-    .main-content {
-      flex: 1; margin-left: 280px; padding: 30px;
-      background: #f1f5f9; min-height: 100vh;
-    }
+    .main-content { flex: 1; margin-left: 280px; padding: 30px; background: #f1f5f9; min-height: 100vh; }
+
     .top-bar {
       background: white; padding: 20px 30px; border-radius: var(--border-radius);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;
-      justify-content: space-between; align-items: center; margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06); display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 30px;
     }
-    .greeting { font-size: 18px; font-weight: 500; }
+    .greeting { font-size: 18px; font-weight: 500; color: #1e293b; }
     .greeting span { color: #94a3b8; font-size: 16px; }
     .notification {
       position: relative; width: 40px; height: 40px; background: #f1f5f9;
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
     .notification .badge {
       position: absolute; top: -4px; right: -4px; background: #ef4444;
-      color: white; font-size: 10px; width: 18px; height: 18px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .page-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 24px;
-    }
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .page-header h1 { font-size: 26px; font-weight: 600; color: #1e293b; }
     .btn-add {
-      background: var(--primary); color: white; border: none;
-      padding: 10px 20px; border-radius: 12px; font-size: 15px;
-      cursor: pointer; font-weight: 500; display: flex;
-      align-items: center; gap: 8px; transition: 0.3s;
+      background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 12px;
+      font-size: 15px; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: .3s;
     }
     .btn-add:hover { background: #3651d4; }
 
@@ -124,8 +93,7 @@
     .tab-content.active { display: block; }
 
     .stats-grid {
-      display: grid; grid-template-columns: repeat(6, 1fr);
-      gap: 16px; margin-bottom: 30px;
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 30px;
     }
     .stat-card {
       background: white; padding: 20px; border-radius: 16px;
@@ -140,7 +108,7 @@
     .stat-card.expired .number { color: var(--yellow); }
 
     .filter-bar {
-      margin-bottom: 20px; display: flex; align-items: center; gap: center; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     }
     .filter-select, .search-input, .date-input {
       padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 12px;
@@ -164,7 +132,7 @@
     .status.suspended { background: #fee2e2; color: #991b1b; }
     .status.warning { background: #fef9c3; color: #92400e; }
     .license-warning { color: var(--red); font-size: 12px; font-weight: 500; }
-    .actions a { margin-right: 12px; color: #64748b; font-size: 18px; cursor: pointer; transition: 0.3s; }
+    .actions a { margin-right: 12px; color: #64748b; font-size: 18px; cursor: pointer; transition: .3s; }
     .actions a:hover { color: var(--primary); }
 
     .btn-export {
@@ -172,17 +140,64 @@
       font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px;
     }
 
+    /* MODAL STYLE - ĐỒNG NHẤT VỚI MODAL CHỈNH SỬA */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      align-items:center; justify-content:center; z-index:9999; }
+    .modal.active { display:flex; }
+    .modal-content { background:white; width:90%; max-width:700px; border-radius:16px;
+      overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,0.3); animation:zoom .3s; }
+    @keyframes zoom { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+    .modal-header { padding:20px; background:var(--primary); color:white; font-size:18px;
+      font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+    .modal-body { padding:30px; max-height:70vh; overflow-y:auto; }
+    .modal-footer { padding:16px 30px; background:#f8fafc; display:flex; gap:12px;
+      justify-content:flex-end; }
+    .form-group { margin-bottom:20px; }
+    .form-group label { display:block; margin-bottom:8px; font-weight:500; color:#374151; }
+    .form-group label span.required { color:var(--red); }
+    .form-group input, .form-group select, .form-group textarea {
+      width:100%; padding:12px 16px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px;
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .upload-area { border:2px dashed #c7d2fe; border-radius:12px; padding:20px; text-align:center; background:#f8fafc; cursor:pointer; transition:.3s; }
+    .upload-area:hover { background:#e0e7ff; }
+    .upload-area i { font-size:32px; color:var(--primary); margin-bottom:12px; }
+    .upload-area p { margin:8px 0; color:#64748b; }
+    .file-list { margin-top:12px; }
+    .file-item { display:flex; align-items:center; gap:10px; padding:8px; background:#e0e7ff; border-radius:8px; margin-bottom:8px; }
+    .file-item i { color:var(--primary); }
+    .btn-modal { padding:10px 24px; border:none; border-radius:12px; cursor:pointer; font-weight:500; }
+    .btn-modal-primary { background:var(--primary); color:white; }
+    .btn-modal-secondary { background:#e2e8f0; color:#475569; }
+
     @media (max-width: 992px) {
       .sidebar { width: 80px; padding: 20px 10px; }
       .sidebar .user-info .info, .sidebar .menu-title, .sidebar .menu a span { display: none; }
       .sidebar a { justify-content: center; }
       .main-content { margin-left: 80px; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .form-row { grid-template-columns:1fr; }
     }
-    @media (max-width: 576px) {
-      .main-content { margin-left: 0; padding: 15px; }
-      .filter-bar { flex-direction: column; align-items: stretch; }
-      .search-input { min-width: 100%; }
+        /* Highlight tài xế vượt giờ làm việc - KHÔNG THÊM CỘT */
+    .overtime-row {
+      background: #fee2e2 !important; /* Nền đỏ nhạt */
+    }
+    .overtime-row:hover {
+      background: #fecaca !important; /* Hover đậm hơn chút */
+    }
+    .driver-name-overtime {
+      color: var(--red) !important;
+      font-weight: 600;
+    }
+    .overtime-badge {
+      background: var(--red);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -193,39 +208,36 @@
     <div class="user-info">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
       <div class="info">
-        <h3>Samantha</h3>
-        <p>+098 (99) 439-49-16</p>
+        <h3>ADMIN</h3>
+        <p>Nhân viên điều hành</p>
       </div>
     </div>
 
     <p class="menu-title">MAIN MENU</p>
     <ul class="menu">
-      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-      <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
-      <li><a href="#"><i class="fas fa-car-side"></i> <span>Quản lý xe</span></a></li>
-      <li><a href="#" class="active"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
-      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
-      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Tuyến & giá vé</span></a></li>
       <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
-      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="#"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
     </ul>
   </aside>
 
   <main class="main-content">
     <div class="top-bar">
       <div class="greeting">
-        Chào buổi sáng, Samantha <span>bạn có 2 thông báo mới</span>
+        Chào buổi sáng, ADMIN <span>bạn có 2 thông báo mới</span>
       </div>
       <div class="notification">
-        <i class="fas fa-bell" style="font-size:18px; color:#64748b;"></i>
+        <i class="fas fa-bell" style="font-size:18px;color:#64748b;"></i>
         <div class="badge">2</div>
       </div>
     </div>
 
     <div class="page-header">
       <h1>Quản lý Tài xế</h1>
-      <button class="btn-add" onclick="alert('Mở form thêm tài xế mới')">
-        Thêm tài xế mới
+      <button class="btn-add" onclick="openModal('addDriverModal')">
+        <i class="fas fa-plus"></i> Thêm tài xế mới
       </button>
     </div>
 
@@ -249,7 +261,7 @@
       <div class="tab-btn" data-tab="tab-schedule">Ca làm việc</div>
     </div>
 
-    <!-- TAB 1: DANH SÁCH TÀI XẾ – ĐÃ SỬA CỘT "XE ĐANG CHẠY" -->
+    <!-- TAB 1: DANH SÁCH TÀI XẾ -->
     <div id="tab-list" class="tab-content active">
       <div class="stats-grid">
         <div class="stat-card"><h3>Tổng tài xế</h3><div class="number">32</div></div>
@@ -275,22 +287,27 @@
             <th>Hạn GPLX</th>
             <th>Số điện thoại</th>
             <th>Xe đang chạy</th>
+            <th>Hướng chạy</th>
             <th>Trạng thái</th>
             <th>GPLX</th>
             <th>Thao tác</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><strong>Nguyễn Văn Hùng</strong></td>
+       <tbody>
+          <tr class="overtime-row">
+            <td>
+      <strong class="driver-name-overtime">Phạm Quốc Anh</strong>
+      <span class="overtime-badge">!</span>
+    </td>
             <td>301234567890</td>
             <td>12/08/2027</td>
             <td>0903 456 789</td>
             <td>29H-12345</td>
+            <td><span class="route-badge">HN → HP</span></td>
             <td><span class="status ready">Sẵn sàng</span></td>
             <td></td>
             <td class="actions">
-              <a href="chi-tiet-tai-xe.html"><i class="fas fa-eye"></i></a>
+              <a href="chi tiết tài xế.html"><i class="fas fa-eye"></i></a>
               <a href="#" class="edit"><i class="fas fa-edit"></i></a>
               <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
             </td>
@@ -300,7 +317,8 @@
             <td>301987654321</td>
             <td>05/01/2026 <span class="license-warning">(còn 26 ngày)</span></td>
             <td>0918 123 456</td>
-            <td>—</td>
+            <td>29H-12435</td>
+            <td><span class="route-badge">HN → HP</span></td>
             <td><span class="status running">Đang chạy</span></td>
             <td><span class="license-warning">Cảnh báo</span></td>
             <td class="actions">
@@ -315,6 +333,7 @@
             <td>20/03/2026</td>
             <td>0935 789 012</td>
             <td>Chưa phân xe</td>
+            <td><span class="route-badge">—</span></td>
             <td><span class="status ready">Sẵn sàng</span></td>
             <td></td>
             <td class="actions">
@@ -329,6 +348,7 @@
             <td>10/02/2026</td>
             <td>0987 654 321</td>
             <td>—</td>
+            <td>—</td>
             <td><span class="status leave">Nghỉ phép</span></td>
             <td></td>
             <td class="actions">
@@ -337,95 +357,12 @@
               <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
-          <tr>
-            <td><strong>Vũ Thị Hồng</strong></td>
-            <td>303112233445</td>
-            <td>15/01/2026 <span class="license-warning">(còn 36 ngày)</span></td>
-            <td>0977 888 999</td>
-            <td>29H-67890</td>
-            <td><span class="status ready">Sẵn sàng</span></td>
-            <td><span class="license-warning">Cảnh báo</span></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Hoàng Văn Nam</strong></td>
-            <td>303556677889</td>
-            <td>18/04/2028</td>
-            <td>0922 111 222</td>
-            <td>29H-67890</td>
-            <td><span class="status running">Đang chạy</span></td>
-            <td></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Đỗ Thị Mai</strong></td>
-            <td>303998877665</td>
-            <td>22/01/2026 <span class="license-warning">(còn 43 ngày)</span></td>
-            <td>0966 333 444</td>
-            <td>Chưa phân xe</td>
-            <td><span class="status ready">Sẵn sàng</span></td>
-            <td><span class="license-warning">Cảnh báo</span></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Bùi Xuân Trường</strong></td>
-            <td>304443322110</td>
-            <td>30/06/2027</td>
-            <td>0899 555 666</td>
-            <td>29H-55555</td>
-            <td><span class="status ready">Sẵn sàng</span></td>
-            <td></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Ngô Văn Long</strong></td>
-            <td>304887766554</td>
-            <td>08/02/2026</td>
-            <td>0888 777 888</td>
-            <td>—</td>
-            <td><span class="status suspended">Tạm ngưng</span></td>
-            <td></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Lý Thị Ngọc</strong></td>
-            <td>305112233445</td>
-            <td>25/05/2028</td>
-            <td>0944 999 000</td>
-            <td>Chưa phân xe</td>
-            <td><span class="status ready">Sẵn sàng</span></td>
-            <td></td>
-            <td class="actions">
-              <a href="#"><i class="fas fa-eye"></i></a>
-              <a href="#" class="edit"><i class="fas fa-edit"></i></a>
-              <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
+          
         </tbody>
       </table>
     </div>
 
-    <!-- TAB 2: CA LÀM VIỆC – ĐÃ SỬA ĐÚNG 100% THEO ẢNH BẠN GỬI -->
+<!-- TAB 2: CA LÀM VIỆC – ĐÃ BỎ CỘT "GHI CHÚ" -->
     <div id="tab-schedule" class="tab-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2 style="font-size:22px;color:#1e293b;">Lịch chạy tuyến cố định</h2>
@@ -434,7 +371,6 @@
         </button>
       </div>
 
-      <!-- Bộ lọc đơn giản -->
       <div class="filter-bar">
         <input type="text" class="search-input" placeholder="Tìm tài xế, ngày, tuyến...">
         <input type="date" class="date-input" value="2025-12-12">
@@ -443,29 +379,26 @@
         </button>
       </div>
 
-      <!-- BẢNG CA LÀM VIỆC – GIỐNG HỆT ẢNH -->
       <table>
         <thead>
           <tr>
             <th>Tài xế</th>
-            <th>Tuyến cố định</th>
+            <th>Tuyến chạy</th>
             <th>Ngày</th>
             <th>Giờ xuất bến</th>
             <th>Hướng đi</th>
             <th>Số giờ</th>
-            <th>Ghi chú</th>
-            <th>Thao tác</th>
+            <th>Thao tác</th> <!-- Đã bỏ cột Ghi chú -->
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>Nguyễn Văn Hùng</strong></td>
-            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;padding:6px 12px;">HN → HP</span></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;">HN → HP</span></td>
             <td>12/12/2025</td>
             <td>06:00</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sáng</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye" title="Xem"></i></a>
               <a href="#"><i class="fas fa-edit" title="Sửa"></i></a>
@@ -478,7 +411,6 @@
             <td>14:00</td>
             <td>Hải Phòng → Hà Nội</td>
             <td>4.5 giờ</td>
-            <td>Lượt chiều</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
@@ -491,7 +423,6 @@
             <td>07:00</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sáng</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
@@ -504,17 +435,157 @@
             <td>05:30</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sớm</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
             </td>
           </tr>
-          <!-- Bạn có thể thêm bao nhiêu dòng tùy ý -->
         </tbody>
       </table>
     </div>
   </main>
+
+  <!-- ==================== MODAL THÊM TÀI XẾ MỚI ==================== -->
+  <div id="addDriverModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span><i class="fas fa-user-plus"></i> Thêm tài xế mới</span>
+        <i class="fas fa-times" onclick="closeModal('addDriverModal')" style="cursor:pointer;font-size:20px;"></i>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Họ và tên <span class="required">*</span></label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại <span class="required">*</span></label>
+            <input type="text" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Địa chỉ</label>
+            <input type="text">
+          </div>
+          <div class="form-group">
+            <label>Kinh nghiệm (năm) <span class="required">*</span></label>
+            <input type="number" min="0" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Căn cước công dân (CCCD)</label>
+            <input type="text">
+          </div>
+          <div class="form-group">
+            <label>Tuyến chạy <span class="required">*</span></label>
+            <select required>
+              <option value="">-- Chọn tuyến --</option>
+              <option>Hà Nội – Hải Phòng</option>
+              <option>Hà Nội – Nam Định</option>
+              <option>Hà Nội – Thái Bình</option>
+              <option>Hải Phòng – Quảng Ninh</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Số GPLX <span class="required">*</span></label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Hạng GPLX <span class="required">*</span></label>
+            <select required>
+              <option value="">-- Chọn hạng --</option>
+              <option>B2</option>
+              <option>C</option>
+              <option>D</option>
+              <option>E</option>
+              <option>F</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ngày cấp GPLX <span class="required">*</span></label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>Hết hạn GPLX <span class="required">*</span></label>
+            <input type="date" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Số giấy khám sức khỏe</label>
+            <input type="text">
+          </div>
+          <div class="form-group">
+            <label>Ngày khám sức khỏe <span class="required">*</span></label>
+            <input type="date" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Hết hạn giấy khám sức khỏe <span class="required">*</span></label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>Trạng thái ban đầu</label>
+            <select>
+              <option selected>Sẵn sàng</option>
+              <option>Đang chạy xe</option>
+              <option>Nghỉ phép</option>
+              <option>Tạm ngưng</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Ghi chú</label>
+          <textarea rows="3"></textarea>
+        </div>
+
+        <hr style="margin:30px 0; border:none; border-top:1px solid #e2e8f0;">
+
+        <h4 style="margin-bottom:16px; color:#1e293b;">Tải lên giấy tờ bắt buộc</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Giấy phép lái xe (mặt trước + sau) <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('addGPLX').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="addGPLX" accept=".pdf,.jpg,.jpeg,.png" multiple required style="display:none;">
+            </div>
+            <div id="addGPLX-list" class="file-list"></div>
+          </div>
+          <div class="form-group">
+            <label>Giấy khám sức khỏe <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('addHealthCert').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="addHealthCert" accept=".pdf,.jpg,.jpeg,.png" multiple required style="display:none;">
+            </div>
+            <div id="addHealthCert-list" class="file-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal btn-modal-secondary" onclick="closeModal('addDriverModal')">Hủy</button>
+        <button class="btn-modal btn-modal-primary" onclick="addNewDriver()">Thêm tài xế</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Chuyển tab
@@ -526,6 +597,47 @@
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
     });
+
+    // Modal functions
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Xử lý upload file cho modal thêm mới
+    ['addGPLX', 'addHealthCert'].forEach(id => {
+      document.getElementById(id).addEventListener('change', function() {
+        const list = document.getElementById(id + '-list');
+        list.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+          const div = document.createElement('div');
+          div.className = 'file-item';
+          div.innerHTML = `<i class="fas fa-file-pdf"></i> ${file.name} <small>(${Math.round(file.size/1024)} KB)</small>`;
+          list.appendChild(div);
+        });
+      });
+    });
+
+    // Hàm thêm tài xế mới
+    function addNewDriver() {
+      const requiredFields = document.querySelectorAll('#addDriverModal [required]');
+      for (let field of requiredFields) {
+        if (!field.value && field.type !== 'file') {
+          alert('Vui lòng điền đầy đủ các trường bắt buộc!');
+          return;
+        }
+      }
+      // Kiểm tra file upload
+      if (document.getElementById('addGPLX').files.length === 0 || document.getElementById('addHealthCert').files.length === 0) {
+        alert('Vui lòng tải lên GPLX và Giấy khám sức khỏe!');
+        return;
+      }
+      alert('Thêm tài xế mới thành công!');
+      closeModal('addDriverModal');
+      // Ở đây bạn có thể thêm logic reload bảng hoặc thêm dòng mới vào table
+    }
   </script>
 </body>
 </html>

@@ -30,6 +30,8 @@
     .user-info .info h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
     .user-info .info p { font-size: 13px; color: #94a3b8; }
     .menu-title { text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 1.5px; margin:20px 0 12px; font-weight:600; }
+    .menu { list-style: none; }
+    .menu li { margin-bottom: 4px; }
     .menu a { display: flex; align-items: center; gap: 14px; padding: 14px 18px; color: #94a3b8; text-decoration:none; border-radius:14px; transition:all .3s; font-size:15px; font-weight:500; }
     .menu a i { font-size: 18px; width: 24px; text-align: center; }
     .menu a:hover { background: var(--sidebar-hover); color: white; }
@@ -37,8 +39,24 @@
     .menu a.active i { color: var(--primary) !important; }
 
     .main-content { flex: 1; margin-left: 280px; padding: 30px; background: #f1f5f9; min-height: 100vh; }
-    .top-bar { background: white; padding: 20px 30px; border-radius: var(--border-radius); box-shadow: 0 4px 20px rgba(0,0,0,.06); margin-bottom: 30px; }
+
+    /* TOP-BAR ĐÃ ĐỒNG NHẤT VỚI TRANG CHI TIẾT */
+    .top-bar {
+      background: white; padding: 20px 30px; border-radius: var(--border-radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,.06); display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 30px;
+    }
     .greeting { font-size: 18px; font-weight: 500; color: #1e293b; }
+    .greeting span { color: #94a3b8; font-size: 16px; }
+    .notification {
+      position: relative; width: 40px; height: 40px; background: #f1f5f9;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .notification .badge {
+      position: absolute; top: -4px; right: -4px; background: #ef4444;
+      color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
 
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .page-header h1 { font-size: 26px; font-weight: 600; color: #1e293b; }
@@ -71,7 +89,7 @@
     .actions a { margin-right: 12px; color: #64748b; font-size: 18px; cursor: pointer; transition: .3s; }
     .actions a:hover { color: var(--primary); }
 
-    /* MODAL */
+    /* MODAL giữ nguyên */
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 9999; }
     .modal.active { display: flex; }
     .modal-content { background: white; width: 90%; max-width: 700px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; animation: zoom .3s; }
@@ -109,26 +127,28 @@
     <div class="user-info">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
       <div class="info">
-        <h3>Samantha</h3>
-        <p>+098 (99) 439-49-16</p>
+        <h3>ADMIN</h3>
+        <p>Nhân viên điều hành</p>
       </div>
     </div>
     <p class="menu-title">MAIN MENU</p>
     <ul class="menu">
-      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-      <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
-      <li><a href="#" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
-      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
-      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
-      <li><a href="#"><i class="fas fa-map-marked"></i> <span>Quản lý tuyến & giá vé</span></a></li>
       <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
-      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="#" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
     </ul>
   </aside>
 
   <main class="main-content">
+    <!-- TOP-BAR ĐÃ ĐỒNG NHẤT HOÀN TOÀN -->
     <div class="top-bar">
-      <div class="greeting">Chào buổi sáng, Samantha</div>
+      <div class="greeting">Chào buổi sáng, ADMIN <span>bạn có 2 thông báo mới</span></div>
+      <div class="notification">
+        <i class="fas fa-bell" style="font-size:18px;color:#64748b;"></i>
+        <div class="badge">2</div>
+      </div>
     </div>
 
     <div class="page-header">
@@ -138,6 +158,7 @@
       </button>
     </div>
 
+    <!-- Phần còn lại giữ nguyên như cũ -->
     <div class="stats-grid">
       <div class="stat-card"><h3>Tổng số xe</h3><div class="number">38</div></div>
       <div class="stat-card ready"><h3>Sẵn sàng</h3><div class="number">22</div></div>
@@ -167,6 +188,7 @@
           <th>Hãng xe</th>
           <th>Trạng thái</th>
           <th>Tài xế</th>
+          <th>Hướng đi</th>
           <th>Thao tác</th>
         </tr>
       </thead>
@@ -178,8 +200,9 @@
           <td>Hyundai County</td>
           <td><span class="status ready">Sẵn sàng</span></td>
           <td>Nguyễn Văn Hùng</td>
+          <td>Hà Nội → Thái Bình</td>
           <td class="actions">
-            <a href="#"><i class="fas fa-eye"></i></a>
+            <a href="chi tiết xe.html"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
             <a href="#"><i class="fas fa-trash-alt"></i></a>
           </td>
@@ -191,6 +214,7 @@
           <td>Thaco Mobihome</td>
           <td><span class="status running">Đang chạy</span></td>
           <td>Trần Văn Long</td>
+          <td>Hà Nội → Hải Phòng</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -203,6 +227,7 @@
           <td>34</td>
           <td>Fuso Rosa</td>
           <td><span class="status broken">Không hoạt động</span></td>
+          <td>—</td>
           <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
@@ -217,6 +242,7 @@
           <td>Hyundai Universe</td>
           <td><span class="status maintenance">Bảo dưỡng</span></td>
           <td>—</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -230,43 +256,19 @@
           <td>Hyundai Solati</td>
           <td><span class="status ready">Sẵn sàng</span></td>
           <td>Chưa phân tài xế</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
             <a href="#"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
-        <tr>
-          <td><strong>29K-77777</strong></td>
-          <td>Giường nằm 42 chỗ</td>
-          <td>42</td>
-          <td>Thaco TB120S</td>
-          <td><span class="status running">Đang chạy</span></td>
-          <td>Lê Thị Mai</td>
-          <td class="actions">
-            <a href="#"><i class="fas fa-eye"></i></a>
-            <a href="#"><i class="fas fa-edit"></i></a>
-            <a href="#"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>30G-88888</strong></td>
-          <td>Limousine 34 chỗ</td>
-          <td>34</td>
-          <td>Fuso Rosa</td>
-          <td><span class="status ready">Sẵn sàng</span></td>
-          <td>Chưa phân tài xế</td>
-          <td class="actions">
-            <a href="#"><i class="fas fa-eye"></i></a>
-            <a href="#"><i class="fas fa-edit"></i></a>
-            <a href="#"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
+
       </tbody>
     </table>
   </main>
 
-  <!-- MODAL THÊM XE MỚI -->
+  <!-- MODAL THÊM XE MỚI – ĐÃ ĐỒNG NHẤT VỚI MODAL CHỈNH SỬA -->
   <div id="addVehicleModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -298,29 +300,71 @@
             <input type="text" placeholder="Hyundai, Thaco, Fuso...">
           </div>
           <div class="form-group">
-            <label>Số ghế</label>
-            <input type="number" min="16" max="50" placeholder="42">
+            <label>Số ghế <span class="required">*</span></label>
+            <input type="number" min="16" max="50" placeholder="42" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tuyến chạy <span class="required">*</span></label>
+            <select required>
+              <option value="">-- Chọn tuyến chạy --</option>
+              <option>HN → HP</option>
+              <option>HP → HN</option>
+              <option>HN → NB</option>
+              <option>NB → HN</option>
+              <option>HN → TH</option>
+              <option>Không cố định</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Trạng thái ban đầu</label>
+            <select>
+              <option>Sẵn sàng</option>
+              <option>Đang chạy</option>
+              <option>Bảo dưỡng</option>
+              <option>Hỏng/Sửa chữa</option>
+              <option>Ngừng hoạt động</option>
+            </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label>Trạng thái ban đầu</label>
-          <select>
-            <option>Sẵn sàng</option>
-            <option>Bảo dưỡng</option>
-            <option>Hỏng/Sửa chữa</option>
-          </select>
+          <label>Ghi chú</label>
+          <textarea rows="3" placeholder="Thông tin bổ sung như màu xe, năm sản xuất, tiện nghi..."></textarea>
         </div>
 
-        <div class="form-group">
-          <label>Ghi chú</label>
-          <textarea rows="3" placeholder="Thông tin bổ sung..."></textarea>
+        <hr style="margin:30px 0; border:none; border-top:1px solid #e2e8f0;">
+
+        <h4 style="margin-bottom:16px; color:#1e293b;">Tải lên giấy tờ xe (bắt buộc khi thêm mới)</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Giấy đăng kiểm <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('dangKiemAdd').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="dangKiemAdd" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;" required>
+            </div>
+            <div id="dangKiemAdd-list" class="file-list"></div>
+          </div>
+          <div class="form-group">
+            <label>Bảo hiểm trách nhiệm dân sự <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('baoHiemAdd').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="baoHiemAdd" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;" required>
+            </div>
+            <div id="baoHiemAdd-list" class="file-list"></div>
+          </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button class="btn-modal btn-modal-secondary" onclick="closeModal('addVehicleModal')">Hủy</button>
-        <button class="btn-modal btn-modal-primary" onclick="alert('Đã thêm xe mới thành công!'); closeModal('addVehicleModal');">Thêm xe</button>
+        <button class="btn-modal btn-modal-primary" onclick="addNewVehicle()">Thêm xe</button>
       </div>
     </div>
   </div>
@@ -331,6 +375,25 @@
     }
     function closeModal(id) {
       document.getElementById(id).classList.remove('active');
+    }
+
+    // Xử lý upload file (nếu cần)
+    ['dangKiemAdd', 'baoHiemAdd'].forEach(id => {
+      document.getElementById(id).addEventListener('change', function() {
+        const list = document.getElementById(id + '-list');
+        list.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+          const div = document.createElement('div');
+          div.className = 'file-item';
+          div.innerHTML = `<i class="fas fa-file-pdf"></i> ${file.name} <small>(${Math.round(file.size/1024)} KB)</small>`;
+          list.appendChild(div);
+        });
+      });
+    });
+
+    function addNewVehicle() {
+      alert('Đã thêm xe mới thành công!');
+      closeModal('addVehicleModal');
     }
   </script>
 </body>
