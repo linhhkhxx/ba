@@ -178,6 +178,27 @@
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
       .form-row { grid-template-columns:1fr; }
     }
+        /* Highlight tài xế vượt giờ làm việc - KHÔNG THÊM CỘT */
+    .overtime-row {
+      background: #fee2e2 !important; /* Nền đỏ nhạt */
+    }
+    .overtime-row:hover {
+      background: #fecaca !important; /* Hover đậm hơn chút */
+    }
+    .driver-name-overtime {
+      color: var(--red) !important;
+      font-weight: 600;
+    }
+    .overtime-badge {
+      background: var(--red);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -273,8 +294,11 @@
           </tr>
         </thead>
        <tbody>
-          <tr>
-            <td><strong>Nguyễn Văn Hùng</strong></td>
+          <tr class="overtime-row">
+            <td>
+      <strong class="driver-name-overtime">Phạm Quốc Anh</strong>
+      <span class="overtime-badge">!</span>
+    </td>
             <td>301234567890</td>
             <td>12/08/2027</td>
             <td>0903 456 789</td>
@@ -333,6 +357,7 @@
               <a href="#" class="delete"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
+          
         </tbody>
       </table>
     </div>
