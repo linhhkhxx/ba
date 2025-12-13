@@ -34,6 +34,13 @@
     .user-info .info p { font-size:13px; color:#94a3b8; }
     .menu-title { text-transform:uppercase; font-size:11px; color:#64748b; letter-spacing:1.5px;
       margin:20px 0 12px; font-weight:600; }
+      /* BỎ DẤU CHẤM TRƯỚC MỖI MỤC MENU */
+    .menu {
+      list-style: none; /* Loại bỏ hoàn toàn bullet/dấu chấm */
+    }
+    .menu li {
+      margin-bottom: 4px; /* Khoảng cách giữa các mục */
+    }
     .menu a {
       display:flex; align-items:center; gap:14px; padding:14px 18px; color:#94a3b8;
       text-decoration:none; border-radius:14px; transition:all .3s; font-size:15px; font-weight:500;
@@ -153,28 +160,25 @@
 
   <aside class="sidebar">
     <div class="user-info">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Samantha">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
       <div class="info">
-        <h3>Samantha</h3>
-        <p>+098 (99) 439-49-16</p>
+        <h3>ADMIN</h3>
+        <p>Nhân viên điều hành</p>
       </div>
     </div>
     <p class="menu-title">MAIN MENU</p>
     <ul class="menu">
-      <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-      <li><a href="#"><i class="fas fa-car"></i> <span>Đặt xe</span></a></li>
-      <li><a href="quản lý xe.html" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
-      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
-      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
-      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
       <li><a href="#"><i class="fas fa-clock"></i> <span>Phân xe tự động</span></a></li>
-      <li><a href="#"><i class="fas fa-cog"></i> <span>Cài đặt</span></a></li>
+      <li><a href="#"><i class="fas fa-users"></i> <span>Quản lý tài khoản</span></a></li>
+      <li><a href="#"><i class="fas fa-user-tie"></i> <span>Quản lý tài xế</span></a></li>
+      <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span>Quản lý tuyến & giá vé</span></a></li>
+      <li><a href="quản lý xe.html" class="active"><i class="fas fa-car-side"></i> <span>Quản lý thông tin xe</span></a></li>
     </ul>
   </aside>
 
   <main class="main-content">
     <div class="top-bar">
-      <div class="greeting">Chào buổi sáng, Samantha <span>bạn có 2 thông báo mới</span></div>
+      <div class="greeting">Chào buổi sáng, ADMIN <span>bạn có 2 thông báo mới</span></div>
       <div class="notification">
         <i class="fas fa-bell" style="font-size:18px;color:#64748b;"></i>
         <div class="badge">2</div>
