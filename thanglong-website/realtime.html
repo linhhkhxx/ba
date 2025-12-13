@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo dõi chuyến xe - Thăng Long Express</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-4px);
+        }
+
+        .header-title h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge.picking-up {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #f59e0b;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-badge.picking-up .status-dot {
+            background: #f59e0b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 16px auto;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 16px;
+            zoom: 0.85;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .info-card h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .route-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+        }
+
+        .route-point {
+            text-align: center;
+            flex: 1;
+        }
+
+        .route-label {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-bottom: 4px;
+        }
+
+        .route-city {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .route-arrow {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        /* Limousine Pickup Status */
+        .pickup-status {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .pickup-status h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .passenger-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .passenger-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .passenger-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .passenger-status.picked {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .passenger-status.waiting {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .passenger-name {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-900);
+        }
+
+        .passenger-location {
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .pickup-summary {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(146, 64, 14, 0.2);
+            font-size: 14px;
+            font-weight: 600;
+            color: #92400e;
+            text-align: center;
+        }
+
+        /* Driver Info */
+        .driver-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: 12px;
+        }
+
+        .driver-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .driver-info {
+            flex: 1;
+        }
+
+        .driver-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .driver-phone {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .driver-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            color: var(--warning-color);
+        }
+
+        .contact-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .contact-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .contact-btn-call {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .contact-btn-call:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .contact-btn-message {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .contact-btn-message:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--gray-300);
+        }
+
+        .timeline-item.active::before {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+
+        .timeline-item.completed::before {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .timeline-time {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 2px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .progress-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .progress-percent {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gray-200);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 6px;
+            transition: width 1s ease-out;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        /* Map Container */
+        .map-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: calc(100vh - 100px);
+            position: sticky;
+            top: 70px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Journey Map Styles */
+        .journey-map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            padding: 40px;
+        }
+
+        .route-line {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            width: 6px;
+            height: 70%;
+            background: linear-gradient(to bottom,
+                var(--secondary-color) 0%,
+                var(--secondary-color) var(--progress, 0%),
+                var(--gray-300) var(--progress, 0%),
+                var(--gray-300) 100%);
+            border-radius: 3px;
+            transform: translateX(-50%);
+            transition: --progress 1s ease;
+        }
+
+        .location-marker {
+            position: absolute;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 10;
+        }
+
+        .location-marker.start {
+            top: 15%;
+        }
+
+        .location-marker.end {
+            top: 85%;
+        }
+
+        .marker-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transform: translateX(-50%);
+        }
+
+        .marker-dot.end-marker {
+            border-color: var(--primary-color);
+        }
+
+        .marker-label {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            position: absolute;
+            left: 40px;
+            transform: translateX(-50%);
+        }
+
+        .marker-label.left-label {
+            left: auto;
+            right: 40px;
+        }
+
+        .marker-label h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .marker-label p {
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+
+        /* Animated Bus */
+        .bus-marker {
+            position: absolute;
+            left: 50%;
+            top: var(--bus-position, 15%);
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            transition: top 2s ease-in-out;
+        }
+
+        .bus-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            animation: busFloat 2s ease-in-out infinite;
+        }
+
+        .bus-icon::before {
+            content: '🚌';
+            font-size: 24px;
+        }
+
+        .bus-icon.limousine::before {
+            content: '🚗';
+        }
+
+        @keyframes busFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .bus-pulse {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.2);
+            animation: pulse 2s ease-out infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* Waypoints */
+        .waypoint {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .waypoint-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--gray-400);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .waypoint.passed .waypoint-dot {
+            border-color: var(--secondary-color);
+            background: var(--secondary-color);
+        }
+
+        .waypoint-label {
+            background: var(--gray-100);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--gray-700);
+            position: absolute;
+            left: 30px;
+            white-space: nowrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 400px;
+                position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-title h1 {
+                font-size: 18px;
+            }
+
+            .header-title p {
+                font-size: 12px;
+            }
+
+            .main-container {
+                padding: 0 16px;
+                margin: 16px auto;
+            }
+
+            .route-city {
+                font-size: 16px;
+            }
+        }
+
+        /* Journey Complete Modal */
+        .completion-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .completion-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .completion-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            animation: scaleIn 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .completion-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 50px;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .completion-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .completion-message {
+            font-size: 16px;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .completion-info {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .completion-info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .completion-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .completion-info-label {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .completion-info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .completion-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-completion {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-completion-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-completion-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-completion-secondary {
+            background: white;
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-completion-secondary:hover {
+            background: var(--gray-50);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    ← Quay lại
+                </a>
+                <div class="header-title">
+                    <h1 id="headerTitle">🚌 Theo dõi chuyến xe</h1>
+                    <p id="ticketId">Mã vé: #DEMO123456</p>
+                </div>
+            </div>
+            <div class="status-badge" id="statusBadge">
+                <span class="status-dot"></span>
+                <span id="statusText">Đang di chuyển</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Panel -->
+        <div class="info-panel">
+            <!-- Route Info -->
+            <div class="info-card">
+                <h2>📍 Thông tin tuyến đường</h2>
+                <div class="route-info">
+                    <div class="route-point">
+                        <div class="route-label">Điểm đi</div>
+                        <div class="route-city" id="fromCity">Hà Nội</div>
+                    </div>
+                    <div class="route-arrow">→</div>
+                    <div class="route-point">
+                        <div class="route-label">Điểm đến</div>
+                        <div class="route-city" id="toCity">Hải Phòng</div>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">🕐 Giờ khởi hành</span>
+                    <span class="detail-value" id="departureTime">08:00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">🕑 Dự kiến đến</span>
+                    <span class="detail-value" id="arrivalTime">10:30</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">🚌 Loại xe</span>
+                    <span class="detail-value" id="busType">Xe Limousine</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">📅 Ngày đi</span>
+                    <span class="detail-value" id="travelDate">15/12/2025</span>
+                </div>
+            </div>
+
+            <!-- Limousine Pickup Status (only for limousine) -->
+            <div class="info-card" id="pickupStatusCard" style="display: none;">
+                <div class="pickup-status">
+                    <h3>🚗 Trạng thái đón khách</h3>
+                    <div class="passenger-list" id="passengerList">
+                        <!-- Passenger items will be inserted here -->
+                    </div>
+                    <div class="pickup-summary" id="pickupSummary">
+                        Đã đón 2/5 khách - Đang đón tiếp...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress (only show when journey started) -->
+            <div class="progress-container" id="progressCard">
+                <div class="progress-header">
+                    <span class="progress-title">Tiến trình hành trình</span>
+                    <span class="progress-percent" id="progressPercent">45%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 45%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span id="distanceTraveled">54 km đã đi</span>
+                    <span id="distanceRemaining">66 km còn lại</span>
+                </div>
+            </div>
+
+            <!-- Driver Info -->
+            <div class="info-card">
+                <h2>👨‍✈️ Thông tin tài xế</h2>
+                <div class="driver-card">
+                    <div class="driver-avatar">NV</div>
+                    <div class="driver-info">
+                        <div class="driver-name" id="driverName">Nguyễn Văn A</div>
+                        <div class="driver-phone" id="driverPhone">📞 0123 456 789</div>
+                        <div class="driver-rating">
+                            ⭐⭐⭐⭐⭐ <span style="color: var(--gray-600);">(4.9/5.0)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-btns">
+                    <button class="contact-btn contact-btn-call" onclick="callDriver()">
+                        📞 Gọi điện
+                    </button>
+                    <button class="contact-btn contact-btn-message" onclick="messageDriver()">
+                        💬 Nhắn tin
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="info-card">
+                <h2>📋 Lộ trình</h2>
+                <div class="timeline" id="timeline">
+                    <!-- Timeline items will be inserted here based on bus type -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-container">
+            <div class="map-placeholder">
+                <div class="journey-map" id="journeyMap">
+                    <!-- Route line -->
+                    <div class="route-line" id="routeLine"></div>
+
+                    <!-- Start location -->
+                    <div class="location-marker start">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">
+                            <h4 id="startLocation">Hà Nội</h4>
+                            <p id="startTime">08:00 - Đã khởi hành</p>
+                        </div>
+                    </div>
+
+                    <!-- Waypoints will be added here dynamically -->
+                    <div id="waypointsContainer"></div>
+
+                    <!-- Bus marker -->
+                    <div class="bus-marker" id="busMarker">
+                        <div class="bus-pulse"></div>
+                        <div class="bus-icon" id="busIcon"></div>
+                    </div>
+
+                    <!-- End location -->
+                    <div class="location-marker end">
+                        <div class="marker-dot end-marker"></div>
+                        <div class="marker-label left-label">
+                            <h4 id="endLocation">Đà Nẵng</h4>
+                            <p id="endTime">22:00 - Dự kiến</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journey Completion Modal -->
+    <div class="completion-modal" id="completionModal">
+        <div class="completion-content">
+            <div class="completion-icon">
+                ✓
+            </div>
+            <h2 class="completion-title">Chuyến đi hoàn thành!</h2>
+            <p class="completion-message">
+                Bạn đã đến điểm đến an toàn. Cảm ơn bạn đã sử dụng dịch vụ của Thăng Long Express!
+            </p>
+
+            <div class="completion-info">
+                <div class="completion-info-item">
+                    <span class="completion-info-label">Tuyến đường</span>
+                    <span class="completion-info-value" id="completionRoute">Hà Nội → Đà Nẵng</span>
+                </div>
+                <div class="completion-info-item">
+                    <span class="completion-info-label">Thời gian hành trình</span>
+                    <span class="completion-info-value" id="completionDuration">6 giờ 30 phút</span>
+                </div>
+                <div class="completion-info-item">
+                    <span class="completion-info-label">Quãng đường</span>
+                    <span class="completion-info-value" id="completionDistance">600 km</span>
+                </div>
+            </div>
+
+            <div class="completion-buttons">
+                <button class="btn-completion btn-completion-secondary" onclick="closeCompletionModal()">
+                    Đóng
+                </button>
+                <button class="btn-completion btn-completion-primary" onclick="returnToHome()">
+                    Về trang chủ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let busType = 'bus'; // 'bus' or 'limousine'
+        let isJourneyStarted = false;
+        let journeyCompleted = false;
+
+        // Load ticket data from URL params
+        function loadTicketData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ticketId = urlParams.get('ticketId');
+
+            if (ticketId) {
+                // Load from localStorage
+                const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                const booking = bookings.find(b => b.id === ticketId);
+
+                if (booking) {
+                    busType = booking.trip.type.toLowerCase().includes('limousine') ? 'limousine' : 'bus';
+
+                    document.getElementById('ticketId').textContent = `Mã vé: #${booking.id}`;
+                    document.getElementById('fromCity').textContent = booking.trip.from;
+                    document.getElementById('toCity').textContent = booking.trip.to;
+                    document.getElementById('departureTime').textContent = booking.trip.departureTime;
+                    document.getElementById('arrivalTime').textContent = booking.trip.arrivalTime;
+                    document.getElementById('busType').textContent = booking.trip.type;
+                    document.getElementById('travelDate').textContent = booking.trip.date;
+
+                    // Update header based on bus type
+                    if (busType === 'limousine') {
+                        document.getElementById('headerTitle').textContent = '🚗 Theo dõi xe Limousine';
+                    }
+
+                    // Update map locations
+                    document.getElementById('startLocation').textContent = booking.trip.from;
+                    document.getElementById('endLocation').textContent = booking.trip.to;
+                    document.getElementById('startTime').textContent = booking.trip.departureTime + ' - Đã khởi hành';
+                    document.getElementById('endTime').textContent = booking.trip.arrivalTime + ' - Dự kiến';
+
+                    // Set bus icon
+                    const busIcon = document.getElementById('busIcon');
+                    if (busType === 'limousine') {
+                        busIcon.classList.add('limousine');
+                    }
+
+                    // Initialize based on bus type
+                    initializeTracking();
+                }
+            } else {
+                // Demo data - set bus icon
+                const busIcon = document.getElementById('busIcon');
+                if (busType === 'limousine') {
+                    busIcon.classList.add('limousine');
+                }
+                initializeTracking();
+            }
+        }
+
+        // Initialize tracking based on bus type
+        function initializeTracking() {
+            if (busType === 'limousine') {
+                setupLimousineTracking();
+            } else {
+                setupBusTracking();
+            }
+        }
+
+        // Setup tracking for Limousine (pickup passengers first)
+        function setupLimousineTracking() {
+            isJourneyStarted = false;
+
+            // Show pickup status card
+            document.getElementById('pickupStatusCard').style.display = 'block';
+
+            // Hide progress initially
+            document.getElementById('progressCard').style.display = 'none';
+
+            // Set status badge
+            const statusBadge = document.getElementById('statusBadge');
+            statusBadge.classList.add('picking-up');
+            document.getElementById('statusText').textContent = 'Đang đón khách';
+
+            // Create passenger list
+            const passengers = [
+                { name: 'Bạn', location: 'Cầu Giấy, Hà Nội', picked: true },
+                { name: 'Nguyễn Văn B', location: 'Thanh Xuân, Hà Nội', picked: true },
+                { name: 'Trần Thị C', location: 'Hai Bà Trưng, Hà Nội', picked: false },
+                { name: 'Lê Văn D', location: 'Đống Đa, Hà Nội', picked: false },
+                { name: 'Phạm Thị E', location: 'Hoàn Kiếm, Hà Nội', picked: false }
+            ];
+
+            renderPassengerList(passengers);
+
+            // Create limousine timeline
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = `
+                <div class="timeline-item completed">
+                    <div class="timeline-time">14:00</div>
+                    <div class="timeline-title">Đón khách đầu tiên</div>
+                    <div class="timeline-desc">Cầu Giấy, Hà Nội (Bạn)</div>
+                </div>
+                <div class="timeline-item active">
+                    <div class="timeline-time">14:25 (Hiện tại)</div>
+                    <div class="timeline-title">Đang đón khách thứ 3</div>
+                    <div class="timeline-desc">Hai Bà Trưng, Hà Nội</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">15:00 (Dự kiến)</div>
+                    <div class="timeline-title">Đón đủ khách - Bắt đầu hành trình</div>
+                    <div class="timeline-desc">Khởi hành đến Đà Nẵng</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">22:00 (Dự kiến)</div>
+                    <div class="timeline-title">Đến Đà Nẵng</div>
+                    <div class="timeline-desc">Trả khách tại điểm hẹn</div>
+                </div>
+            `;
+
+            // Simulate pickup progress
+            simulatePickupProgress(passengers);
+        }
+
+        // Setup tracking for regular Bus (journey starts immediately)
+        function setupBusTracking() {
+            isJourneyStarted = true;
+
+            // Hide pickup status card
+            document.getElementById('pickupStatusCard').style.display = 'none';
+
+            // Show progress
+            document.getElementById('progressCard').style.display = 'block';
+
+            // Set status badge
+            document.getElementById('statusText').textContent = 'Đang di chuyển';
+
+            // Create bus timeline
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = `
+                <div class="timeline-item completed">
+                    <div class="timeline-time">08:00</div>
+                    <div class="timeline-title">Khởi hành từ Hà Nội</div>
+                    <div class="timeline-desc">Bến xe Mỹ Đình</div>
+                </div>
+                <div class="timeline-item active">
+                    <div class="timeline-time">09:15 (Hiện tại)</div>
+                    <div class="timeline-title">Đang trên đường</div>
+                    <div class="timeline-desc">Cao tốc Hà Nội - Hải Phòng</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">10:30 (Dự kiến)</div>
+                    <div class="timeline-title">Đến Hải Phòng</div>
+                    <div class="timeline-desc">Bến xe Lạch Tray</div>
+                </div>
+            `;
+
+            // Simulate journey progress
+            simulateProgress();
+        }
+
+        // Render passenger list for limousine
+        function renderPassengerList(passengers) {
+            const passengerList = document.getElementById('passengerList');
+            passengerList.innerHTML = passengers.map(p => `
+                <div class="passenger-item">
+                    <div class="passenger-status ${p.picked ? 'picked' : 'waiting'}">
+                        ${p.picked ? '✓' : '○'}
+                    </div>
+                    <div class="passenger-name">${p.name}</div>
+                    <div class="passenger-location">${p.location}</div>
+                </div>
+            `).join('');
+
+            // Update summary
+            const pickedCount = passengers.filter(p => p.picked).length;
+            const totalCount = passengers.length;
+            const summary = document.getElementById('pickupSummary');
+
+            if (pickedCount === totalCount) {
+                summary.innerHTML = '✓ Đã đón đủ khách - Đang bắt đầu hành trình!';
+                summary.style.color = '#065F46';
+            } else {
+                summary.innerHTML = `Đã đón ${pickedCount}/${totalCount} khách - Đang đón tiếp...`;
+            }
+        }
+
+        // Simulate pickup progress for limousine
+        function simulatePickupProgress(passengers) {
+            let currentPickedCount = passengers.filter(p => p.picked).length;
+
+            const pickupInterval = setInterval(() => {
+                if (currentPickedCount < passengers.length) {
+                    passengers[currentPickedCount].picked = true;
+                    currentPickedCount++;
+                    renderPassengerList(passengers);
+
+                    // Update timeline
+                    if (currentPickedCount < passengers.length) {
+                        const timeline = document.getElementById('timeline');
+                        timeline.querySelector('.active .timeline-title').textContent =
+                            `Đang đón khách thứ ${currentPickedCount + 1}`;
+                    }
+                } else {
+                    // All passengers picked up - start journey
+                    clearInterval(pickupInterval);
+                    startJourney();
+                }
+            }, 8000); // Pick up one passenger every 8 seconds
+        }
+
+        // Start journey after all passengers picked up (for limousine)
+        function startJourney() {
+            isJourneyStarted = true;
+
+            // Update status badge
+            const statusBadge = document.getElementById('statusBadge');
+            statusBadge.classList.remove('picking-up');
+            document.getElementById('statusText').textContent = 'Đang di chuyển';
+
+            // Hide pickup card, show progress
+            document.getElementById('pickupStatusCard').style.display = 'none';
+            document.getElementById('progressCard').style.display = 'block';
+
+            // Update timeline
+            const timeline = document.getElementById('timeline');
+            const items = timeline.querySelectorAll('.timeline-item');
+            items[1].classList.remove('active');
+            items[1].classList.add('completed');
+            items[2].classList.add('active');
+            items[2].querySelector('.timeline-title').textContent = 'Đang trên đường đến Đà Nẵng';
+            items[2].querySelector('.timeline-desc').textContent = 'Cao tốc Hà Nội - Đà Nẵng';
+
+            // Start progress simulation
+            simulateProgress();
+        }
+
+        // Simulate progress animation
+        function simulateProgress() {
+            let progress = 5;
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            const distanceTraveled = document.getElementById('distanceTraveled');
+            const distanceRemaining = document.getElementById('distanceRemaining');
+            const busMarker = document.getElementById('busMarker');
+            const routeLine = document.getElementById('routeLine');
+
+            const totalDistance = busType === 'limousine' ? 600 : 120;
+
+            // Add waypoints to map
+            addWaypoints();
+
+            setInterval(() => {
+                if (!journeyCompleted) {
+                    progress += Math.random() * 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        journeyCompleted = true;
+
+                        // Show completion modal
+                        setTimeout(() => {
+                            showCompletionModal();
+                        }, 1000);
+                    }
+
+                    progressFill.style.width = progress + '%';
+                    progressPercent.textContent = Math.round(progress) + '%';
+
+                    const traveled = Math.round(totalDistance * progress / 100);
+                    const remaining = totalDistance - traveled;
+
+                    distanceTraveled.textContent = `${traveled} km đã đi`;
+                    distanceRemaining.textContent = `${remaining} km còn lại`;
+
+                    // Update map
+                    updateMapProgress(progress);
+
+                    // Update status when complete
+                    if (journeyCompleted) {
+                        document.getElementById('statusText').textContent = 'Đã hoàn thành';
+                    }
+                }
+            }, 5000);
+        }
+
+        // Add waypoints to journey map
+        function addWaypoints() {
+            const container = document.getElementById('waypointsContainer');
+            const waypoints = [
+                { position: 30, name: 'Ninh Bình', passed: true },
+                { position: 50, name: 'Thanh Hóa', passed: false },
+                { position: 70, name: 'Vinh', passed: false }
+            ];
+
+            waypoints.forEach(wp => {
+                const waypoint = document.createElement('div');
+                waypoint.className = 'waypoint' + (wp.passed ? ' passed' : '');
+                waypoint.style.top = wp.position + '%';
+                waypoint.innerHTML = `
+                    <div class="waypoint-dot"></div>
+                    <div class="waypoint-label">${wp.name}</div>
+                `;
+                container.appendChild(waypoint);
+            });
+        }
+
+        // Update map based on progress
+        function updateMapProgress(progress) {
+            const busMarker = document.getElementById('busMarker');
+            const routeLine = document.getElementById('routeLine');
+
+            // Calculate bus position (15% start to 85% end)
+            const busPosition = 15 + (progress / 100 * 70);
+            busMarker.style.setProperty('--bus-position', busPosition + '%');
+
+            // Update route line color
+            routeLine.style.setProperty('--progress', progress + '%');
+
+            // Update waypoints
+            const waypoints = document.querySelectorAll('.waypoint');
+            waypoints.forEach(wp => {
+                const wpTop = parseFloat(wp.style.top);
+                if (busPosition >= wpTop) {
+                    wp.classList.add('passed');
+                }
+            });
+        }
+
+        // Contact functions
+        function callDriver() {
+            const phone = document.getElementById('driverPhone').textContent.replace('📞 ', '').trim();
+            window.location.href = 'tel:' + phone.replace(/\s/g, '');
+        }
+
+        function messageDriver() {
+            alert('Tính năng nhắn tin sẽ được cập nhật sớm!');
+        }
+
+        // Journey Completion Modal functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+
+            // Update modal content with actual data
+            const fromCity = document.getElementById('fromCity').textContent;
+            const toCity = document.getElementById('toCity').textContent;
+            const totalDistance = busType === 'limousine' ? 600 : 120;
+
+            document.getElementById('completionRoute').textContent = `${fromCity} → ${toCity}`;
+            document.getElementById('completionDistance').textContent = `${totalDistance} km`;
+
+            // Calculate journey duration (estimate based on distance)
+            const hours = Math.floor(totalDistance / 100);
+            const minutes = Math.round((totalDistance % 100) / 100 * 60);
+            document.getElementById('completionDuration').textContent = `${hours} giờ ${minutes} phút`;
+
+            // Show modal
+            modal.classList.add('show');
+        }
+
+        function closeCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('show');
+        }
+
+        function returnToHome() {
+            // Close modal first
+            closeCompletionModal();
+
+            // Return to main page after short delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 300);
+        }
+
+        // Initialize
+        window.onload = loadTicketData;
+    </script>
+</body>
+</html>
