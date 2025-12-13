@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý tài khoản - NX Thăng Long</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f6fa;
+        display: flex;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 250px;
+        background-color: #1e1e2d;
+        color: white;
+        min-height: 100vh;
+        padding: 20px 0;
+        position: fixed;
+        left: 0;
+        top: 0;
+        overflow-y: auto;
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #2c2c3e;
+      }
+
+      .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 12px;
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .user-info h4 {
+        font-size: 14px;
+        margin-bottom: 3px;
+      }
+
+      .user-info p {
+        font-size: 11px;
+        color: #8b8b9a;
+      }
+
+      .main-menu {
+        margin-top: 20px;
+      }
+
+      .menu-title {
+        padding: 10px 20px;
+        font-size: 11px;
+        color: #8b8b9a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .menu-item {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        color: #8b8b9a;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .menu-item:hover {
+        background-color: #2c2c3e;
+        color: white;
+      }
+
+      .menu-item.active {
+        background-color: #4a90e2;
+        color: white;
+        border-left: 3px solid #fff;
+      }
+
+      .menu-item i {
+        margin-right: 12px;
+        width: 20px;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 30px;
+        margin-left: 250px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        color: #2c3e50;
+      }
+
+      .header-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-add-account {
+        padding: 12px 24px;
+        background-color: #26de81;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .btn-add-account:hover {
+        background-color: #20bf6b;
+      }
+
+      .btn-locked-accounts {
+        padding: 12px 24px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .btn-locked-accounts:hover {
+        background-color: #c0392b;
+      }
+
+      /* Toolbar */
+      .toolbar {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        flex: 1;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      .search-box i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #7f8c8d;
+      }
+
+      .btn-filter {
+        padding: 12px 24px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .btn-filter:hover {
+        background-color: #f8f9fa;
+        border-color: #4a90e2;
+      }
+
+      /* Table */
+      .table-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: #f8f9fa;
+      }
+
+      th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        padding: 15px;
+        border-top: 1px solid #ecf0f1;
+        font-size: 14px;
+        color: #34495e;
+      }
+
+      tbody tr {
+        transition: background-color 0.2s;
+      }
+
+      tbody tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      /* Status Badges */
+      .role-badge {
+        padding: 5px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        display: inline-block;
+      }
+
+      .role-director {
+        background-color: #ff6b6b;
+        color: white;
+      }
+
+      .role-driver {
+        background-color: #ffa502;
+        color: white;
+      }
+
+      .role-employee {
+        background-color: #4a90e2;
+        color: white;
+      }
+
+      .role-customer {
+        background-color: #26de81;
+        color: white;
+      }
+
+      .permission-badge {
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: 500;
+        display: inline-block;
+        background-color: #e8f4fd;
+        color: #4a90e2;
+        margin: 2px;
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-action {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .btn-edit {
+        background-color: #fff4e6;
+        color: #ffa502;
+      }
+
+      .btn-edit:hover {
+        background-color: #ffa502;
+        color: white;
+      }
+
+      .btn-lock {
+        background-color: #e6f7ed;
+        color: #26de81;
+      }
+
+      .btn-lock:hover {
+        background-color: #26de81;
+        color: white;
+      }
+
+      .btn-unlock {
+        background-color: #ffe6e6;
+        color: #e74c3c;
+      }
+
+      .btn-unlock:hover {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .page-btn {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #ddd;
+        background-color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 14px;
+      }
+
+      .page-btn:hover {
+        background-color: #f8f9fa;
+        border-color: #4a90e2;
+      }
+
+      .page-btn.active {
+        background-color: #4a90e2;
+        color: white;
+        border-color: #4a90e2;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background-color: white;
+        border-radius: 8px;
+        padding: 30px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-header h2 {
+        font-size: 20px;
+        color: #2c3e50;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #7f8c8d;
+      }
+
+      .filter-group,
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 14px;
+      }
+
+      .required {
+        color: #e74c3c;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+
+      .form-group input.error,
+      .form-group select.error,
+      .form-group textarea.error {
+        border-color: #e74c3c;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 25px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background-color: #4a90e2;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #357abd;
+      }
+
+      .btn-secondary {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+      }
+
+      .btn-secondary:hover {
+        background-color: #d5dbdb;
+      }
+
+      /* Notification */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #e74c3c;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: none;
+        align-items: center;
+        gap: 10px;
+        z-index: 2000;
+        animation: slideIn 0.3s ease-out;
+        min-width: 300px;
+      }
+
+      .notification.show {
+        display: flex;
+      }
+
+      .notification.success {
+        background-color: #26de81;
+      }
+
+      .notification.info {
+        background-color: #4a90e2;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .status-locked {
+        color: #e74c3c;
+        font-weight: 600;
+      }
+
+      .status-active {
+        color: #26de81;
+        font-weight: 600;
+      }
+
+      .error-message {
+        color: #e74c3c;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+      }
+
+      .confirm-modal .modal-content {
+        max-width: 450px;
+      }
+
+      .confirm-message {
+        font-size: 16px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="user-profile">
+        <div class="user-avatar">
+          <img src="https://www.genspark.ai/api/files/s/IUmwk00t" alt="Admin" />
+        </div>
+        <div class="user-info">
+          <h4>ADMIN</h4>
+          <p>Nhân viên điều hành</p>
+        </div>
+      </div>
+
+      <div class="main-menu">
+        <div class="menu-title">MAIN MENU</div>
+        <div class="menu-item">
+          <i class="fas fa-clock"></i>
+          <span>Phân xe tự động</span>
+        </div>
+        <div class="menu-item active">
+          <i class="fas fa-users"></i>
+          <span>Quản lý tài khoản</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-car"></i>
+          <span>Quản lý tài xế</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-route"></i>
+          <span>Quản lý tuyến & giá vé</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-tasks"></i>
+          <span>Quản lý thông tin xe</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-clipboard-list"></i>
+          <span>Quản lý phân xe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header">
+        <h1>Quản lý tài khoản</h1>
+        <div class="header-buttons">
+          <button class="btn-add-account" onclick="openAddAccountModal()">
+            <i class="fas fa-plus"></i>
+            Thêm tài khoản
+          </button>
+          <button class="btn-locked-accounts" onclick="toggleLockedAccounts()">
+            <i class="fas fa-lock"></i>
+            Danh sách tài khoản bị khóa
+          </button>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Tìm kiếm theo tên, số điện thoại, CCCD..."
+            onkeyup="searchTable()"
+          />
+        </div>
+        <button class="btn-filter" onclick="openFilterModal()">
+          <i class="fas fa-filter"></i>
+          Bộ lọc
+        </button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-container">
+        <table id="accountsTable">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Họ tên</th>
+              <th>Tên tài khoản</th>
+              <th>Chức vụ</th>
+              <th>Quyền</th>
+              <th>SDT</th>
+              <th>CCCD</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn" onclick="changePage('prev')">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="page-btn active" onclick="goToPage(1)">1</button>
+        <button class="page-btn" onclick="goToPage(2)">2</button>
+        <button class="page-btn" onclick="goToPage(3)">3</button>
+        <button class="page-btn" onclick="goToPage(4)">4</button>
+        <button class="page-btn" onclick="goToPage(5)">5</button>
+        <button class="page-btn" onclick="changePage('next')">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Bộ lọc</h2>
+          <button class="close-modal" onclick="closeFilterModal()">×</button>
+        </div>
+
+        <div class="filter-group">
+          <label>Chức vụ</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="role" value="director" />
+              Giám đốc
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="role" value="driver" />
+              Tài xế
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="role" value="employee" />
+              Nhân viên
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="role" value="customer" />
+              Khách hàng
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Quyền</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="permission" value="admin" />
+              Quản trị viên
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="permission" value="view_only" />
+              Chỉ được xem
+            </label>
+            <label class="checkbox-item">
+              <input
+                type="checkbox"
+                name="permission"
+                value="account_manager"
+              />
+              Quản lý tài khoản
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="permission" value="driver_manager" />
+              Quản lý tài xế
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="permission" value="route_manager" />
+              Quản lý tuyến - giá vé
+            </label>
+            <label class="checkbox-item">
+              <input
+                type="checkbox"
+                name="permission"
+                value="vehicle_manager"
+              />
+              Quản lý xe
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="permission" value="assign_manager" />
+              Quản lý phân xe
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Trạng thái</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="status" value="active" />
+              Đang hoạt động
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="status" value="locked" />
+              Đã bị khóa
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeFilterModal()">
+            Đóng
+          </button>
+          <button class="btn-primary" onclick="applyFilters()">Áp dụng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Account Modal -->
+    <div id="accountModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Thêm tài khoản</h2>
+          <button class="close-modal" onclick="closeAccountModal()">×</button>
+        </div>
+
+        <form id="accountForm">
+          <input type="hidden" id="accountId" />
+
+          <div class="form-group">
+            <label>Họ và tên <span class="required">*</span></label>
+            <input type="text" id="fullName" placeholder="Nhập họ và tên" />
+            <div class="error-message" id="fullNameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Tên tài khoản <span class="required">*</span></label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Số điện thoại hoặc email"
+            />
+            <div class="error-message" id="usernameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Chức vụ <span class="required">*</span></label>
+            <select id="role">
+              <option value="">-- Chọn chức vụ --</option>
+              <option value="director">Giám đốc</option>
+              <option value="driver">Tài xế</option>
+              <option value="employee">Nhân viên</option>
+              <option value="customer">Khách hàng</option>
+            </select>
+            <div class="error-message" id="roleError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Quyền <span class="required">*</span></label>
+            <select id="permission">
+              <option value="">-- Chọn quyền --</option>
+              <option value="admin">Quản trị viên</option>
+              <option value="view_only">Chỉ được xem</option>
+              <option value="account_manager">Quản lý tài khoản</option>
+              <option value="driver_manager">Quản lý tài xế</option>
+              <option value="route_manager">Quản lý tuyến - giá vé</option>
+              <option value="vehicle_manager">Quản lý xe</option>
+              <option value="assign_manager">Quản lý phân xe</option>
+            </select>
+            <div class="error-message" id="permissionError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Số điện thoại <span class="required">*</span></label>
+            <input type="text" id="phone" placeholder="Nhập số điện thoại" />
+            <div class="error-message" id="phoneError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>CCCD <span class="required">*</span></label>
+            <input type="text" id="cccd" placeholder="Số CCCD (12 số)" />
+            <div class="error-message" id="cccdError"></div>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeAccountModal()"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn-primary" onclick="saveAccount()">
+              Lưu
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Lock Confirmation Modal -->
+    <div id="lockModal" class="modal confirm-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Xác nhận khóa tài khoản</h2>
+          <button class="close-modal" onclick="closeLockModal()">×</button>
+        </div>
+
+        <p class="confirm-message">
+          Bạn có chắc chắn muốn khóa tài khoản này không?
+        </p>
+
+        <div class="form-group">
+          <label>Lý do khóa <span class="required">*</span></label>
+          <textarea
+            id="lockReason"
+            placeholder="Nhập lý do khóa tài khoản (tối thiểu 10 ký tự)"
+            maxlength="500"
+          ></textarea>
+          <div class="error-message" id="lockReasonError"></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeLockModal()">
+            Hủy bỏ
+          </button>
+          <button class="btn-primary" onclick="confirmLock()">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlock Confirmation Modal -->
+    <div id="unlockModal" class="modal confirm-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Xác nhận mở khóa tài khoản</h2>
+          <button class="close-modal" onclick="closeUnlockModal()">×</button>
+        </div>
+
+        <p class="confirm-message">
+          Bạn có chắc chắn muốn mở khóa tài khoản này không?
+        </p>
+
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeUnlockModal()">
+            Hủy bỏ
+          </button>
+          <button class="btn-primary" onclick="confirmUnlock()">
+            Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="notificationText">Có lỗi xảy ra, vui lòng thử lại!</span>
+    </div>
+
+    <script>
+      // Sample data with creation timestamps
+      let allAccounts = [
+        {
+          id: 1,
+          name: "Nguyễn Văn Hùng",
+          username: "0903498799",
+          role: "director",
+          permission: "admin",
+          phone: "0903498799",
+          cccd: "201234567890",
+          status: "active",
+          createdAt: new Date("2024-01-15"),
+        },
+        {
+          id: 2,
+          name: "Trần Thị Lan",
+          username: "tranthilan@gmail.com",
+          role: "employee",
+          permission: "account_manager",
+          phone: "0918123456",
+          cccd: "301987654321",
+          status: "active",
+          createdAt: new Date("2024-02-20"),
+        },
+        {
+          id: 3,
+          name: "Lê Văn Minh",
+          username: "0935789012",
+          role: "driver",
+          permission: "view_only",
+          phone: "0935789012",
+          cccd: "302456789001",
+          status: "active",
+          createdAt: new Date("2024-03-10"),
+        },
+        {
+          id: 4,
+          name: "Phạm Quốc Anh",
+          username: "phamquocanh@gmail.com",
+          role: "employee",
+          permission: "driver_manager",
+          phone: "0987654321",
+          cccd: "302876543210",
+          status: "locked",
+          lockReason: "Vi phạm nội quy công ty",
+          createdAt: new Date("2024-04-05"),
+        },
+        {
+          id: 5,
+          name: "Vũ Thị Hồng",
+          username: "0977888999",
+          role: "driver",
+          permission: "view_only",
+          phone: "0977888999",
+          cccd: "303112233445",
+          status: "active",
+          createdAt: new Date("2024-05-12"),
+        },
+        {
+          id: 6,
+          name: "Hoàng Văn Nam",
+          username: "hoangvannam@yahoo.com",
+          role: "employee",
+          permission: "route_manager",
+          phone: "0922111222",
+          cccd: "303556677889",
+          status: "active",
+          createdAt: new Date("2024-06-18"),
+        },
+        {
+          id: 7,
+          name: "Đỗ Thị Mai",
+          username: "0986333444",
+          role: "customer",
+          permission: "view_only",
+          phone: "0986333444",
+          cccd: "303998877665",
+          status: "locked",
+          lockReason: "Yêu cầu của khách hàng",
+          createdAt: new Date("2024-07-22"),
+        },
+        {
+          id: 8,
+          name: "Bùi Xuân Trường",
+          username: "buixuantruong@outlook.com",
+          role: "employee",
+          permission: "assign_manager",
+          phone: "0899555666",
+          cccd: "304223344556",
+          status: "active",
+          createdAt: new Date("2024-08-30"),
+        },
+      ];
+
+      let currentPage = 1;
+      let filteredAccounts = [...allAccounts];
+      let showLockedOnly = false;
+      let currentEditId = null;
+      let currentLockId = null;
+
+      const permissionNames = {
+        admin: "Quản trị viên",
+        view_only: "Chỉ được xem",
+        account_manager: "Quản lý tài khoản",
+        driver_manager: "Quản lý tài xế",
+        route_manager: "Quản lý tuyến - giá vé",
+        vehicle_manager: "Quản lý xe",
+        assign_manager: "Quản lý phân xe",
+      };
+
+      // Sort by creation time (newest first)
+      function sortAccountsByDate() {
+        allAccounts.sort((a, b) => b.createdAt - a.createdAt);
+        filteredAccounts = [...allAccounts];
+      }
+
+      function renderTable() {
+        const tbody = document.getElementById("tableBody");
+        const itemsPerPage = 10;
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        const accountsToShow = showLockedOnly
+          ? filteredAccounts.filter((acc) => acc.status === "locked")
+          : filteredAccounts;
+
+        const pageAccounts = accountsToShow.slice(start, end);
+
+        if (pageAccounts.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="9" style="text-align: center; padding: 40px; color: #7f8c8d;">Không có dữ liệu</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = pageAccounts
+          .map((account, index) => {
+            const roleClass = `role-${account.role}`;
+            const roleName = {
+              director: "Giám đốc",
+              driver: "Tài xế",
+              employee: "Nhân viên",
+              customer: "Khách hàng",
+            }[account.role];
+
+            const statusClass =
+              account.status === "active" ? "status-active" : "status-locked";
+            const statusText =
+              account.status === "active" ? "Đang hoạt động" : "Đã khóa";
+
+            // YÊU CẦU 3: Thay đổi màu biểu tượng khóa
+            const lockIcon =
+              account.status === "active"
+                ? '<button class="btn-action btn-lock" onclick="openLockModal(' +
+                  account.id +
+                  ')" title="Khóa tài khoản"><i class="fas fa-lock-open"></i></button>'
+                : '<button class="btn-action btn-unlock" onclick="openUnlockModal(' +
+                  account.id +
+                  ')" title="Mở khóa tài khoản"><i class="fas fa-lock"></i></button>';
+
+            return `
+                        <tr>
+                            <td>${start + index + 1}</td>
+                            <td><strong>${account.name}</strong></td>
+                            <td>${account.username}</td>
+                            <td><span class="role-badge ${roleClass}">${roleName}</span></td>
+                            <td><span class="permission-badge">${
+                              permissionNames[account.permission]
+                            }</span></td>
+                            <td>${account.phone}</td>
+                            <td>${account.cccd}</td>
+                            <td><span class="${statusClass}">${statusText}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-edit" onclick="editAccount(${
+                                      account.id
+                                    })" title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    ${lockIcon}
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+          })
+          .join("");
+      }
+
+      function searchTable() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        filteredAccounts = allAccounts.filter(
+          (account) =>
+            account.name.toLowerCase().includes(searchTerm) ||
+            account.phone.includes(searchTerm) ||
+            account.cccd.includes(searchTerm) ||
+            account.username.toLowerCase().includes(searchTerm)
+        );
+
+        currentPage = 1;
+        renderTable();
+      }
+
+      function openFilterModal() {
+        document.getElementById("filterModal").classList.add("show");
+      }
+
+      function closeFilterModal() {
+        document.getElementById("filterModal").classList.remove("show");
+      }
+
+      function applyFilters() {
+        const roleCheckboxes = document.querySelectorAll(
+          'input[name="role"]:checked'
+        );
+        const permissionCheckboxes = document.querySelectorAll(
+          'input[name="permission"]:checked'
+        );
+        const statusCheckboxes = document.querySelectorAll(
+          'input[name="status"]:checked'
+        );
+
+        const selectedRoles = Array.from(roleCheckboxes).map((cb) => cb.value);
+        const selectedPermissions = Array.from(permissionCheckboxes).map(
+          (cb) => cb.value
+        );
+        const selectedStatuses = Array.from(statusCheckboxes).map(
+          (cb) => cb.value
+        );
+
+        filteredAccounts = allAccounts.filter((account) => {
+          const roleMatch =
+            selectedRoles.length === 0 || selectedRoles.includes(account.role);
+          const permissionMatch =
+            selectedPermissions.length === 0 ||
+            selectedPermissions.includes(account.permission);
+          const statusMatch =
+            selectedStatuses.length === 0 ||
+            selectedStatuses.includes(account.status);
+
+          return roleMatch && permissionMatch && statusMatch;
+        });
+
+        currentPage = 1;
+        renderTable();
+        closeFilterModal();
+      }
+
+      function toggleLockedAccounts() {
+        showLockedOnly = !showLockedOnly;
+        const btn = document.querySelector(".btn-locked-accounts");
+
+        if (showLockedOnly) {
+          btn.innerHTML =
+            '<i class="fas fa-arrow-left"></i> Quay lại danh sách';
+          btn.style.backgroundColor = "#95a5a6";
+          document.querySelector(".header h1").textContent =
+            "Danh sách tài khoản bị khóa";
+        } else {
+          btn.innerHTML =
+            '<i class="fas fa-lock"></i> Danh sách tài khoản bị khóa';
+          btn.style.backgroundColor = "#e74c3c";
+          document.querySelector(".header h1").textContent =
+            "Quản lý tài khoản";
+        }
+
+        currentPage = 1;
+        renderTable();
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        document.querySelectorAll(".page-btn").forEach((btn, index) => {
+          if (index > 0 && index < 6) {
+            btn.classList.remove("active");
+            if (parseInt(btn.textContent) === page) {
+              btn.classList.add("active");
+            }
+          }
+        });
+        renderTable();
+      }
+
+      function changePage(direction) {
+        if (direction === "prev" && currentPage > 1) {
+          currentPage--;
+        } else if (direction === "next" && currentPage < 5) {
+          currentPage++;
+        }
+        goToPage(currentPage);
+      }
+
+      // Add Account Modal
+      function openAddAccountModal() {
+        currentEditId = null;
+        document.getElementById("modalTitle").textContent = "Thêm tài khoản";
+        document.getElementById("accountForm").reset();
+        clearErrors();
+        document.getElementById("accountModal").classList.add("show");
+      }
+
+      function closeAccountModal() {
+        document.getElementById("accountModal").classList.remove("show");
+        clearErrors();
+      }
+
+      // Edit Account
+      function editAccount(id) {
+        currentEditId = id;
+        const account = allAccounts.find((acc) => acc.id === id);
+
+        if (!account) return;
+
+        document.getElementById("modalTitle").textContent =
+          "Chỉnh sửa tài khoản";
+        document.getElementById("accountId").value = account.id;
+        document.getElementById("fullName").value = account.name;
+        document.getElementById("username").value = account.username;
+        document.getElementById("role").value = account.role;
+        document.getElementById("permission").value = account.permission;
+        document.getElementById("phone").value = account.phone;
+        document.getElementById("cccd").value = account.cccd;
+
+        clearErrors();
+        document.getElementById("accountModal").classList.add("show");
+      }
+
+      // Validation functions
+      function validateFullName(name) {
+        const nameRegex = /^[a-zA-ZÀ-ỹ\s]{2,50}$/;
+        return nameRegex.test(name);
+      }
+
+      // YÊU CẦU 1: Cập nhật validation cho username (số điện thoại hoặc email)
+      function validateUsername(username, role) {
+        // Tài xế và khách hàng: chỉ xem
+        if (role === "driver" || role === "customer") {
+          // Số điện thoại
+          if (/^0\d{9}$/.test(username)) return true;
+          // Email không cần đuôi @nxthanglong
+          if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username))
+            return true;
+          return false;
+        }
+        // Giám đốc và nhân viên: số điện thoại hoặc email
+        if (/^0\d{9}$/.test(username)) return true;
+        if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username))
+          return true;
+        return false;
+      }
+
+      function validatePhone(phone) {
+        const phoneRegex = /^0\d{9}$/;
+        return phoneRegex.test(phone);
+      }
+
+      function validateCCCD(cccd) {
+        const cccdRegex = /^\d{12}$/;
+        return cccdRegex.test(cccd);
+      }
+
+      function clearErrors() {
+        document
+          .querySelectorAll(".error")
+          .forEach((el) => el.classList.remove("error"));
+        document.querySelectorAll(".error-message").forEach((el) => {
+          el.classList.remove("show");
+          el.textContent = "";
+        });
+      }
+
+      function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(fieldId + "Error");
+        field.classList.add("error");
+        errorDiv.textContent = message;
+        errorDiv.classList.add("show");
+      }
+
+      function saveAccount() {
+        clearErrors();
+
+        const fullName = document.getElementById("fullName").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const role = document.getElementById("role").value;
+        const permission = document.getElementById("permission").value;
+        const phone = document.getElementById("phone").value.trim();
+        const cccd = document.getElementById("cccd").value.trim();
+
+        let hasError = false;
+
+        // Check completeness
+        if (!fullName) {
+          showError("fullName", "Vui lòng nhập họ và tên");
+          hasError = true;
+        }
+
+        if (!username) {
+          showError("username", "Vui lòng nhập tên tài khoản");
+          hasError = true;
+        }
+
+        if (!role) {
+          showError("role", "Vui lòng chọn chức vụ");
+          hasError = true;
+        }
+
+        if (!permission) {
+          showError("permission", "Vui lòng chọn quyền");
+          hasError = true;
+        }
+
+        if (!phone) {
+          showError("phone", "Vui lòng nhập số điện thoại");
+          hasError = true;
+        }
+
+        if (!cccd) {
+          showError("cccd", "Vui lòng nhập số CCCD");
+          hasError = true;
+        }
+
+        if (hasError) {
+          showNotification("Vui lòng điền đầy đủ thông tin", "error");
+          return;
+        }
+
+        // YÊU CẦU 1: Kiểm tra quyền tài xế và khách hàng
+        if (
+          (role === "driver" || role === "customer") &&
+          permission !== "view_only"
+        ) {
+          showError(
+            "permission",
+            "Tài xế và khách hàng chỉ được có quyền 'Chỉ được xem'"
+          );
+          showNotification(
+            "Tài xế và khách hàng chỉ được có quyền 'Chỉ được xem'",
+            "error"
+          );
+          return;
+        }
+
+        // Validate format
+        if (!validateFullName(fullName)) {
+          showError("fullName", "Họ tên không hợp lệ");
+          hasError = true;
+        }
+
+        if (!validateUsername(username, role)) {
+          showError(
+            "username",
+            "Tên tài khoản phải là số điện thoại hoặc email"
+          );
+          hasError = true;
+        }
+
+        if (!validatePhone(phone)) {
+          showError("phone", "Số điện thoại không hợp lệ");
+          hasError = true;
+        }
+
+        if (!validateCCCD(cccd)) {
+          showError("cccd", "Số CCCD phải có 12 chữ số");
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Check duplicates
+        const existingUsername = allAccounts.find(
+          (acc) => acc.id !== currentEditId && acc.username === username
+        );
+
+        if (existingUsername) {
+          showError("username", "Tên tài khoản đã tồn tại");
+          showNotification("Tên tài khoản đã tồn tại", "error");
+          return;
+        }
+
+        const existingPhone = allAccounts.find(
+          (acc) => acc.id !== currentEditId && acc.phone === phone
+        );
+
+        if (existingPhone) {
+          showError("phone", "Số điện thoại đã tồn tại");
+          showNotification("Số điện thoại đã tồn tại", "error");
+          return;
+        }
+
+        const existingCCCD = allAccounts.find(
+          (acc) => acc.id !== currentEditId && acc.cccd === cccd
+        );
+
+        if (existingCCCD) {
+          showError("cccd", "Số CCCD đã tồn tại");
+          showNotification("Số CCCD đã tồn tại", "error");
+          return;
+        }
+
+        // Save
+        try {
+          if (currentEditId) {
+            // Edit existing account
+            const accountIndex = allAccounts.findIndex(
+              (acc) => acc.id === currentEditId
+            );
+
+            if (accountIndex !== -1) {
+              allAccounts[accountIndex] = {
+                ...allAccounts[accountIndex],
+                name: fullName,
+                username: username,
+                role: role,
+                permission: permission,
+                phone: phone,
+                cccd: cccd,
+              };
+              showNotification("Cập nhật tài khoản thành công", "success");
+            }
+          } else {
+            // Add new account
+            const newAccount = {
+              id: allAccounts.length + 1,
+              name: fullName,
+              username: username,
+              role: role,
+              permission: permission,
+              phone: phone,
+              cccd: cccd,
+              status: "active",
+              createdAt: new Date(),
+            };
+
+            allAccounts.unshift(newAccount);
+            showNotification("Thêm tài khoản thành công", "success");
+
+            // Send SMS (simulation)
+            console.log(
+              `SMS sent to ${phone}: Username: ${username}, Password: nxthanglong123!`
+            );
+          }
+
+          sortAccountsByDate();
+          renderTable();
+          closeAccountModal();
+        } catch (error) {
+          showNotification("Có lỗi xảy ra, vui lòng thử lại", "error");
+        }
+      }
+
+      // Lock/Unlock functions
+      function openLockModal(id) {
+        currentLockId = id;
+        document.getElementById("lockReason").value = "";
+        clearLockErrors();
+        document.getElementById("lockModal").classList.add("show");
+      }
+
+      function closeLockModal() {
+        document.getElementById("lockModal").classList.remove("show");
+        clearLockErrors();
+      }
+
+      function clearLockErrors() {
+        document.getElementById("lockReason").classList.remove("error");
+        const errorDiv = document.getElementById("lockReasonError");
+        errorDiv.classList.remove("show");
+        errorDiv.textContent = "";
+      }
+
+      function confirmLock() {
+        const reason = document.getElementById("lockReason").value.trim();
+
+        if (!reason || reason.length < 10) {
+          document.getElementById("lockReason").classList.add("error");
+          const errorDiv = document.getElementById("lockReasonError");
+          errorDiv.textContent =
+            "Vui lòng nhập lý do khóa tài khoản (tối thiểu 10 ký tự)";
+          errorDiv.classList.add("show");
+          return;
+        }
+
+        try {
+          const account = allAccounts.find((acc) => acc.id === currentLockId);
+
+          if (account) {
+            account.status = "locked";
+            account.lockReason = reason;
+            renderTable();
+            closeLockModal();
+            showNotification("Khóa tài khoản thành công", "success");
+          }
+        } catch (error) {
+          showNotification("Có lỗi xảy ra, vui lòng thử lại", "error");
+        }
+      }
+
+      function openUnlockModal(id) {
+        currentLockId = id;
+        document.getElementById("unlockModal").classList.add("show");
+      }
+
+      function closeUnlockModal() {
+        document.getElementById("unlockModal").classList.remove("show");
+      }
+
+      function confirmUnlock() {
+        try {
+          const account = allAccounts.find((acc) => acc.id === currentLockId);
+
+          if (account) {
+            account.status = "active";
+            delete account.lockReason;
+            renderTable();
+            closeUnlockModal();
+            showNotification("Mở khóa tài khoản thành công", "success");
+          }
+        } catch (error) {
+          showNotification("Có lỗi xảy ra, vui lòng thử lại", "error");
+        }
+      }
+
+      function showNotification(message, type = "error") {
+        const notification = document.getElementById("notification");
+        const notificationText = document.getElementById("notificationText");
+
+        notification.className = "notification";
+
+        if (type === "success") {
+          notification.classList.add("success");
+        } else if (type === "info") {
+          notification.classList.add("info");
+        }
+
+        notificationText.textContent = message;
+        notification.classList.add("show");
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+
+      // Initialize
+      sortAccountsByDate();
+      renderTable();
+    </script>
+  </body>
+</html>
