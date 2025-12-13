@@ -158,7 +158,7 @@
       </select>
     </div>
 
-    <table>
+<table>
       <thead>
         <tr>
           <th>Biển số</th>
@@ -167,6 +167,7 @@
           <th>Hãng xe</th>
           <th>Trạng thái</th>
           <th>Tài xế</th>
+          <th>Hướng đi</th> <!-- CỘT MỚI ĐƯỢC THÊM Ở ĐÂY -->
           <th>Thao tác</th>
         </tr>
       </thead>
@@ -178,6 +179,7 @@
           <td>Hyundai County</td>
           <td><span class="status ready">Sẵn sàng</span></td>
           <td>Nguyễn Văn Hùng</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -191,6 +193,7 @@
           <td>Thaco Mobihome</td>
           <td><span class="status running">Đang chạy</span></td>
           <td>Trần Văn Long</td>
+          <td>Hà Nội → Hải Phòng</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -203,6 +206,7 @@
           <td>34</td>
           <td>Fuso Rosa</td>
           <td><span class="status broken">Không hoạt động</span></td>
+          <td>—</td>
           <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
@@ -217,6 +221,7 @@
           <td>Hyundai Universe</td>
           <td><span class="status maintenance">Bảo dưỡng</span></td>
           <td>—</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -230,6 +235,7 @@
           <td>Hyundai Solati</td>
           <td><span class="status ready">Sẵn sàng</span></td>
           <td>Chưa phân tài xế</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -243,6 +249,7 @@
           <td>Thaco TB120S</td>
           <td><span class="status running">Đang chạy</span></td>
           <td>Lê Thị Mai</td>
+          <td>Hải Phòng → Hà Nội</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -256,6 +263,7 @@
           <td>Fuso Rosa</td>
           <td><span class="status ready">Sẵn sàng</span></td>
           <td>Chưa phân tài xế</td>
+          <td>—</td>
           <td class="actions">
             <a href="#"><i class="fas fa-eye"></i></a>
             <a href="#"><i class="fas fa-edit"></i></a>
@@ -266,7 +274,7 @@
     </table>
   </main>
 
-  <!-- MODAL THÊM XE MỚI -->
+ <!-- MODAL THÊM XE MỚI – ĐÃ ĐỒNG NHẤT VỚI MODAL CHỈNH SỬA -->
   <div id="addVehicleModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -298,29 +306,71 @@
             <input type="text" placeholder="Hyundai, Thaco, Fuso...">
           </div>
           <div class="form-group">
-            <label>Số ghế</label>
-            <input type="number" min="16" max="50" placeholder="42">
+            <label>Số ghế <span class="required">*</span></label>
+            <input type="number" min="16" max="50" placeholder="42" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tuyến chạy <span class="required">*</span></label>
+            <select required>
+              <option value="">-- Chọn tuyến chạy --</option>
+              <option>HN → HP</option>
+              <option>HP → HN</option>
+              <option>HN → NB</option>
+              <option>NB → HN</option>
+              <option>HN → TH</option>
+              <option>Không cố định</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Trạng thái ban đầu</label>
+            <select>
+              <option>Sẵn sàng</option>
+              <option>Đang chạy</option>
+              <option>Bảo dưỡng</option>
+              <option>Hỏng/Sửa chữa</option>
+              <option>Ngừng hoạt động</option>
+            </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label>Trạng thái ban đầu</label>
-          <select>
-            <option>Sẵn sàng</option>
-            <option>Bảo dưỡng</option>
-            <option>Hỏng/Sửa chữa</option>
-          </select>
+          <label>Ghi chú</label>
+          <textarea rows="3" placeholder="Thông tin bổ sung như màu xe, năm sản xuất, tiện nghi..."></textarea>
         </div>
 
-        <div class="form-group">
-          <label>Ghi chú</label>
-          <textarea rows="3" placeholder="Thông tin bổ sung..."></textarea>
+        <hr style="margin:30px 0; border:none; border-top:1px solid #e2e8f0;">
+
+        <h4 style="margin-bottom:16px; color:#1e293b;">Tải lên giấy tờ xe (bắt buộc khi thêm mới)</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Giấy đăng kiểm <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('dangKiemAdd').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="dangKiemAdd" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;" required>
+            </div>
+            <div id="dangKiemAdd-list" class="file-list"></div>
+          </div>
+          <div class="form-group">
+            <label>Bảo hiểm trách nhiệm dân sự <span class="required">*</span></label>
+            <div class="upload-area" onclick="document.getElementById('baoHiemAdd').click()">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, JPG, PNG - Tối đa 5MB</small>
+              <input type="file" id="baoHiemAdd" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;" required>
+            </div>
+            <div id="baoHiemAdd-list" class="file-list"></div>
+          </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button class="btn-modal btn-modal-secondary" onclick="closeModal('addVehicleModal')">Hủy</button>
-        <button class="btn-modal btn-modal-primary" onclick="alert('Đã thêm xe mới thành công!'); closeModal('addVehicleModal');">Thêm xe</button>
+        <button class="btn-modal btn-modal-primary" onclick="addNewVehicle()">Thêm xe</button>
       </div>
     </div>
   </div>
