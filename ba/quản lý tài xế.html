@@ -337,7 +337,7 @@
       </table>
     </div>
 
-<!-- TAB 2: CA LÀM VIỆC – ĐÃ SỬA ĐÚNG 100% THEO ẢNH BẠN GỬI -->
+<!-- TAB 2: CA LÀM VIỆC – ĐÃ BỎ CỘT "GHI CHÚ" -->
     <div id="tab-schedule" class="tab-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2 style="font-size:22px;color:#1e293b;">Lịch chạy tuyến cố định</h2>
@@ -346,7 +346,6 @@
         </button>
       </div>
 
-      <!-- Bộ lọc đơn giản -->
       <div class="filter-bar">
         <input type="text" class="search-input" placeholder="Tìm tài xế, ngày, tuyến...">
         <input type="date" class="date-input" value="2025-12-12">
@@ -355,7 +354,6 @@
         </button>
       </div>
 
-      <!-- BẢNG CA LÀM VIỆC – GIỐNG HỆT ẢNH -->
       <table>
         <thead>
           <tr>
@@ -365,19 +363,17 @@
             <th>Giờ xuất bến</th>
             <th>Hướng đi</th>
             <th>Số giờ</th>
-            <th>Ghi chú</th>
-            <th>Thao tác</th>
+            <th>Thao tác</th> <!-- Đã bỏ cột Ghi chú -->
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>Nguyễn Văn Hùng</strong></td>
-            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;padding:6px 12px;">HN → HP</span></td>
+            <td><span style="background:#e0e7ff;color:#4338ca;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;">HN → HP</span></td>
             <td>12/12/2025</td>
             <td>06:00</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sáng</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye" title="Xem"></i></a>
               <a href="#"><i class="fas fa-edit" title="Sửa"></i></a>
@@ -390,7 +386,6 @@
             <td>14:00</td>
             <td>Hải Phòng → Hà Nội</td>
             <td>4.5 giờ</td>
-            <td>Lượt chiều</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
@@ -403,7 +398,6 @@
             <td>07:00</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sáng</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
@@ -416,13 +410,11 @@
             <td>05:30</td>
             <td>Hà Nội → Hải Phòng</td>
             <td>4.5 giờ</td>
-            <td>Lượt sớm</td>
             <td class="actions">
               <a href="#"><i class="fas fa-eye"></i></a>
               <a href="#"><i class="fas fa-edit"></i></a>
             </td>
           </tr>
-          <!-- Bạn có thể thêm bao nhiêu dòng tùy ý -->
         </tbody>
       </table>
     </div>
